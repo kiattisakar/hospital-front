@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Prompt', 'ui-sans-serif', 'system-ui'],
+        sans: ['Sarabun', 'ui-sans-serif', 'system-ui'],
       },
     },
   },
