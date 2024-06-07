@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoginPage from './LoginPage';
 import Registor from './Registor';
+import MotionScroll from './test';
 import { debounce } from 'lodash';
 
 const cardVariants = {
@@ -12,7 +13,7 @@ const cardVariants = {
 
 const Card = ({ content }) => (
   <motion.div
-    className="flex items-center justify-center"
+    className="overflow-auto"
     variants={cardVariants}
     initial="initial"
     animate="animate"
@@ -26,22 +27,31 @@ const Card = ({ content }) => (
       borderRadius: 10,
       margin: 10,
       boxShadow: '10px 10px 20px rgba(0, 0, 0, 0.2)',
+      flexDirection: 'column',
+      padding: '10px',
     }}
   >
     {content === 1 ? <LoginPage /> : <Registor />}
   </motion.div>
 );
-
 const CardSwitcher = () => {
   const [currentCard, setCurrentCard] = useState(0);
   const cards = [1, 2];
-
+  const [tikNextCard, setTikNextCard] = useState(false);
+  const [btnNextCard, setBtnNextCard] = useState('ลงทะเบียน');
   const nextCard = useCallback(
     debounce(() => {
+      setTikNextCard((prev) => !prev);
+      console.log(tikNextCard);
       setCurrentCard((prev) => (prev + 1) % cards.length);
-    }, 300),
-    []
-  ); // 300ms debounce time
+      if (tikNextCard == false) {
+        setBtnNextCard('เข้าสู่ระบบ');
+      } else if (tikNextCard == true) {
+        setBtnNextCard('ลงทะเบียน');
+      }
+    }, 500),
+    [currentCard, cards.length]
+  );
 
   return (
     <div
@@ -55,7 +65,7 @@ const CardSwitcher = () => {
         onClick={nextCard}
         className="ml-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
       >
-        Next Card
+        {btnNextCard}
       </button>
     </div>
   );

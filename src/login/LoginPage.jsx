@@ -2,7 +2,7 @@ import React from 'react';
 
 const LoginPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-center">
+    <div className="flex items-center justify-center  min-h-full bg-center ">
       <div className="bg-white bg-opacity-90 p-10 rounded-lg w-96">
         <h2 className="text-2xl font-bold mb-5 text-center">เข้าสู่ระบบ</h2>
         <form>
