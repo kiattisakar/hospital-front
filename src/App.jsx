@@ -6,8 +6,8 @@ import Login from './login/Login.jsx';
 function App() {
   return (
     <div className="font-sans">
-      {/* <Login /> */}
-      <FrmMain />
+      <Login />
+      {/* <FrmMain /> */}
     </div>
   );
 }

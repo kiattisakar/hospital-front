@@ -42,7 +42,6 @@ const CardSwitcher = () => {
   const nextCard = useCallback(
     debounce(() => {
       setTikNextCard((prev) => !prev);
-      console.log(tikNextCard);
       setCurrentCard((prev) => (prev + 1) % cards.length);
       if (tikNextCard == false) {
         setBtnNextCard('เข้าสู่ระบบ');
