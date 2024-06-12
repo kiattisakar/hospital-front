@@ -4,7 +4,7 @@ import { FaChevronDown } from 'react-icons/fa';
 
 export default function IpdHeader() {
   return (
-    <div className="text-xs">
+    <div className="text-[13px]">
       <div className="flex items-center bg-gray-200 ">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
         <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">

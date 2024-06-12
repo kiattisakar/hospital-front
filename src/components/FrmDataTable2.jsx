@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import addDoc from '../../img/addDoc.png';
 import editDoc from '../../img/editDoc.png';
+import noteBook from '../../img/notebook.png';
 import homeIcon from '../../img/homeIcon.png';
 import hospitalicon from '../../img/hospitalicon.png';
 import patientIcon from '../../img/patientIcon.png';
@@ -78,7 +79,7 @@ export default function FrmDataTeble2() {
             ค้นหา
           </button>
           <button className="bg-blue-700 text-xs px-2 text-white p-1 rounded mr-10 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
-            <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
+            <img src={noteBook} alt="ภาพ" className="w-4 h-4 mr-1" />
             สรุปรายชื่อผู้ป่วย
           </button>
           <input

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
 export default function FrmHeader2() {
   return (
-    <div className="text-xs">
+    <div className="text-[13px]">
       <div className="flex items-center bg-gray-200 ">
         <DropdownIV
           icon="💉"
