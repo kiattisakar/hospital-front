@@ -159,8 +159,11 @@ export default function FrmDataTebleIPD() {
           </div>
         </div>
       </div>
-      <footer className="bg-gray-800 text-white h-11">
-        <Footer />
+
+      <footer className="bg-gray-500 text-white py-4 text-xs w-full fixed bottom-0 left-0 border-y-2 border-white-300">
+        <div className="container mx-auto ">
+          <Footer />
+        </div>
       </footer>
     </div>
   );
