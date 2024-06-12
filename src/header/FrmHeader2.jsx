@@ -1,36 +1,70 @@
 import { React, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
-
-export default function IpdHeader() {
+export default function FrmHeader2() {
   return (
     <div className="text-xs">
       <div className="flex items-center bg-gray-200 ">
-        <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">💊</span>
+        <DropdownIV
+          icon="💉"
+          label="ห้องยา IV"
+          items={['Medication Profile', 'screenning', 'CheckOut']}
+        />
+        <DropdownIV
+          icon="🧪"
+          label="ห้องยาเคมี"
+          items={[
+            'Medication Profile',
+            'Gen Order',
+            'Screenning',
+            'CheckOut',
+            'Med Tranfer',
+          ]}
+        />
+        <DropdownIV
+          icon="📑"
+          label="บันทึกการผลิตยา"
+          items={[
+            'แบบบันทึกการผลิตทั่วไป',
+            'แบบบันทึกการผลิตยาสมุนไพร',
+            'แบบบันทึกการผลิตน้ำยาฆ่าเชื้อ',
+            'แบบบันทึกการผลิตยาปราศจากฆ่าเชื้อ',
+          ]}
+        />
+        <DropdownIV
+          icon="📑"
+          label="บันทึกการผลิตยา"
+          items={['Medication Profile', 'CheckOut']}
+        />
+        <DropdownIV
+          icon="🏥"
+          label="ห้องยา TPN"
+          items={['Medication Profile', 'CheckOut']}
+        />
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">🏥</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">🏥</span>
           <span className="ml-2">ข้อมูลการจ่าย</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx  ">👩‍⚕️</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="  ">👩‍⚕️</span>
           <span className="ml-2">Nurse Station</span>
         </button>
         <DropdownReport icon="📄" label="Report" />
 
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">📝</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">📝</span>
           <span className="ml-2">คลังย่อย</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">🛒</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">🛒</span>
           <span className="ml-2">คืนยา</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">📊</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">📊</span>
           <span className="ml-2">Med Reconcile</span>
         </button>
         <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
@@ -42,7 +76,7 @@ export default function IpdHeader() {
   );
 }
 
-const DropdownIPD = ({ icon, label }) => {
+const DropdownIV = ({ icon, label, items }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuVariants = {
@@ -69,7 +103,9 @@ const DropdownIPD = ({ icon, label }) => {
       },
     },
   };
-
+  const click = () => {
+    alert('medication');
+  };
   return (
     <div
       className="relative inline-block text-left"
@@ -78,10 +114,10 @@ const DropdownIPD = ({ icon, label }) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
+        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out wx-"
       >
-        <span className="text-sx">{icon}</span>
-        <span className="ml-2">{label}</span>
+        <span className="">{icon}</span>
+        <span>{label}</span>
         <FaChevronDown
           style={{
             marginLeft: '4px',
@@ -96,16 +132,9 @@ const DropdownIPD = ({ icon, label }) => {
         variants={menuVariants}
         className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
       >
-        <DropdownItem label="Connect Unitdose" />
-        <DropdownItem label="ห้องยา IPD Profile" />
-        <DropdownItem label="Screen Create Order" shortcut="Alt+S" />
-        <DropdownItem label="Screening" shortcut="Alt+S" />
-        <DropdownItem label="[ER] Quick Order" shortcut="Alt+Q" />
-        <DropdownItem label="Prescription Order" shortcut="Alt+P" />
-        <DropdownItem label="Screen Create Order" />
-        <DropdownItem label="Matching" />
-        <DropdownItem label="Check Out" shortcut="Alt+C" />
-        <DropdownItem label="Med Tranfer" shortcut="Alt+T" />
+        {items.map((item) => (
+          <DropdownItem key={item} label={item} onClick={() => alert(item)} />
+        ))}
       </motion.div>
     </div>
   );
@@ -149,7 +178,7 @@ const DropdownReport = ({ icon, label }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
-        <span className="text-sx">{icon}</span>
+        <span className="">{icon}</span>
         <span className="ml-2">{label}</span>
         <FaChevronDown
           style={{
@@ -165,7 +194,7 @@ const DropdownReport = ({ icon, label }) => {
         variants={menuVariants}
         className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
       >
-        <DropdownItem label="ADR" />
+        <DropdownItem label="ADR" onClick={() => alert('ADR')} />
         <DropdownItem label="IV Admixture" />
         <DropdownItem label="Med Transfer" />
         <DropdownItem label="Nurse Station" />
@@ -188,8 +217,11 @@ const DropdownReport = ({ icon, label }) => {
   );
 };
 
-const DropdownItem = ({ label, shortcut }) => (
-  <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer transition duration-300 ease-in-out">
+const DropdownItem = ({ label, shortcut, onClick }) => (
+  <div
+    className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer transition duration-300 ease-in-out "
+    onClick={onClick}
+  >
     <span>{label}</span>
     {shortcut && <span className="text-sm text-gray-500">{shortcut}</span>}
   </div>

@@ -7,14 +7,15 @@ import patientIcon from '../../img/patientIcon.png';
 import searchIcon from '../../img/searchIcon.png';
 import Footer from '../header/Footer';
 import IpdHeader from '../header/IpdHeader';
+import FrmHeader2 from '../header/FrmHeader2';
 
-export default function FrmDataTebleIPD() {
+export default function FrmDataTeble2() {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     const today = new Date();
     const formattedDate = formatDateToDDMMYYYY(today); ///ใช่ตัวแปล formattedDate
-    console.log(formattedDate);
+
     setCurrentDate(formattedDate);
   }, []);
 
@@ -27,6 +28,7 @@ export default function FrmDataTebleIPD() {
   const handleDateChange = (e) => {
     const selectedDate = new Date(e.target.value);
     const formattedDate = formatDateToDDMMYYYY(selectedDate);
+
     setCurrentDate(formattedDate);
   };
   const idH = 2;
@@ -51,33 +53,17 @@ export default function FrmDataTebleIPD() {
     <div className=" bg-gray-100 h-full  ">
       <div className="้h-1/6">
         <header className="h-full">
-          <IpdHeader />
+          <FrmHeader2 />
         </header>
         <div className="flex h-2/4 justify-between items-center mb-2">
           <div className="space-x-2 mt-2 ml-4 w-full flex">
             <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={addDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
-              <span>สร้างใบยาใหม่</span>
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm  flex justify-center items-center">
-              <img src={editDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
-              สร้างใบยาเพิ่มเติม
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
-              สร้างใบยากลับบ้าน
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={patientIcon} alt="ภาพ" className="w-7 h-7 mr-1" />
-              ผู้ป่วย Admit ใหม่
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={hospitalicon} alt="ภาพ" className="w-4 h-4 mr-1" />
               ย้ายหอผู้ป่วย
             </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
-              ผู้ป่วยกลับบ้าน
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm  flex justify-center items-center">
+              <img src={editDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
+              Note
             </button>
           </div>
         </div>
@@ -85,11 +71,15 @@ export default function FrmDataTebleIPD() {
           <input
             type="text"
             placeholder="ค้นหา"
-            className="border border-gray-300 rounded p-2 w-1/4"
+            className="border border-gray-300 rounded p-2 w-1/5"
           />
-          <button className="bg-blue-700 text-white p-1 rounded mr-10 ml-4 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+          <button className="bg-blue-700 text-white p-1 rounded mr-2 ml-4 text-xs hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
             <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
             ค้นหา
+          </button>
+          <button className="bg-blue-700 text-xs px-2 text-white p-1 rounded mr-10 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+            <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
+            สรุปรายชื่อผู้ป่วย
           </button>
           <input
             type="date"
@@ -117,11 +107,11 @@ export default function FrmDataTebleIPD() {
         </div>
       </div>
       <div className="h-3/4 flex">
-        <div className="h-full w-1/4">
+        <div className="h-full w-1/4 top">
           <div className="h-full w-full border border-gray-300 p-4">
             <div className="overflow-auto h-full">
               <table className="min-w-full border-collapse">
-                <thead className="sticky top-0 bg-gray-100">
+                <thead className="sticky top-0 bg-gray-100 z-10">
                   <tr className="bg-white">
                     <th className="px-4 py-2 border border-gray-300">
                       หอผู้ป่วย
@@ -172,9 +162,9 @@ export default function FrmDataTebleIPD() {
           </div>
 
           <div>
-            <table className="w-full bg-white rounded shadow ">
+            <table className="w-full bg-white rounded shadow">
               <thead>
-                <tr className="bg-gray-200 sticky  top-0">
+                <tr className="bg-gray-200 sticky top-0">
                   <th className="text-left p-2">Admit Date</th>
                   <th className="text-left p-2">HN</th>
                   <th className="text-left p-2">AN</th>
