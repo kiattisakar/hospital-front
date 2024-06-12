@@ -6,30 +6,30 @@ export default function IpdHeader() {
     <div>
       <div className="flex items-center bg-gray-200 ">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">💊</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">🏥</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx">🏥</span>
           <span className="ml-2">ข้อมูลการจ่าย</span>
         </button>
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">👩‍⚕️</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx  ">👩‍⚕️</span>
           <span className="ml-2">Nurse Station</span>
         </button>
         <DropdownReport icon="📄" label="Report" />
 
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">📝</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx">📝</span>
           <span className="ml-2">คลังย่อย</span>
         </button>
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">🛒</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx">🛒</span>
           <span className="ml-2">คืนยา</span>
         </button>
-        <button className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-lg">📊</span>
+        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="text-sx">📊</span>
           <span className="ml-2">Med Reconcile</span>
         </button>
       </div>
@@ -73,9 +73,9 @@ const DropdownIPD = ({ icon, label }) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
+        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
-        <span className="text-lg">{icon}</span>
+        <span className="text-sx">{icon}</span>
         <span className="ml-2">{label}</span>
       </button>
       <motion.div
@@ -135,9 +135,9 @@ const DropdownReport = ({ icon, label }) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center mx-2 hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
+        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
-        <span className="text-lg">{icon}</span>
+        <span className="text-sx">{icon}</span>
         <span className="ml-2">{label}</span>
       </button>
       <motion.div

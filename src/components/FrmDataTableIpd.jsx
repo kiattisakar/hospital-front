@@ -1,12 +1,14 @@
 import React from 'react';
-
 import addDoc from '../../img/addDoc.png';
 import editDoc from '../../img/editDoc.png';
 import homeIcon from '../../img/homeIcon.png';
 import hospitalicon from '../../img/hospitalicon.png';
 import patientIcon from '../../img/patientIcon.png';
 import searchIcon from '../../img/searchIcon.png';
-export default function frmMain() {
+import Footer from '../header/Footer';
+import IpdHeader from '../header/IpdHeader';
+
+export default function FrmDataTebleIPD() {
   const idH = 2;
   const nameH = 'เด็ก 3 ';
   const wards = [
@@ -26,49 +28,52 @@ export default function frmMain() {
   ];
 
   return (
-    <div className=" bg-gray-100 min-h-screen h-screen  ">
-      <div className="้h-1/5">
-        <div className="flex justify-between items-center mb-2">
+    <div className=" bg-gray-100 h-full  ">
+      <div className="้h-1/6">
+        <header classname="h-full">
+          <IpdHeader />
+        </header>
+        <div className="flex h-2/4 justify-between items-center mb-2">
           <div className="space-x-2 mt-2 ml-4 w-full flex">
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={addDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
               <span>สร้างใบยาใหม่</span>
             </button>
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm  flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm  flex justify-center items-center">
               <img src={editDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
               สร้างใบยาเพิ่มเติม
             </button>
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
               สร้างใบยากลับบ้าน
             </button>
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={patientIcon} alt="ภาพ" className="w-7 h-7 mr-1" />
               ผู้ป่วย Admit ใหม่
             </button>
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={hospitalicon} alt="ภาพ" className="w-4 h-4 mr-1" />
               ย้ายหอผู้ป่วย
             </button>
-            <button className="bg-gray-500 text-white p-2 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
+            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
               <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
               ผู้ป่วยกลับบ้าน
             </button>
           </div>
         </div>
-        <div className="flex items-center mb-6 bg-blue-100 p-1 border-2 border-blue-300  ">
+        <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10">
           <input
             type="text"
             placeholder="ค้นหา"
             className="border border-gray-300 rounded p-2 w-1/4"
           />
-          <button className="bg-blue-700 text-white p-2 rounded mr-10 ml-4 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+          <button className="bg-blue-700 text-white p-1 rounded mr-10 ml-4 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
             <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
             ค้นหา
           </button>
           <input
             type="date"
-            className="border border-gray-300 rounded p-2 w-1/4 mr-6"
+            className="border border-gray-300 rounded p-1 w-1/4 mr-6"
           />
           <div className="flex space-x-4 mr-7">
             <div>
@@ -84,12 +89,12 @@ export default function frmMain() {
               <input type="radio" name="patientStatus" />
             </div>
           </div>
-          <button className="bg-red-500 text-white p-2 rounded hover:bg-red-700 active:bg-red-300 text-sm">
+          <button className="bg-red-500 text-white p-1 rounded hover:bg-red-700 active:bg-red-300 text-sm">
             Discharge
           </button>
         </div>
       </div>
-      <div className="h-4/5 flex">
+      <div className="h-3/4 flex">
         <div className="h-full w-1/4">
           <ul className="space-y-2 h-full w-full overflow-auto border border-gray-300 p-4">
             {wards.map((ward, index) => (
@@ -154,6 +159,9 @@ export default function frmMain() {
           </div>
         </div>
       </div>
+      <footer className="bg-gray-800 text-white h-11">
+        <Footer />
+      </footer>
     </div>
   );
 }
