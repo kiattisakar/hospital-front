@@ -108,13 +108,13 @@ const DropdownIV = ({ icon, label, items }) => {
   };
   return (
     <div
-      className="relative inline-block text-left"
+      className="relative inline-block text-left z-50"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out wx-"
+        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md  transition duration-300 ease-in-out"
       >
         <span className="">{icon}</span>
         <span>{label}</span>
@@ -192,7 +192,7 @@ const DropdownReport = ({ icon, label }) => {
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
         variants={menuVariants}
-        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
+        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-50"
       >
         <DropdownItem label="ADR" onClick={() => alert('ADR')} />
         <DropdownItem label="IV Admixture" />

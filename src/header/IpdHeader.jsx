@@ -72,7 +72,7 @@ const DropdownIPD = ({ icon, label }) => {
 
   return (
     <div
-      className="relative inline-block text-left"
+      className="relative inline-block text-left z-50"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -94,7 +94,7 @@ const DropdownIPD = ({ icon, label }) => {
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
         variants={menuVariants}
-        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
+        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-50"
       >
         <DropdownItem label="Connect Unitdose" />
         <DropdownItem label="ห้องยา IPD Profile" />

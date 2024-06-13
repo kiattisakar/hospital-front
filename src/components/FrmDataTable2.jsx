@@ -74,11 +74,11 @@ export default function FrmDataTeble2() {
             placeholder="ค้นหา"
             className="border border-gray-300 rounded p-2 w-1/5"
           />
-          <button className="bg-blue-700 text-white p-1 rounded mr-2 ml-4 text-xs hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+          <button className="bg-blue-700 text-white p-1 rounded mr-2 ml-4  hover:bg-blue-900 active:bg-blue-400  flex justify-center items-center">
             <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
             ค้นหา
           </button>
-          <button className="bg-blue-700 text-xs px-2 text-white p-1 rounded mr-10 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+          <button className="bg-blue-700  px-2 text-white p-1 rounded mr-10 hover:bg-blue-900 active:bg-blue-400  flex justify-center items-center">
             <img src={noteBook} alt="ภาพ" className="w-4 h-4 mr-1" />
             สรุปรายชื่อผู้ป่วย
           </button>
@@ -124,7 +124,7 @@ export default function FrmDataTeble2() {
                   {wards.map((ward, index) => (
                     <tr
                       key={index}
-                      className="hover:bg-blue-400 hover:text-white active:bg-blue-700"
+                      className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
                     >
                       <td className="px-4 py-2 border border-gray-300">
                         {ward.name}

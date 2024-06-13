@@ -133,7 +133,7 @@ export default function FrmDataTebleIPD() {
                   {wards.map((ward, index) => (
                     <tr
                       key={index}
-                      className="hover:bg-blue-400 hover:text-white active:bg-blue-700"
+                      className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
                     >
                       <td className="px-4 py-2 border border-gray-300">
                         {ward.name}
