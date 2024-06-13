@@ -7,6 +7,7 @@ import patientIcon from '../../img/patientIcon.png';
 import searchIcon from '../../img/searchIcon.png';
 import Footer from '../header/Footer';
 import IpdHeader from '../header/IpdHeader';
+import FrmDataTable from './FrmDataTable';
 
 export default function FrmDataTebleIPD() {
   const [currentDate, setCurrentDate] = useState('');
@@ -116,88 +117,8 @@ export default function FrmDataTebleIPD() {
           </button>
         </div>
       </div>
-      <div className="h-3/4 flex">
-        <div className="h-full w-1/4">
-          <div className="h-full w-full border border-gray-300 p-4">
-            <div className="overflow-auto h-full">
-              <table className="min-w-full border-collapse">
-                <thead className="sticky top-0 bg-gray-100">
-                  <tr className="bg-white">
-                    <th className="px-4 py-2 border border-gray-300">
-                      หอผู้ป่วย
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">จำนวน</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {wards.map((ward, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                    >
-                      <td className="px-4 py-2 border border-gray-300">
-                        {ward.name}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300 text-center">
-                        {ward.count}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div className="w-3/4 h-full border-l overflow-auto border-gray-300 pl-4">
-          <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
-            <div className=" w-2/4 h-full flex justify-around items-center px-5">
-              <h4 className="font-bold">รหัสหอผู้ป่วย : {idH}</h4>
-
-              <h4 className="font-bold">ชื่อหอผู้ป่วย : {nameH}</h4>
-            </div>
-            <div className="w-2/4 h-full  flex justify-around items-center px-5">
-              <div>
-                <label className="mr-2">แสดงทั้งหมด</label>
-                <input type="radio" name="patientStatus" />
-              </div>
-              <div>
-                <label className="mr-2">ไม่มีใบสังยา</label>
-                <input type="radio" name="patientStatus" />
-              </div>
-              <div>
-                <label className="mr-2">มีใบสั่งยา</label>
-                <input type="radio" name="patientStatus" />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <table className="w-full bg-white rounded shadow ">
-              <thead>
-                <tr className="bg-gray-200 sticky  top-0">
-                  <th className="text-left p-2">Admit Date</th>
-                  <th className="text-left p-2">HN</th>
-                  <th className="text-left p-2">AN</th>
-                  <th className="text-left p-2">ชื่อ - นามสกุล</th>
-                  <th className="text-left p-2">จำนวนใบสั่งยา</th>
-                  <th className="text-left p-2">หมายเหตุ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.from({ length: 20 }).map((_, index) => (
-                  <tr key={index} className="border-t border-gray-300">
-                    <td className="p-2">12/13/2023</td>
-                    <td className="p-2">66124249</td>
-                    <td className="p-2">6679932</td>
-                    <td className="p-2">ชื่อ - นามสกุล</td>
-                    <td className="p-2">0</td>
-                    <td className="p-2">[1]</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div className="h-3/4 ">
+        <FrmDataTable />
       </div>
 
       <footer className="bg-gray-500 text-white py-4 text-xs w-full fixed bottom-0 left-0 border-y-2 border-white-300">
