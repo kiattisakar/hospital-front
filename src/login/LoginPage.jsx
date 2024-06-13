@@ -9,9 +9,9 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/login', {
-        Username: username,
-        Password: password,
+      const response = await axios.post('http://localhost:3000/api/login', {
+        username,
+        password,
       });
       setMessage('เข้าสู่ระบบสำเร็จ');
       localStorage.setItem('token', response.data.token);
@@ -62,6 +62,13 @@ const LoginPage = () => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
             />
+          </div>
+          <div className="border border-gray-300 rounded p-2 my-5">
+            <select className="w-full border-none focus:outline-none" required>
+              <option>(กรุณาเลือกห้อง)</option>
+              <option>ห้องที่ 1</option>
+              <option>ห้องที่ 2</option>
+            </select>
           </div>
 
           <button
