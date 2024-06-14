@@ -1,49 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function FrmDataTable() {
+  const [wards, setWards] = useState([]);
   const idH = 2;
-  const nameH = 'เด็ก 3 ';
-  const wards = [
-    { name: 'เด็ก 3', count: 23 },
-    { name: 'เด็ก 1', count: 18 },
-    { name: 'ศัลยกรรมหญิง 1', count: 31 },
-    { name: 'NEURO SURGE', count: 23 },
-    { name: 'TRAUMA', count: 37 },
-    { name: 'URO1', count: 18 },
-    { name: 'กระดูกชาย1', count: 28 },
-    { name: 'กระดูกชาย2', count: 35 },
-    { name: 'กระดูกหญิง', count: 53 },
-    { name: 'Stroke unit', count: 19 },
-    { name: 'อายุรกรรมหญิง 1', count: 66 },
-    { name: 'จักษุ', count: 27 },
-    { name: 'ENT', count: 14 },
-  ];
+  const nameH = '';
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/getWardData')
+      .then(response => {
+        setWards(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the ward data!', error);
+      });
+  }, []);
+
   return (
     <div className="h-full flex">
-      <div className=" w-1/4 top">
+      <div className="w-1/4 top">
         <div className="h-full w-full border border-gray-300 p-4">
           <div className="overflow-auto h-full">
             <table className="min-w-full border-collapse">
               <thead className="sticky top-0 bg-gray-100 z-10">
                 <tr className="bg-white">
-                  <th className="px-4 py-2 border border-gray-300">
-                    หอผู้ป่วย
-                  </th>
+                  <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
                   <th className="px-4 py-2 border border-gray-300">จำนวน</th>
                 </tr>
               </thead>
               <tbody>
                 {wards.map((ward, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                  >
-                    <td className="px-4 py-2 border border-gray-300">
-                      {ward.name}
-                    </td>
-                    <td className="px-4 py-2 border border-gray-300 text-center">
-                      {ward.count}
-                    </td>
+                  <tr key={index} className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer">
+                    <td className="px-4 py-2 border border-gray-300">{ward.warddesc}</td>
+                    <td className="px-4 py-2 border border-gray-300 text-center">{ward.wardcode}</td>
                   </tr>
                 ))}
               </tbody>
@@ -53,12 +42,11 @@ export default function FrmDataTable() {
       </div>
       <div className="w-3/4 h-full border-l overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
-          <div className=" w-2/4 h-full flex justify-around items-center px-5">
+          <div className="w-2/4 h-full flex justify-around items-center px-5">
             <h4 className="font-bold">รหัสหอผู้ป่วย : {idH}</h4>
-
             <h4 className="font-bold">ชื่อหอผู้ป่วย : {nameH}</h4>
           </div>
-          <div className="w-2/4 h-full  flex justify-around items-center px-5">
+          <div className="w-2/4 h-full flex justify-around items-center px-5">
             <div>
               <label className="mr-2">แสดงทั้งหมด</label>
               <input type="radio" name="patientStatus" />
@@ -73,7 +61,6 @@ export default function FrmDataTable() {
             </div>
           </div>
         </div>
-
         <div>
           <table className="w-full bg-white rounded shadow">
             <thead>
