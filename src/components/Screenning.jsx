@@ -17,6 +17,261 @@ import printer from '../../img/printer.png';
 import cancel from '../../img/cancel.png';
 import doc from '../../img/doc.png';
 
+const data3 = {
+  prescrip: [
+    {
+      date: '17/06/2024',
+      time: '12 .. JUN MRPS',
+      drug: 'MRNO',
+      name: 'ไม่มีประวัติยามาก่อนใน รพ.ของเรา',
+      dose: 12,
+      qty: 12,
+      usageCode: 'MRPS',
+      instructions: '. 12 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '1 .. JUN .',
+      drug: 'NM1',
+      name: 'NO MED',
+      dose: 1,
+      qty: 1,
+      usageCode: '.',
+      instructions: '. 1 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '14 .. JUN .',
+      drug: 'POSTOP',
+      name: 'ผู้ป่วย POST OP..DATE...',
+      dose: 14,
+      qty: 14,
+      usageCode: '.',
+      instructions: '. 14 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '14 .. JUN .',
+      drug: 'POSTOP',
+      name: 'ผู้ป่วย POST OP..DATE...',
+      dose: 14,
+      qty: 14,
+      usageCode: '.',
+      instructions: '. 14 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '14 .. JUN .',
+      drug: 'POSTOP',
+      name: 'ผู้ป่วย POST OP..DATE...',
+      dose: 14,
+      qty: 14,
+      usageCode: '.',
+      instructions: '. 14 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '14 .. JUN .',
+      drug: 'POSTOP',
+      name: 'ผู้ป่วย POST OP..DATE...',
+      dose: 14,
+      qty: 14,
+      usageCode: '.',
+      instructions: '. 14 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '[20:00] ก่อนนอน',
+      drug: 'SNKT1',
+      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
+      dose: 2,
+      qty: 2,
+      usageCode: 'HS',
+      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
+      store: 'JVM',
+      print: false,
+      room: 'ห้องยา IPD[001]',
+    },
+    {
+      date: '17/06/2024',
+      time: '12 .. JUN MRPS',
+      drug: 'MRNO',
+      name: 'ไม่มีประวัติยามาก่อนใน รพ.ของเรา',
+      dose: 12,
+      qty: 12,
+      usageCode: 'MRPS',
+      instructions: '. 12 มีคุณเจน .',
+      store: 'จัดมือ',
+      print: true,
+      room: 'ห้องยา IPD[001]',
+    },
+  ],
+};
+
+const DataTable = () => {
+  return (
+    <div className="flex-grow flex flex-col overflow-auto max-h-56 ">
+      <table className="min-w-full border-collapse border border-gray-400 text-sm">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 p-1">
+              <input type="checkbox" />
+            </th>
+            <th className="border border-gray-300 p-1">วันที่</th>
+            <th className="border border-gray-300 p-1">เวลารับประทาน</th>
+            <th className="border border-gray-300 p-1">รหัสยา</th>
+            <th className="border border-gray-300 p-1">ชื่อยา</th>
+            <th className="border border-gray-300 p-1">Dose</th>
+            <th className="border border-gray-300 p-1">QTY</th>
+            <th className="border border-gray-300 p-1">รหัสวิธีใช้</th>
+            <th className="border border-gray-300 p-1">คำอธิบายวิธีใช้</th>
+            <th className="border border-gray-300 p-1">ที่เก็บยา</th>
+            <th className="border border-gray-300 p-1">Print</th>
+            <th className="border border-gray-300 p-1">ห้อง</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data3.prescrip.map((item, index) => (
+            <tr key={index}>
+              <td className="border border-gray-300 p-1 text-center">
+                <input type="checkbox" />
+              </td>
+              <td className="border border-gray-300 p-1">{item.date}</td>
+              <td className="border border-gray-300 p-1">{item.time}</td>
+              <td className="border border-gray-300 p-1">{item.drug}</td>
+              <td className="border border-gray-300 p-1">{item.name}</td>
+              <td className="border border-gray-300 p-1 text-center">
+                {item.dose}
+              </td>
+              <td className="border border-gray-300 p-1 text-center">
+                {item.qty}
+              </td>
+              <td className="border border-gray-300 p-1">{item.usageCode}</td>
+              <td className="border border-gray-300 p-1">
+                {item.instructions}
+              </td>
+              <td className="border border-gray-300 p-1">{item.store}</td>
+              <td className="border border-gray-300 p-1 text-center">
+                <input type="checkbox" checked={item.print} readOnly />
+              </td>
+              <td className="border border-gray-300 p-1">{item.room}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 export default function () {
   const [selectedPatient, setSelectedPatient] = useState(null);
 
@@ -40,19 +295,74 @@ export default function () {
         status: 'รอ Screen',
         room: 'ห้องยา IPD[001]',
       },
+      {
+        date: '14/06/2024',
+        type: 0,
+        order: '24061400825',
+        hn: '65114449',
+        an: '6738028',
+        name: 'นาง จำดี มุนเสิน',
+        ward: 'ICUTM (IV)',
+        status: 'รอ Screen',
+        room: 'ห้องยา IPD[001]',
+      },
+      {
+        date: '14/06/2024',
+        type: 0,
+        order: '24061400825',
+        hn: '65114449',
+        an: '6738028',
+        name: 'นาง จำดี มุนเสิน',
+        ward: 'ICUTM (IV)',
+        status: 'รอ Screen',
+        room: 'ห้องยา IPD[001]',
+      },
+      {
+        date: '14/06/2024',
+        type: 0,
+        order: '24061400825',
+        hn: '65114449',
+        an: '6738028',
+        name: 'นาง จำดี มุนเสิน',
+        ward: 'ICUTM (IV)',
+        status: 'รอ Screen',
+        room: 'ห้องยา IPD[001]',
+      },
+      {
+        date: '14/06/2024',
+        type: 0,
+        order: '24061400825',
+        hn: '65114449',
+        an: '6738028',
+        name: 'นาง จำดี มุนเสิน',
+        ward: 'ICUTM (IV)',
+        status: 'รอ Screen',
+        room: 'ห้องยา IPD[001]',
+      },
     ],
   };
 
   const data = [
     { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
     { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 17, ward: 'ICU MED', count: 3 },
-    { id: 19, ward: 'ICUTM (IV)', count: 1 },
-    { id: 47, ward: 'ICU ตัดกรรมน 2', count: 1 },
-    { id: 91, ward: 'อายุรกรรมหัวใจ', count: 8 },
-    { id: 92, ward: 'ICU MED2', count: 1 },
-    { id: 93, ward: 'สูติศ์หญิง 2(รอ-IV)', count: 1 },
-    { id: 95, ward: 'RICU (IV)', count: 2 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
+    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
+    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
   ];
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
@@ -142,28 +452,32 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className=" h-4/5 w-full p-15 flex flex-col justify-center ">
+            <div className=" h-4/5 w-full flex flex-col mt-1 ">
               <div className="  max-h-96 overflow-auto ">
-                <table className="min-w-full border-collapse border border-gray-400">
+                <table className="min-w-full border-collapse border border-gray-400 ">
                   <thead className="stick top-0">
                     <tr>
-                      <th className="border border-gray-300 p-2">
+                      <th className="border border-gray-300 p-2 text-xs">
                         <input type="checkbox" />
                       </th>
-                      <th className="border border-gray-300 p-2">หอผู้ป่วย</th>
-                      <th className="border border-gray-300 p-2">จำนวน</th>
+                      <th className="border border-gray-300 p-2 text-xs">
+                        หอผู้ป่วย
+                      </th>
+                      <th className="border border-gray-300 p-2 text-xs">
+                        จำนวน
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.map((item) => (
                       <tr key={item.id}>
-                        <td className="border border-gray-300 p-2 text-center">
+                        <td className="border border-gray-300 p-2 text-xs text-center">
                           <input type="checkbox" />
                         </td>
-                        <td className="border border-gray-300 p-2">
+                        <td className="border border-gray-300 p-2 text-xs">
                           {item.ward}
                         </td>
-                        <td className="border border-gray-300 p-2 text-center">
+                        <td className="border border-gray-300 p-2 text-xs text-center">
                           {item.count}
                         </td>
                       </tr>
@@ -173,8 +487,8 @@ export default function () {
               </div>
             </div>
           </div>
-          <div className="h-full w-4/5 bg-yellow-300">
-            <div className="border-2 border-gray-400 w-full h-[45%] bg-white p-1    ">
+          <div className="h-full w-4/5 ">
+            <div className="border-2 border-gray-400 w-full h-[45%] bg-white p-1">
               <div className="w-full h-1/4  flex ">
                 <ButtonGroup
                   icon={inImg}
@@ -205,62 +519,74 @@ export default function () {
                     <table className="min-w-full border-collapse border border-gray-400">
                       <thead>
                         <tr>
-                          <th className="border border-gray-300 p-2">
+                          <th className="border border-gray-300 p-1 text-xs">
                             <input type="checkbox" />
                           </th>
-                          <th className="border border-gray-300 p-2">วันที่</th>
-                          <th className="border border-gray-300 p-2">ประเภท</th>
-                          <th className="border border-gray-300 p-2">
+                          <th className="border border-gray-300 p-1 text-xs">
+                            วันที่
+                          </th>
+                          <th className="border border-gray-300 p-1 text-xs">
+                            ประเภท
+                          </th>
+                          <th className="border border-gray-300 p-1 text-xs">
                             ใบสั่งยา
                           </th>
-                          <th className="border border-gray-300 p-2">HN</th>
-                          <th className="border border-gray-300 p-2">AN</th>
-                          <th className="border border-gray-300 p-2">
+                          <th className="border border-gray-300 p-1 text-xs">
+                            HN
+                          </th>
+                          <th className="border border-gray-300 p-1 text-xs">
+                            AN
+                          </th>
+                          <th className="border border-gray-300 p-1 text-xs">
                             ชื่อ - นามสกุล
                           </th>
-                          <th className="border border-gray-300 p-2">
+                          <th className="border border-gray-300 p-1 text-xs">
                             หอผู้ป่วย
                           </th>
-                          <th className="border border-gray-300 p-2">STS</th>
-                          <th className="border border-gray-300 p-2">
+                          <th className="border border-gray-300 p-1 text-xs">
+                            STS
+                          </th>
+                          <th className="border border-gray-300 p-1 text-xs">
                             สถานะใบสั่งยา
                           </th>
-                          <th className="border border-gray-300 p-2">ห้อง</th>
+                          <th className="border border-gray-300 p-1 text-xs">
+                            ห้อง
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         {data2.patients.map((item, index) => (
                           <tr key={index}>
-                            <td className="border border-gray-300 p-2 text-center">
+                            <td className="border border-gray-300 p-1 text-xs text-center">
                               <input type="checkbox" />
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.date}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.type}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.order}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.hn}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.an}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.name}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.ward}
                             </td>
 
-                            <td className="border border-gray-300 p-2"></td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs"></td>
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.status}
                             </td>
-                            <td className="border border-gray-300 p-2">
+                            <td className="border border-gray-300 p-1 text-xs">
                               {item.room}
                             </td>
                           </tr>
@@ -271,7 +597,35 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className=""></div>
+            <div className="h-[55%] w-full  border-2 border-gray-400 p-1 mt-[2px] ">
+              <div className="w-full h-[20%]  flex">
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center w-62">
+                  <img src={inImg} alt="คืนยา" className="w-6 h-6 mr-2 " />
+                  <div className="flex flex-col">
+                    <span className="text-center">
+                      จัดยาโดยเลือกตามรายการยา
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center w-32">
+                  <img src={printer} alt="คืนยา" className="w-6 h-6 mr-2 " />
+                  <div className="flex flex-col">
+                    <span className="text-center">Reprint</span>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center h-full w-52 text-sm">
+                  <div>HN : 69855541</div>
+                  <div>ชื่อผู้ป่วย : นาย เกียติศักษ์ อารมย์</div>
+                </div>
+                <div className="flex flex-col justify-center h-full w-52  text-sm">
+                  <div>AN : 69855541</div>
+                  <div>จำนวน 4 รายการ</div>
+                </div>
+              </div>
+              <div className="h-[80%] w-full">
+                <DataTable />
+              </div>
+            </div>
           </div>
         </div>
       </div>

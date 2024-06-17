@@ -7,40 +7,44 @@ export default function FrmDataTable() {
   const nameH = '';
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/getWardData')
-      .then(response => {
+    axios
+      .get('http://localhost:3000/api/getWardData')
+      .then((response) => {
         setWards(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('There was an error fetching the ward data!', error);
       });
   }, []);
 
   return (
-    <div className="h-full flex">
-      <div className="w-1/4 top">
-        <div className="h-full w-full border border-gray-300 p-4">
-          <div className="overflow-auto h-full">
-            <table className="min-w-full border-collapse">
-              <thead className="sticky top-0 bg-gray-100 z-10">
-                <tr className="bg-white">
-                  <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
-                  <th className="px-4 py-2 border border-gray-300">จำนวน</th>
-                </tr>
-              </thead>
-              <tbody>
-                {wards.map((ward, index) => (
-                  <tr key={index} className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer">
-                    <td className="px-4 py-2 border border-gray-300">{ward.warddesc}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-center">{ward.wardcode}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div className="h-full  flex w-screen  ">
+      <div className="w-1/4 h-[489px] overflow-auto  border-2 border-gray-300 px-2 ">
+        <table className="min-w-full  border-collapse">
+          <thead className="sticky top-0 bg-gray-100 z-10">
+            <tr className="bg-white">
+              <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
+              <th className="px-4 py-2 border border-gray-300">จำนวน</th>
+            </tr>
+          </thead>
+          <tbody>
+            {wards.map((ward, index) => (
+              <tr
+                key={index}
+                className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+              >
+                <td className="px-4 py-2 border border-gray-300">
+                  {ward.warddesc}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {ward.wardcode}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="w-3/4 h-full border-l overflow-auto border-gray-300 pl-4">
+      <div className="w-3/4 max-h-[489px] border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <h4 className="font-bold">รหัสหอผู้ป่วย : {idH}</h4>

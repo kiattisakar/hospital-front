@@ -8,6 +8,7 @@ import searchIcon from '../../img/searchIcon.png';
 import Footer from '../header/Footer';
 import IpdHeader from '../header/IpdHeader';
 import FrmDataTable from './FrmDataTable';
+import { HomeIcon } from '@heroicons/react/16/solid';
 
 export default function FrmDataTebleIPD() {
   const [currentDate, setCurrentDate] = useState('');
@@ -49,37 +50,16 @@ export default function FrmDataTebleIPD() {
   ];
 
   return (
-    <div className=" bg-gray-100 h-full  ">
+    <div className="h-full w-screen">
       <div className="้h-1/6">
-        <header className="h-full">
-          <IpdHeader />
-        </header>
         <div className="flex h-2/4 justify-between items-center mb-2">
           <div className="space-x-2 mt-2 ml-4 w-full flex">
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={addDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
-              <span>สร้างใบยาใหม่</span>
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm  flex justify-center items-center">
-              <img src={editDoc} alt="ภาพ" className="w-4 h-4  mr-1" />
-              สร้างใบยาเพิ่มเติม
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
-              สร้างใบยากลับบ้าน
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={patientIcon} alt="ภาพ" className="w-7 h-7 mr-1" />
-              ผู้ป่วย Admit ใหม่
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={hospitalicon} alt="ภาพ" className="w-4 h-4 mr-1" />
-              ย้ายหอผู้ป่วย
-            </button>
-            <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
-              <img src={homeIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
-              ผู้ป่วยกลับบ้าน
-            </button>
+            <ButtonWithIcon icon={addDoc} label="สร้างใบยาใหม่" />
+            <ButtonWithIcon icon={editDoc} label="สร้างใบยาเพิ่มเติม" />
+            <ButtonWithIcon icon={homeIcon} label="สร้างใบยากลับบ้าน" />
+            <ButtonWithIcon icon={patientIcon} label="ผู้ป่วย Admit ใหม่" />
+            <ButtonWithIcon icon={hospitalicon} label="ย้ายหอผู้ป่วย" />
+            <ButtonWithIcon icon={homeIcon} label="ผู้ป่วยกลับบ้าน" />
           </div>
         </div>
         <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10">
@@ -117,15 +97,17 @@ export default function FrmDataTebleIPD() {
           </button>
         </div>
       </div>
-      <div className="h-3/4 ">
+      <div className="w-full h-5/6">
         <FrmDataTable />
       </div>
-
-      <footer className="bg-gray-500 text-white py-4 text-xs w-full fixed bottom-0 left-0 border-y-2 border-white-300">
-        <div className="container mx-auto ">
-          <Footer />
-        </div>
-      </footer>
     </div>
   );
 }
+const ButtonWithIcon = ({ icon, label, bgColor }) => {
+  return (
+    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32">
+      <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
+      <span className="mt-2 text-sm text-center">{label}</span>
+    </div>
+  );
+};

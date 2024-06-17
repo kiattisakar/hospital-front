@@ -11,10 +11,10 @@ export default function FrmMainIpd() {
         <IpdHeader />
       </header>
       <main className="flex-grow flex flex-col  ">
-        {/* <FrmDataTebleIPD /> */}
+        <FrmDataTebleIPD />
         {/* <FrmDataTable2 /> */}
 
-        <Screenning />
+        {/* <Screenning /> */}
       </main>
 
       <footer className="bg-gray-500 text-white py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
