@@ -11,8 +11,8 @@ export default function FrmMainIpd() {
         <IpdHeader />
       </header>
       <main className="flex-grow flex flex-col  ">
-        <FrmDataTebleIPD />
-        {/* <FrmDataTable2 /> */}
+        {/* <FrmDataTebleIPD /> */}
+        <FrmDataTable2 />
 
         {/* <Screenning /> */}
       </main>

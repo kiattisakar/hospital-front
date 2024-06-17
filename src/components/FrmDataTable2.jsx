@@ -37,9 +37,6 @@ export default function FrmDataTeble2() {
   return (
     <div className=" bg-gray-100 h-full  ">
       <div className="้h-1/6">
-        <header className="h-full">
-          <FrmHeader2 />
-        </header>
         <div className="flex h-2/4 justify-between items-center mb-2">
           <div className="space-x-2 mt-2 ml-4 w-full flex">
             <button className="bg-gray-500 text-white p-1 rounded hover:bg-gray-700 active:bg-gray-300 text-sm flex justify-center items-center">
@@ -94,12 +91,6 @@ export default function FrmDataTeble2() {
       <div className="h-3/4 ">
         <FrmDataTable />
       </div>
-
-      <footer className="bg-gray-500 text-white py-4 text-xs w-full fixed bottom-0 left-0 border-y-2 border-white-300">
-        <div className="container mx-auto ">
-          <Footer />
-        </div>
-      </footer>
     </div>
   );
 }
