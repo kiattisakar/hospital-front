@@ -4,6 +4,7 @@ import FrmDataTable2 from './FrmDataTable2';
 import Screenning from './Screenning';
 import IpdHeader from '../header/IpdHeader';
 import Footer from '../header/Footer';
+import FrmProfile from './Profile/FrmProfile';
 export default function FrmMainIpd() {
   return (
     <div className="font-sans flex flex-col h-[100%]">
@@ -12,8 +13,8 @@ export default function FrmMainIpd() {
       </header>
       <main className="flex-grow flex flex-col  ">
         {/* <FrmDataTebleIPD /> */}
-        <FrmDataTable2 />
-
+        {/* <FrmDataTable2 /> */}
+        <FrmProfile />
         {/* <Screenning /> */}
       </main>
 
