@@ -8,9 +8,10 @@ export default function FrmDataTable() {
   const [orderdate, setOrderdate] = useState('2024-05-30');
   const [ptstatus, setPtstatus] = useState('');
 
+  // Fetch ward data on component mount
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/first')
+      .post('http://localhost:3000/api/first')
       .then((response) => {
         setWards(response.data);
       })
@@ -19,10 +20,15 @@ export default function FrmDataTable() {
       });
   }, []);
 
+  // Fetch patient data when selectedWard, orderdate, or ptstatus changes
   useEffect(() => {
     if (selectedWard) {
       axios
-        .get(`http://localhost:3000/api/second?orderdate=${orderdate}&ptstatus=${ptstatus}&wardcode=${selectedWard.wardcode}`)
+        .post('http://localhost:3000/api/second', {
+          orderdate: orderdate,
+          ptstatus: ptstatus,
+          wardcode: selectedWard.wardcode
+        })
         .then((response) => {
           setPatients(response.data);
         })
@@ -65,20 +71,42 @@ export default function FrmDataTable() {
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <div>
               <label className="mr-2">แสดงทั้งหมด</label>
-              <input type="radio" name="patientStatus" onChange={() => setPtstatus('')} />
+              <input
+                type="radio"
+                name="patientStatus"
+                onChange={() => setPtstatus('')}
+              />
             </div>
             <div>
-              <label className="mr-2">ไม่มีใบสังยา</label>
-              <input type="radio" name="patientStatus" onChange={() => setPtstatus(" AND dbo.ms_patientadmit.DCdatetime is null")} />
+              <label className="mr-2">ไม่มีใบสั่งยา</label>
+              <input
+                type="radio"
+                name="patientStatus"
+                onChange={() =>
+                  setPtstatus(' AND dbo.ms_patientadmit.DCdatetime is null')
+                }
+              />
             </div>
             <div>
               <label className="mr-2">มีใบสั่งยา</label>
-              <input type="radio" name="patientStatus" onChange={() => {
-                const startDate = new Date();
-                const endDate = new Date();
-                endDate.setHours(23, 59, 59);
-                setPtstatus(` AND dbo.ms_patientadmit.DCdatetime BETWEEN '${startDate.toISOString().slice(0, 19).replace('T', ' ')}' AND '${endDate.toISOString().slice(0, 19).replace('T', ' ')}'`);
-              }} />
+              <input
+                type="radio"
+                name="patientStatus"
+                onChange={() => {
+                  const startDate = new Date();
+                  const endDate = new Date();
+                  endDate.setHours(23, 59, 59);
+                  setPtstatus(
+                    ` AND dbo.ms_patientadmit.DCdatetime BETWEEN '${startDate
+                      .toISOString()
+                      .slice(0, 19)
+                      .replace('T', ' ')}' AND '${endDate
+                      .toISOString()
+                      .slice(0, 19)
+                      .replace('T', ' ')}'`
+                  );
+                }}
+              />
             </div>
           </div>
         </div>
@@ -87,10 +115,11 @@ export default function FrmDataTable() {
             <thead>
               <tr className="bg-gray-200 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
-                <th className="text-left p-2">Discharged Date</th>
+                {/* <th className="text-left p-2">Discharged Date</th> */}
                 <th className="text-left p-2">HN</th>
                 <th className="text-left p-2">AN</th>
                 <th className="text-left p-2">ชื่อ - นามสกุล</th>
+                <th className="text-left p-2">จำนวนใบสั่งยา</th>
                 <th className="text-left p-2">หอผู้ป่วย</th>
               </tr>
             </thead>
@@ -98,10 +127,11 @@ export default function FrmDataTable() {
               {patients.map((record, index) => (
                 <tr key={index} className="border-t border-gray-300">
                   <td className="p-2">{new Date(record.admitteddate).toLocaleDateString()}</td>
-                  <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td>
+                  {/* <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td> */}
                   <td className="p-2">{record.hn}</td>
                   <td className="p-2">{record.an}</td>
                   <td className="p-2">{record.patientname}</td>
+                  <td className="p-2">{record.medic}</td>
                   <td className="p-2">{record.warddesc}</td>
                 </tr>
               ))}
