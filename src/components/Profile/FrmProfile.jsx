@@ -10,6 +10,10 @@ import drug from '../../../img/drug.png';
 import note from '../../../img/note.png';
 import back from '../../../img/back.png';
 import saveImg from '../../../img/save.png';
+import chemoRoom from '../../../img/chemoRoom.png';
+import IPDRoom from '../../../img/IPDRoom.png';
+import TPNRoom from '../../../img/TPNRoom.png';
+import IVRoom from '../../../img/IVRoom.png';
 
 // import backIcon from '../../../img/back.png';
 export default function FrmProfile() {
@@ -19,14 +23,14 @@ export default function FrmProfile() {
         <div className="w-screen h-[87%] flex ">
           <div className="h-full w-[12%] text-[10px] flex flex-col">
             <div className="w-full h-[15%]  flex justify-center  items-center">
-              <button className="w-3/4 h-full flex justify-center items-center rounded-sm  bg-gray-500 text-xs text-white hover:bg-gray-800 active:bg-gray-400">
+              <button className="w-3/4 h-full flex justify-center items-center rounded-sm 2xl:text-[13px] 3xl:text-[15px] 4xl:text-[14px] bg-gray-500 text-xs text-white hover:bg-gray-800 active:bg-gray-400">
                 รายละเอียดผู้ป่วย
               </button>
             </div>
             <div className="w-full h-[63%] mt-1 ">
               <div className="flex w-full h-full">
-                <div className="flex flex-col justify-start pl-2  w-1/2 h-full">
-                  <div className="w-[70%] h-[55%] bg-gray-300 flex items-center justify-center mb-2">
+                <div className="flex flex-col justify-start pl-2 2xl:text-[11px] 3xl:text-[15px] 4xl:text-[14px] w-1/2 h-full">
+                  <div className="w-[70%] h-[55%] bg-gray-300  flex items-center justify-center mb-2">
                     <svg
                       className="w-8 h-8 text-gray-500"
                       fill="currentColor"
@@ -77,7 +81,7 @@ export default function FrmProfile() {
                 </div>
               </div>
             </div>
-            <div className="w-full h-[22%] flex justify-between px-2 items-center my-1 ">
+            <div className="w-full h-[22%] flex justify-between px-2 items-center 2xl:text-[13px] 3xl:text-[15px] my-1 ">
               <button className="w-2/5 h-full flex justify-center items-center rounded-sm p-1 bg-white text-white border-2 border-gray-700 hover:bg-gray-400 active:bg-gray-100">
                 <img src={homeIcon} alt="บ้าน" className="w-6 h-6" />
               </button>
@@ -294,15 +298,78 @@ export default function FrmProfile() {
                   </div>
                 </div>
               </div>
-              <div className="w-full h-[35%]  flex ">
-                <div className="h-full w-[50%] bg-red-300"></div>
-                <div className="h-full w-[50%] bg-red-100"></div>
+              <div className="w-full h-[35%] flex ">
+                <div className="mx-2 h-full w-[50%] ">
+                  <textarea
+                    name=""
+                    id="1"
+                    className=" w-full h-full border-[2px] border-gray-700 bg-yellow-50"
+                  ></textarea>
+                </div>
+                <div className="h-full w-[50%]  ">
+                  <div className="flex mt-1 h-1/3 w-full">
+                    <div className="flex justify-start items-start p-0 h-full  2xl:w-[50%] 3xl:w-[60%]">
+                      <p className="mr-1 ">Band form Neutrophil%:</p>
+                      <input
+                        type="text"
+                        className="w-[26.5%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default  ml-1"
+                        value={'0'}
+                        readOnly
+                      />
+                    </div>{' '}
+                    <div className="flex justify-start item-start h-full 2xl:w-[50%] 3xl:w-[40%]">
+                      <div className="text-right w-[42.8%] ">ANC:</div>
+                      <input
+                        type="text"
+                        className=" w-[25.7%] border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-1 "
+                        value={'0'}
+                        readOnly
+                      />
+                      <div className=" ml-1 text-right">cells/mL</div>
+                    </div>
+                  </div>
+                  <div className="flex w-full h-1/3">
+                    <div className="flex justify-start items-start p-0 h-full w-full ">
+                      <p className="mr-1">วินิจฉัยโรค :</p>
+                      <input
+                        type="text"
+                        className="w-[69.5%] border-[1px] bg-white px-2 border-gray-700 ml-1"
+                      />
+                      <button className="bg-black text-white w-[5%] h-hull rotate-180 ml-[5%] hover:text-gray-800 hover:bg-gray-400 active:bg-slate-500">
+                        {'^'}
+                      </button>
+                    </div>{' '}
+                  </div>
+                  <div className="flex w-full h-1/3">
+                    <div className="flex justify-start items-start p-0 h-full w-full ">
+                      <p className="mr-1 2xl:w-[14.3%] 3xl:w-[16.3%]">
+                        Protocol :
+                      </p>
+                      <input
+                        type="text"
+                        className="w-[69.6%] border-[1px] bg-white px-2 border-gray-700 ml-1"
+                      />
+                      <button className="bg-black text-white w-[5%] h-hull rotate-180 ml-[5%] hover:text-gray-800 hover:bg-gray-400 active:bg-slate-500">
+                        {'^'}
+                      </button>
+                    </div>{' '}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div className="h-full w-[35%] bg-red-300"></div>
         </div>
-        <div className="w-screen h-[13%] bg-green-500"></div>
+        <div className="w-screen h-[13%]  flex items-center space-x-[2px] px-5">
+          <ButtonWithIcon icon={IPDRoom} label="ห้องยา IPD" />
+          <ButtonWithIcon icon={IVRoom} label="ห้องยา IV" />
+          <ButtonWithIcon icon={chemoRoom} label="ห้องยา Chemo" />
+          <ButtonWithIcon icon={TPNRoom} label="ห้องยา TPN" />
+          <div className="flex">
+            <div className=" mx-5 font-bold">รหัสหอผู้ป่วย : {'-'}</div>
+            <div className=" mx-5 font-bold">หอผู้ป่วย : {'-'}</div>
+          </div>
+        </div>
       </div>
       <div className="w-screen h-3/5 bg-yellow-600"></div>
     </div>
@@ -310,17 +377,17 @@ export default function FrmProfile() {
 }
 const ButtonWithIcon = ({ icon, label }) => {
   return (
-    <div className="bg-white  text-gray-700 border-2 rounded h-full px-1 cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 flex justify-center items-center w-24">
+    <div className="bg-white 2xl:text-[10px] 3xl:text-[12px] text-gray-700 border-2 rounded h-full px-1 cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 flex justify-center items-center w-24">
       <img src={icon} alt={label} className="mr-[2px] w-6 h-6" />
-      <span className="text-[10px] text-center">{label}</span>
+      <span className=" text-center">{label}</span>
     </div>
   );
 };
 const ButtonWithSave = ({ icon, label }) => {
   return (
-    <div className="bg-white  text-gray-700 border-[1px] rounded border-black h-full px-1 cursor-pointer hover:bg-gray-200 active:bg-gray-400 flex justify-center items-center w-24">
+    <div className="bg-white 2xl:text-[10px] 3xl:text-[15px] text-gray-700 border-[1px] rounded border-black h-full px-1 cursor-pointer hover:bg-gray-200 active:bg-gray-400 flex justify-center items-center w-24">
       <img src={icon} alt={label} className="mr-[2px] w-6 h-6" />
-      <span className="text-[10px] text-center">{label}</span>
+      <span className=" text-center">{label}</span>
     </div>
   );
 };
