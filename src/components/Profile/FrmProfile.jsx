@@ -14,10 +14,10 @@ import saveImg from '../../../img/save.png';
 // import backIcon from '../../../img/back.png';
 export default function FrmProfile() {
   return (
-    <div className="w-screen h-[100%] flex flex-col mt-1">
+    <div className="w-screen h-full flex flex-col mt-1 ">
       <div className="w-screen h-2/5 ">
         <div className="w-screen h-[87%] flex ">
-          <div className="h-full w-[12%]  flex flex-col">
+          <div className="h-full w-[12%] text-[10px] flex flex-col">
             <div className="w-full h-[15%]  flex justify-center  items-center">
               <button className="w-3/4 h-full flex justify-center items-center rounded-sm  bg-gray-500 text-xs text-white hover:bg-gray-800 active:bg-gray-400">
                 รายละเอียดผู้ป่วย
@@ -35,7 +35,7 @@ export default function FrmProfile() {
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
                   </div>
-                  <div className="mb-1 o text-[10px]">
+                  <div className="mb-1 ">
                     <span className="block text-gray-700 font-medium">
                       วันที่ Admit:
                     </span>
@@ -43,33 +43,33 @@ export default function FrmProfile() {
                       17/06/2024
                     </span>
                   </div>
-                  <div className="mb-1 o text-[10px]">
+                  <div className="mb-1 ">
                     <span className="block text-gray-700 font-medium">
                       จำนวนใบสั่งยา: 0
                     </span>
                   </div>
                 </div>
-                <div className="ml-4 flex flex-col justify-top items-end">
-                  <div className="mb-1 text-[13px] underline">
+                <div className="ml-4 flex flex-col justify-top 2xl:text-[13px] 3xl:text-[16px] 4xl:text-[18px] items-end">
+                  <div className="mb-1  underline">
                     <span className="block text-gray-700 font-medium">HN:</span>
                   </div>
-                  <div className="mb-1 text-[13px] underline">
-                    <span className="block text-gray-700 font-medium">
+                  <div className="mb-1  underline">
+                    <span className="block text-gray-700 2xl:text-[12px] 3xl:text-[17px] font-medium">
                       ชื่อ - นามสกุล:
                     </span>
                   </div>
-                  <div className="mb-1 text-[13px] underline">
+                  <div className="mb-1  underline">
                     <span className="block text-gray-700 font-medium">
                       <p>เลขบัตรปชช: </p>
                     </span>
                   </div>
 
-                  <div className="mb-1 text-[13px] underline">
+                  <div className="mb-1  underline">
                     <span className="block text-gray-700 font-medium">
                       หอผู้ป่วย:
                     </span>
                   </div>
-                  <div className="mb-1 text-[13px] underline">
+                  <div className="mb-1  underline">
                     <span className="block text-gray-700 font-medium">
                       สิทธิ์ผู้ป่วย:
                     </span>
@@ -81,14 +81,14 @@ export default function FrmProfile() {
               <button className="w-2/5 h-full flex justify-center items-center rounded-sm p-1 bg-white text-white border-2 border-gray-700 hover:bg-gray-400 active:bg-gray-100">
                 <img src={homeIcon} alt="บ้าน" className="w-6 h-6" />
               </button>
-              <button className="w-2/5 h-full flex justify-center text-[12px] items-center rounded-sm p-1 text-gray-700 font-bold bg-yellow-400 hover:text-white hover:bg-yellow-600 border-2 border-gray-700 active:bg-yellow-400">
+              <button className="w-2/5 h-full flex justify-center  items-center rounded-sm p-1 text-gray-700 font-bold bg-yellow-400 hover:text-white hover:bg-yellow-600 border-2 border-gray-700 active:bg-yellow-400">
                 <span>จ่ายแบบ ROBOT</span>
               </button>
             </div>
           </div>
           <div className="h-full w-[53%] ">
             <div className="h-[15%] w-full flex justify-start ">
-              <div className="h-full w-full flex justify-start ">
+              <div className="h-     w-full flex justify-start ">
                 <ButtonWithIcon icon={profileIcon} label="Medication Profile" />
                 <ButtonWithIcon icon={noteBookIcon} label="รายการสั่งยา" />
                 <ButtonWithIcon icon={editIcon} label="Medical Reconcile" />
@@ -103,8 +103,8 @@ export default function FrmProfile() {
             </div>
             <div className="w-full my-1 h-[83%]">
               <div className="flex  w-full h-[65%] ">
-                <div className="ml-2 text-[13px] h-full w-[23%] ">
-                  <div className="  flex justify-start w-full text-[12px]  boeder-[2px] mb-1">
+                <div className="ml-2  h-full w-[23%] ">
+                  <div className="  flex justify-start w-full  boeder-[2px] mb-1">
                     <div className="  w-[45%] border-[1px] border-gray-700 flex justify-center items-center font-medium">
                       65078921
                     </div>
@@ -115,34 +115,34 @@ export default function FrmProfile() {
                       65078921
                     </div>
                   </div>
-                  <div className="mb-1 w-full  mt-[1px] font-medium border-[1px] border-gray-700 flex text-[12px] px-1">
+                  <div className="mb-1 w-full  mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
                     นาย วิศรุต เชื้อคำ
                   </div>
-                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex text-[12px] px-1">
+                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
                     1419901859xxx
                   </div>
-                  <div className="w-full mb-1  mt-[1px] font-medium border-[1px] border-gray-700 flex text-[12px] px-1">
+                  <div className="w-full mb-1  mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
                     ศัลยกรรมชาย 1
                   </div>
-                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex text-[12px] px-1">
+                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
                     นาย วิศรุต เชื้อคำ
                   </div>
                 </div>
-                <div className="text-[13px] h-full w-[38%] ">
+                <div className=" h-full w-[38%] ">
                   <div className="flex w-full mb-1">
                     <div className="w-[15%] flex justify-end">วันเกิด:</div>
-                    <div className="w-[35%] text-[12px] border-[1px] border-gray-700 flex justify-center items-center font-medium">
+                    <div className="w-[35%]  border-[1px] border-gray-700 flex justify-center items-center font-medium">
                       20/07/1999
                     </div>
                     <div className="w-[15%] flex justify-end">อายุ:</div>
-                    <div className="w-[35%] text-[12px] border-[1px] border-gray-700 flex justify-center items-center font-medium">
+                    <div className="w-[35%] border-[1px] border-gray-700 flex justify-center items-center font-medium">
                       20/07/1999
                     </div>
                   </div>
                   <div className="flex w-full ">
                     <div className="w-[15%] flex justify-end">ที่อยู่:</div>
                     <textarea
-                      className=" p-[2px] w-[85%] mb-1 text-[12px] border-[1px] cursor-default bg-gray-200 border-gray-700 flex justify-center items-center font-medium"
+                      className=" p-[2px] w-[85%] mb-1 border-[1px] cursor-default bg-gray-200 border-gray-700 flex justify-center items-center font-medium"
                       value={
                         'บ้านเลขที่ 163 หมู่3 ต.เชียงยืน อ.เมือง จ.อุดรธานี 41000'
                       }
@@ -182,14 +182,14 @@ export default function FrmProfile() {
                     <p>copy = 0</p>
                   </div>
                 </div>
-                <div className="text-[12px] h-full w-[39%] ">
+                <div className=" h-full w-[39%] ">
                   <div className="flex mb-1 w-full">
                     <div className="ml-1 w-[15%] flex justify-end">
                       แพทย์ :{' '}
                     </div>
                     <input
                       type="text"
-                      className="w-[85%] border-[1px] bg-green-50 border-gray-700 text-[12px] px-2 cursor-default"
+                      className="w-[85%] border-[1px] bg-green-50 border-gray-700 px-2 cursor-default"
                       value={'น.พ.กิตติธรรม ผดุงเวียง'}
                       readOnly
                     />
@@ -197,11 +197,11 @@ export default function FrmProfile() {
                   <div className="flex mb-1 w-full">
                     <div className="w-[50%] h-full flex">
                       <div className="w-[31%] ml-1 flex justify-end">
-                        น้ำหนัก :{' '}
+                        น้ำหนัก:
                       </div>
                       <input
                         type="text"
-                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default mr-1"
+                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
                         value={'57'}
                         readOnly
                       />
@@ -213,7 +213,7 @@ export default function FrmProfile() {
                       </div>
                       <input
                         type="text"
-                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default mr-1"
+                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
                         value={'1.59'}
                         readOnly
                       />
@@ -227,7 +227,7 @@ export default function FrmProfile() {
                       </div>
                       <input
                         type="text"
-                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default mr-1"
+                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
                         value={'168'}
                         readOnly
                       />
@@ -237,7 +237,7 @@ export default function FrmProfile() {
                       <div className="w-[30%] ml-1 text-right">eGFR:</div>
                       <input
                         type="text"
-                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default mr-1"
+                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
                         value={'130'}
                         readOnly
                       />
@@ -246,25 +246,21 @@ export default function FrmProfile() {
                   </div>
                   <div className="w-full flex  ">
                     <div className="w-[40%] ">
-                      <div className="flex text-[12px] justify-end items-end p-0 mb-1">
-                        <div className="w-[20%] ml-1 text-[12px] text-right">
-                          scr :
-                        </div>
+                      <div className="flex justify-end items-end p-0 mb-1">
+                        <div className="w-[20%] ml-1 text-right">scr :</div>
                         <input
                           type="text"
-                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default ml-2 mr-1"
+                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-2 mr-1"
                           value={'0'}
                           readOnly
                         />
                         <div className="w-[15.2%]"> </div>
                       </div>{' '}
-                      <div className="flex text-[12px] justify-end items-end p-0">
-                        <div className="w-[%] ml-1 text-[12px] text-right">
-                          WBC:
-                        </div>
+                      <div className="flex justify-end items-end p-0">
+                        <div className="w-[%] ml-1 text-right">WBC:</div>
                         <input
                           type="text"
-                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default ml-2 mr-1"
+                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-2 mr-1"
                           value={'0'}
                           readOnly
                         />
@@ -272,24 +268,20 @@ export default function FrmProfile() {
                       </div>
                     </div>
                     <div className="w-[42.3%] ">
-                      <div className="flex text-[12px] justify-end items-end p-0 mb-1">
-                        <div className="w-[20%] ml-1 text-[12px] text-right">
-                          Clcr :
-                        </div>
+                      <div className="flex justify-end items-end p-0 mb-1">
+                        <div className=" ml-1 text-right">Clcr :</div>
                         <input
                           type="text"
-                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default  ml-1"
+                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default  ml-1"
                           value={'0'}
                           readOnly
                         />
                       </div>{' '}
-                      <div className="flex text-[12px] justify-end items-end p-0">
-                        <div className=" ml-1 text-[12px] text-right">
-                          Neutrophil%:
-                        </div>
+                      <div className="flex justify-end items-end p-0">
+                        <div className=" ml-1 text-right">Neutrophil:</div>
                         <input
                           type="text"
-                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-[12px] text-center cursor-default ml-1 "
+                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-1 "
                           value={'0'}
                           readOnly
                         />

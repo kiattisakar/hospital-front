@@ -7,11 +7,11 @@ import Footer from '../header/Footer';
 import FrmProfile from './Profile/FrmProfile';
 export default function FrmMainIpd() {
   return (
-    <div className="font-sans flex flex-col h-[100%]">
+    <div className="font-sans flex flex-col h-screen w-screen 2xl:text-[12px] 3xl:text-[16px] 4xl:text-[17px]">
       <header>
         <IpdHeader />
       </header>
-      <main className="flex-grow flex flex-col  ">
+      <main className="flex-grow flex flex-col">
         {/* <FrmDataTebleIPD /> */}
         {/* <FrmDataTable2 /> */}
         <FrmProfile />
