@@ -3,12 +3,14 @@ import axios from 'axios';
 
 export default function FrmDataTable() {
   const [wards, setWards] = useState([]);
-  const idH = 2;
-  const nameH = '';
+  const [selectedWard, setSelectedWard] = useState(null);
+  const [patients, setPatients] = useState([]);
+  const [orderdate, setOrderdate] = useState('2024-05-30');
+  const [ptstatus, setPtstatus] = useState('');
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/getWardData')
+      .get('http://localhost:3000/api/first')
       .then((response) => {
         setWards(response.data);
       })
@@ -17,10 +19,23 @@ export default function FrmDataTable() {
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedWard) {
+      axios
+        .get(`http://localhost:3000/api/second?orderdate=${orderdate}&ptstatus=${ptstatus}&wardcode=${selectedWard.wardcode}`)
+        .then((response) => {
+          setPatients(response.data);
+        })
+        .catch((error) => {
+          console.error('There was an error fetching the patient data!', error);
+        });
+    }
+  }, [selectedWard, orderdate, ptstatus]);
+
   return (
-    <div className="h-full  flex w-screen  ">
-      <div className="w-1/4 h-[489px] overflow-auto  border-2 border-gray-300 px-2 ">
-        <table className="min-w-full  border-collapse">
+    <div className="h-full flex w-screen">
+      <div className="w-1/4 h-[489px] overflow-auto border-2 border-gray-300 px-2">
+        <table className="min-w-full border-collapse">
           <thead className="sticky top-0 bg-gray-100 z-10">
             <tr className="bg-white">
               <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
@@ -32,13 +47,10 @@ export default function FrmDataTable() {
               <tr
                 key={index}
                 className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                onClick={() => setSelectedWard(ward)}
               >
-                <td className="px-4 py-2 border border-gray-300">
-                  {ward.warddesc}
-                </td>
-                <td className="px-4 py-2 border border-gray-300 text-center">
-                  {ward.wardcode}
-                </td>
+                <td className="px-4 py-2 border border-gray-300">{ward.warddesc}</td>
+                <td className="px-4 py-2 border border-gray-300 text-center">{ward.countadmit}</td>
               </tr>
             ))}
           </tbody>
@@ -47,21 +59,26 @@ export default function FrmDataTable() {
       <div className="w-3/4 max-h-[489px] border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
-            <h4 className="font-bold">รหัสหอผู้ป่วย : {idH}</h4>
-            <h4 className="font-bold">ชื่อหอผู้ป่วย : {nameH}</h4>
+            <h4 className="font-bold">รหัสหอผู้ป่วย : {selectedWard ? selectedWard.wardcode : ''}</h4>
+            <h4 className="font-bold">ชื่อหอผู้ป่วย : {selectedWard ? selectedWard.warddesc : ''}</h4>
           </div>
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <div>
               <label className="mr-2">แสดงทั้งหมด</label>
-              <input type="radio" name="patientStatus" />
+              <input type="radio" name="patientStatus" onChange={() => setPtstatus('')} />
             </div>
             <div>
               <label className="mr-2">ไม่มีใบสังยา</label>
-              <input type="radio" name="patientStatus" />
+              <input type="radio" name="patientStatus" onChange={() => setPtstatus(" AND dbo.ms_patientadmit.DCdatetime is null")} />
             </div>
             <div>
               <label className="mr-2">มีใบสั่งยา</label>
-              <input type="radio" name="patientStatus" />
+              <input type="radio" name="patientStatus" onChange={() => {
+                const startDate = new Date();
+                const endDate = new Date();
+                endDate.setHours(23, 59, 59);
+                setPtstatus(` AND dbo.ms_patientadmit.DCdatetime BETWEEN '${startDate.toISOString().slice(0, 19).replace('T', ' ')}' AND '${endDate.toISOString().slice(0, 19).replace('T', ' ')}'`);
+              }} />
             </div>
           </div>
         </div>
@@ -70,22 +87,22 @@ export default function FrmDataTable() {
             <thead>
               <tr className="bg-gray-200 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
+                <th className="text-left p-2">Discharged Date</th>
                 <th className="text-left p-2">HN</th>
                 <th className="text-left p-2">AN</th>
                 <th className="text-left p-2">ชื่อ - นามสกุล</th>
-                <th className="text-left p-2">จำนวนใบสั่งยา</th>
-                <th className="text-left p-2">หมายเหตุ</th>
+                <th className="text-left p-2">หอผู้ป่วย</th>
               </tr>
             </thead>
             <tbody>
-              {Array.from({ length: 20 }).map((_, index) => (
+              {patients.map((record, index) => (
                 <tr key={index} className="border-t border-gray-300">
-                  <td className="p-2">12/13/2023</td>
-                  <td className="p-2">66124249</td>
-                  <td className="p-2">6679932</td>
-                  <td className="p-2">ชื่อ - นามสกุล</td>
-                  <td className="p-2">0</td>
-                  <td className="p-2">[1]</td>
+                  <td className="p-2">{new Date(record.admitteddate).toLocaleDateString()}</td>
+                  <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td>
+                  <td className="p-2">{record.hn}</td>
+                  <td className="p-2">{record.an}</td>
+                  <td className="p-2">{record.patientname}</td>
+                  <td className="p-2">{record.warddesc}</td>
                 </tr>
               ))}
             </tbody>
