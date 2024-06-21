@@ -4,32 +4,32 @@ import { FaChevronDown } from 'react-icons/fa';
 
 export default function IpdHeader() {
   return (
-    <div className="text-[13px]">
+    <div className="">
       <div className="flex items-center bg-gray-200 ">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
-          <span className="text-sx">💊</span>
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+          <span className="">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx">🏥</span>
           <span className="ml-2">ข้อมูลการจ่าย</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx  ">👩‍⚕️</span>
           <span className="ml-2">Nurse Station</span>
         </button>
         <DropdownReport icon="📄" label="Report" />
 
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx">📝</span>
           <span className="ml-2">คลังย่อย</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx">🛒</span>
           <span className="ml-2">คืนยา</span>
         </button>
-        <button className="text-sx flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx">📊</span>
           <span className="ml-2">Med Reconcile</span>
         </button>
@@ -72,7 +72,7 @@ const DropdownIPD = ({ icon, label }) => {
 
   return (
     <div
-      className="relative inline-block text-left z-50"
+      className="relative inline-block text-left"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -80,7 +80,7 @@ const DropdownIPD = ({ icon, label }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
-        <span className="text-sx">{icon}</span>
+        <span className="">{icon}</span>
         <span className="ml-2">{label}</span>
         <FaChevronDown
           style={{
@@ -94,7 +94,7 @@ const DropdownIPD = ({ icon, label }) => {
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
         variants={menuVariants}
-        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-50"
+        className="absolute  left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-50"
       >
         <DropdownItem label="Connect Unitdose" />
         <DropdownItem label="ห้องยา IPD Profile" />
@@ -149,7 +149,7 @@ const DropdownReport = ({ icon, label }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
-        <span className="text-sx">{icon}</span>
+        <span className="">{icon}</span>
         <span className="ml-2">{label}</span>
         <FaChevronDown
           style={{
@@ -163,7 +163,7 @@ const DropdownReport = ({ icon, label }) => {
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
         variants={menuVariants}
-        className="absolute text-sm left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
+        className="absolute  left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
       >
         <DropdownItem label="ADR" />
         <DropdownItem label="IV Admixture" />
@@ -191,6 +191,6 @@ const DropdownReport = ({ icon, label }) => {
 const DropdownItem = ({ label, shortcut }) => (
   <div className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer transition duration-300 ease-in-out">
     <span>{label}</span>
-    {shortcut && <span className="text-sm text-gray-500">{shortcut}</span>}
+    {shortcut && <span className=" text-gray-500">{shortcut}</span>}
   </div>
 );

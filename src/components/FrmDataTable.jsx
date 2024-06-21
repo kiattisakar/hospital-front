@@ -27,7 +27,7 @@ export default function FrmDataTable() {
         .post('http://localhost:3000/api/second', {
           orderdate: orderdate,
           ptstatus: ptstatus,
-          wardcode: selectedWard.wardcode
+          wardcode: selectedWard.wardcode,
         })
         .then((response) => {
           setPatients(response.data);
@@ -42,7 +42,7 @@ export default function FrmDataTable() {
     <div className="h-full flex w-screen">
       <div className="w-1/4 h-[489px] overflow-auto border-2 border-gray-300 px-2">
         <table className="min-w-full border-collapse">
-          <thead className="sticky top-0 bg-gray-100 z-10">
+          <thead className="sticky top-0 bg-gray-100 z-9">
             <tr className="bg-white">
               <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
               <th className="px-4 py-2 border border-gray-300">จำนวน</th>
@@ -55,8 +55,12 @@ export default function FrmDataTable() {
                 className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
                 onClick={() => setSelectedWard(ward)}
               >
-                <td className="px-4 py-2 border border-gray-300">{ward.warddesc}</td>
-                <td className="px-4 py-2 border border-gray-300 text-center">{ward.countadmit}</td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {ward.warddesc}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {ward.countadmit}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -65,8 +69,12 @@ export default function FrmDataTable() {
       <div className="w-3/4 max-h-[489px] border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
-            <h4 className="font-bold">รหัสหอผู้ป่วย : {selectedWard ? selectedWard.wardcode : ''}</h4>
-            <h4 className="font-bold">ชื่อหอผู้ป่วย : {selectedWard ? selectedWard.warddesc : ''}</h4>
+            <h4 className="font-bold">
+              รหัสหอผู้ป่วย : {selectedWard ? selectedWard.wardcode : ''}
+            </h4>
+            <h4 className="font-bold">
+              ชื่อหอผู้ป่วย : {selectedWard ? selectedWard.warddesc : ''}
+            </h4>
           </div>
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <div>
@@ -126,7 +134,9 @@ export default function FrmDataTable() {
             <tbody>
               {patients.map((record, index) => (
                 <tr key={index} className="border-t border-gray-300">
-                  <td className="p-2">{new Date(record.admitteddate).toLocaleDateString()}</td>
+                  <td className="p-2">
+                    {new Date(record.admitteddate).toLocaleDateString()}
+                  </td>
                   {/* <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td> */}
                   <td className="p-2">{record.hn}</td>
                   <td className="p-2">{record.an}</td>

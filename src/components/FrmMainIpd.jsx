@@ -5,16 +5,19 @@ import Screenning from './Screenning';
 import IpdHeader from '../header/IpdHeader';
 import Footer from '../header/Footer';
 import FrmProfile from './Profile/FrmProfile';
+import Test from './Profile/Test';
 export default function FrmMainIpd() {
   return (
-    <div className="font-sans flex flex-col h-screen w-screen 2xl:text-[12px] 3xl:text-[16px] 4xl:text-[17px]">
+    //xl:text-[9px] 2xl: 3xl:text-[16px] 4xl:text-[17px]
+    <div className="font-sans flex flex-col h-screen w-screen text-[12px] ">
       <header>
         <IpdHeader />
       </header>
       <main className="flex-grow flex flex-col">
-        {/* <FrmDataTebleIPD /> */}
+        <FrmDataTebleIPD />
         {/* <FrmDataTable2 /> */}
-        <FrmProfile />
+        {/* <FrmProfile /> */}
+        {/* <Test /> */}
         {/* <Screenning /> */}
       </main>
 
