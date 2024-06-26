@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import FrmDataTebleIPD from './FrmDataTableIpd';
 import Footer from '../header/Footer';
 import editDoc from '../../img/editDoc.png';
@@ -19,188 +20,7 @@ import doc from '../../img/doc.png';
 
 const data3 = {
   prescrip: [
-    {
-      date: '17/06/2024',
-      time: '12 .. JUN MRPS',
-      drug: 'MRNO',
-      name: 'ไม่มีประวัติยามาก่อนใน รพ.ของเรา',
-      dose: 12,
-      qty: 12,
-      usageCode: 'MRPS',
-      instructions: '. 12 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '1 .. JUN .',
-      drug: 'NM1',
-      name: 'NO MED',
-      dose: 1,
-      qty: 1,
-      usageCode: '.',
-      instructions: '. 1 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '14 .. JUN .',
-      drug: 'POSTOP',
-      name: 'ผู้ป่วย POST OP..DATE...',
-      dose: 14,
-      qty: 14,
-      usageCode: '.',
-      instructions: '. 14 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '14 .. JUN .',
-      drug: 'POSTOP',
-      name: 'ผู้ป่วย POST OP..DATE...',
-      dose: 14,
-      qty: 14,
-      usageCode: '.',
-      instructions: '. 14 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '14 .. JUN .',
-      drug: 'POSTOP',
-      name: 'ผู้ป่วย POST OP..DATE...',
-      dose: 14,
-      qty: 14,
-      usageCode: '.',
-      instructions: '. 14 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '14 .. JUN .',
-      drug: 'POSTOP',
-      name: 'ผู้ป่วย POST OP..DATE...',
-      dose: 14,
-      qty: 14,
-      usageCode: '.',
-      instructions: '. 14 มีคุณเจน .',
-      store: 'จัดมือ',
-      print: true,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
-    {
-      date: '17/06/2024',
-      time: '[20:00] ก่อนนอน',
-      drug: 'SNKT1',
-      name: 'SENNOSIDE 7.5 MG TAB(SEL..)',
-      dose: 2,
-      qty: 2,
-      usageCode: 'HS',
-      instructions: 'รับประทาน 2 เม็ดก่อนนอน',
-      store: 'JVM',
-      print: false,
-      room: 'ห้องยา IPD[001]',
-    },
+
     {
       date: '17/06/2024',
       time: '12 .. JUN MRPS',
@@ -294,76 +114,32 @@ export default function () {
         ward: 'ICUTM (IV)',
         status: 'รอ Screen',
         room: 'ห้องยา IPD[001]',
-      },
-      {
-        date: '14/06/2024',
-        type: 0,
-        order: '24061400825',
-        hn: '65114449',
-        an: '6738028',
-        name: 'นาง จำดี มุนเสิน',
-        ward: 'ICUTM (IV)',
-        status: 'รอ Screen',
-        room: 'ห้องยา IPD[001]',
-      },
-      {
-        date: '14/06/2024',
-        type: 0,
-        order: '24061400825',
-        hn: '65114449',
-        an: '6738028',
-        name: 'นาง จำดี มุนเสิน',
-        ward: 'ICUTM (IV)',
-        status: 'รอ Screen',
-        room: 'ห้องยา IPD[001]',
-      },
-      {
-        date: '14/06/2024',
-        type: 0,
-        order: '24061400825',
-        hn: '65114449',
-        an: '6738028',
-        name: 'นาง จำดี มุนเสิน',
-        ward: 'ICUTM (IV)',
-        status: 'รอ Screen',
-        room: 'ห้องยา IPD[001]',
-      },
-      {
-        date: '14/06/2024',
-        type: 0,
-        order: '24061400825',
-        hn: '65114449',
-        an: '6738028',
-        name: 'นาง จำดี มุนเสิน',
-        ward: 'ICUTM (IV)',
-        status: 'รอ Screen',
-        room: 'ห้องยา IPD[001]',
-      },
+      }
     ],
   };
 
-  const data = [
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-    { id: 7, ward: 'TRAUMA (รอ)', count: 1 },
-    { id: 6, ward: 'NEURO SURGE(รอ...)', count: 1 },
-  ];
+
+//////////////////////////////////////// ส่วนแรก /////////////////////////////////////////////////////////////          
+  // กำหนดสถานะเริ่มต้นเป็นข้อมูลว่างเปล่า
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // ดึงข้อมูลจาก API เมื่อคอมโพเนนต์ถูกสร้างขึ้นมา
+    async function fetchData() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/screen', {
+          wardcode: null, // ส่งข้อมูลตามที่ต้องการ ถ้ามี
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+//////////////////////////////////////// ส่วนแรก /////////////////////////////////////////////////////////////          
+
+  
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
   };
@@ -452,40 +228,46 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className=" h-4/5 w-full flex flex-col mt-1 ">
-              <div className="  max-h-96 overflow-auto ">
-                <table className="min-w-full border-collapse border border-gray-400 ">
-                  <thead className="stick top-0">
-                    <tr>
-                      <th className="border border-gray-300 p-2 text-xs">
-                        <input type="checkbox" />
-                      </th>
-                      <th className="border border-gray-300 p-2 text-xs">
-                        หอผู้ป่วย
-                      </th>
-                      <th className="border border-gray-300 p-2 text-xs">
-                        จำนวน
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((item) => (
-                      <tr key={item.id}>
-                        <td className="border border-gray-300 p-2 text-xs text-center">
-                          <input type="checkbox" />
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.ward}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs text-center">
-                          {item.count}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <div className="h-4/5 w-full flex flex-col mt-1">
+
+
+
+      <div className="max-h-96 overflow-auto">
+        <table className="min-w-full border-collapse border border-gray-400">
+          <thead className="stick top-0">
+            <tr>
+              <th className="border border-gray-300 p-2 text-xs">
+                <input type="checkbox" />
+              </th>
+              <th className="border border-gray-300 p-2 text-xs">
+                หอผู้ป่วย
+              </th>
+              <th className="border border-gray-300 p-2 text-xs">
+                จำนวน
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td className="border border-gray-300 p-2 text-xs text-center">
+                  <input type="checkbox" />
+                </td>
+                <td className="border border-gray-300 p-2 text-xs">
+                   {item.wardname}
+                </td>
+                <td className="border border-gray-300 p-2 text-xs text-center">
+                  {item.counpres}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </div>
           </div>
           <div className="h-full w-4/5 ">
             <div className="border-2 border-gray-400 w-full h-[45%] bg-white p-1">
