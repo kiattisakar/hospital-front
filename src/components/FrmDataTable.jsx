@@ -10,7 +10,7 @@ export default function FrmDataTable() {
 
   // Fetch ward data on component mount
   useEffect(() => {
-    axios
+    axios 
       .post('http://localhost:3000/api/first')
       .then((response) => {
         setWards(response.data);
@@ -133,7 +133,8 @@ export default function FrmDataTable() {
             </thead>
             <tbody>
               {patients.map((record, index) => (
-                <tr key={index} className="border-t border-gray-300">
+                <tr key={index} className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                onClick={() => setSelectedWard(ward)}>
                   <td className="p-2">
                     {new Date(record.admitteddate).toLocaleDateString()}
                   </td>
@@ -141,7 +142,7 @@ export default function FrmDataTable() {
                   <td className="p-2">{record.hn}</td>
                   <td className="p-2">{record.an}</td>
                   <td className="p-2">{record.patientname}</td>
-                  <td className="p-2">{record.medic}</td>
+                  <td className="p-2">{record.SumPresc}</td>
                   <td className="p-2">{record.warddesc}</td>
                 </tr>
               ))}

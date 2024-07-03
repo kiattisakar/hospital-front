@@ -60,30 +60,30 @@ const DataTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data3.prescrip.map((item, index) => (
+          {data3.prescrip.map((ward, index) => (
             <tr key={index}>
               <td className="border border-gray-300 p-1 text-center">
                 <input type="checkbox" />
               </td>
-              <td className="border border-gray-300 p-1">{item.date}</td>
-              <td className="border border-gray-300 p-1">{item.time}</td>
-              <td className="border border-gray-300 p-1">{item.drug}</td>
-              <td className="border border-gray-300 p-1">{item.name}</td>
+              <td className="border border-gray-300 p-1">{ward.date}</td>
+              <td className="border border-gray-300 p-1">{ward.time}</td>
+              <td className="border border-gray-300 p-1">{ward.drug}</td>
+              <td className="border border-gray-300 p-1">{ward.name}</td>
               <td className="border border-gray-300 p-1 text-center">
-                {item.dose}
+                {ward.dose}
               </td>
               <td className="border border-gray-300 p-1 text-center">
-                {item.qty}
+                {ward.qty}
               </td>
-              <td className="border border-gray-300 p-1">{item.usageCode}</td>
+              <td className="border border-gray-300 p-1">{ward.usageCode}</td>
               <td className="border border-gray-300 p-1">
-                {item.instructions}
+                {ward.instructions}
               </td>
-              <td className="border border-gray-300 p-1">{item.store}</td>
+              <td className="border border-gray-300 p-1">{ward.store}</td>
               <td className="border border-gray-300 p-1 text-center">
-                <input type="checkbox" checked={item.print} readOnly />
+                <input type="checkbox" checked={ward.print} readOnly />
               </td>
-              <td className="border border-gray-300 p-1">{item.room}</td>
+              <td className="border border-gray-300 p-1">{ward.room}</td>
             </tr>
           ))}
         </tbody>
@@ -95,7 +95,7 @@ const DataTable = () => {
 export default function () {
   const [selectedPatient, setSelectedPatient] = useState(null);
 
-  const patients = [
+  const patients5 = [
     { id: 1, name: 'NEURO SURGE', room: 'รถ-IV' },
     { id: 2, name: 'คนไข้พิเศษ', room: 'รถ' },
     { id: 3, name: 'Ward 1', room: 'รถ-IV' },
@@ -105,9 +105,9 @@ export default function () {
   const data2 = {
     patients: [
       {
-        date: '14/06/2024',
-        type: 0,
-        order: '24061400825',
+        takedate: '14/06/2024',
+        ordertype: 0,
+        prescriptionno: '24061400825',
         hn: '65114449',
         an: '6738028',
         name: 'นาง จำดี มุนเสิน',
@@ -118,35 +118,61 @@ export default function () {
     ],
   };
 
+  // const [ward, setData] = useState([]);
+  const [wards, setWards] = useState([]);
 
-//////////////////////////////////////// ส่วนแรก /////////////////////////////////////////////////////////////          
-  // กำหนดสถานะเริ่มต้นเป็นข้อมูลว่างเปล่า
-  const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   // ดึงข้อมูลจาก API เมื่อคอมโพเนนต์ถูกสร้างขึ้นมา
+  //   async function fetchData() {
+  //     try {
+  //       const response = await axios.post('http://localhost:3000/api/screen', {
+  //         wardcode: null, // ส่งข้อมูลตามที่ต้องการ ถ้ามี
+  //       });
+  //       setData(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    // ดึงข้อมูลจาก API เมื่อคอมโพเนนต์ถูกสร้างขึ้นมา
-    async function fetchData() {
-      try {
-        const response = await axios.post('http://localhost:3000/api/screen', {
-          wardcode: null, // ส่งข้อมูลตามที่ต้องการ ถ้ามี
-        });
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchData();
+    axios
+      .post('http://localhost:3000/api/screen')
+      .then((response) => {
+        setWards(response.data);
+      })
+      .catch((error) => {
+        console.error('There was an error fetching the ward data!', error);
+      });
   }, []);
-//////////////////////////////////////// ส่วนแรก /////////////////////////////////////////////////////////////          
 
   
+const [selectedWard, setSelectedWard] = useState(null);
+const [patients, setPatients] = useState([]);
+
+  useEffect(() => {
+    if (selectedWard) {
+      axios
+        .post('http://localhost:3000/api/screentwo', {
+          wardcode: selectedWard.wardcode,
+        })
+        .then((response) => {
+          setPatients(response.data);
+        })
+        .catch((error) => {
+          console.error('There was an error fetching the patient data!', error);
+        });
+    }
+  }, [selectedWard]);
+
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
   };
   return (
     <div className="flex-grow flex flex-col h-full w-screen">
       <div className="h-full">
-        <div className="h-[15%] w-full flex justify-between items-center mb-2 ">
+        <div className="h-[15%] w-full flex justify-between wards-center mb-2 ">
           <div className="space-x-2 mt-1 ml-4 w-full flex">
             <ButtonWithIcon icon={icon1} label="ยา Stat" bgColor="bg-white" />
             <ButtonWithIcon
@@ -203,13 +229,13 @@ export default function () {
                   />
                 </form>
               </div>
-              <div className="h-1/2 flex justify-between items-center">
-                <button className=" h-full w-[45%] bg-white text-gray-700 border-2 p-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex items-center">
+              <div className="h-1/2 flex justify-between wards-center">
+                <button className=" h-full w-[45%] bg-white text-gray-700 border-2 p-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex wards-center">
                   <img src={inImg} className="h-7 w-6 mr-2" />
                   <span>จัดยาโดยเลือกห้องผู้ป่วย</span>
                 </button>
                 <div className="h-full w-[55%] flex flex-col ">
-                  <div className="h-1/2 flex items-center justify-center">
+                  <div className="h-1/2 flex wards-center justify-center">
                     <p className="text-xs mr-2">เลือกห้อง</p>
                     <select
                       name="room"
@@ -219,7 +245,7 @@ export default function () {
                       <option value="1">IPD</option>
                     </select>
                   </div>
-                  <div className="h-1/2 flex justify-center items-center">
+                  <div className="h-1/2 flex justify-center wards-center">
                     <input
                       type="date"
                       className="h-3/4 border border-gray-300 w-[80%] p-2 text-xs"
@@ -248,16 +274,21 @@ export default function () {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
+            {wards.map((ward, index) => (
+              <tr key={index}
+                className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                onClick={() => setSelectedWard(ward)}
+                >
+                
                 <td className="border border-gray-300 p-2 text-xs text-center">
                   <input type="checkbox" />
                 </td>
                 <td className="border border-gray-300 p-2 text-xs">
-                   {item.wardname}
+                  {/* [ {ward.wardcode} ]  */}
+                  {ward.wardname}
                 </td>
                 <td className="border border-gray-300 p-2 text-xs text-center">
-                  {item.counpres}
+                  {ward.counpres}
                 </td>
               </tr>
             ))}
@@ -295,6 +326,9 @@ export default function () {
                   </div>
                 </div>
               </div>
+
+
+              
               <div className="w-full h-3/4 ">
                 <div className="flex flex-col h-full">
                   <div className="flex-grow overflow-auto">
@@ -337,39 +371,43 @@ export default function () {
                         </tr>
                       </thead>
                       <tbody>
-                        {data2.patients.map((item, index) => (
-                          <tr key={index}>
+                    
+                        {patients.map((ward, index) => (
+                          <tr key={index}
+                          className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                          onClick={() => setSelectedWard(ward)}
+                          >
                             <td className="border border-gray-300 p-1 text-xs text-center">
                               <input type="checkbox" />
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.date}
+                              {ward.takedate}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.type}
+                              {ward.ordertype}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.order}
+                              {ward.prescriptionno}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.hn}
+                              {ward.hn}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.an}
+                              {ward.an}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.name}
+                              {ward.patientname}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.ward}
+                              {ward.wardname}
                             </td>
 
                             <td className="border border-gray-300 p-1 text-xs"></td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.status}
+                              {ward.status}
                             </td>
                             <td className="border border-gray-300 p-1 text-xs">
-                              {item.room}
+                              {ward.fromlocationname}
                             </td>
                           </tr>
                         ))}
@@ -381,7 +419,7 @@ export default function () {
             </div>
             <div className="h-[55%] w-full  border-2 border-gray-400 p-1 mt-[2px] ">
               <div className="w-full h-[20%]  flex">
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center w-62">
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-62">
                   <img src={inImg} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">
@@ -389,7 +427,7 @@ export default function () {
                     </span>
                   </div>
                 </div>
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center w-32">
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-32">
                   <img src={printer} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">Reprint</span>
@@ -417,7 +455,7 @@ export default function () {
 
 const ButtonWithIcon = ({ icon, label, bgColor }) => {
   return (
-    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32">
+    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col wards-center w-32">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <span className="mt-2 text-sm text-center">{label}</span>
     </div>
@@ -425,7 +463,7 @@ const ButtonWithIcon = ({ icon, label, bgColor }) => {
 };
 const ButtonCancel = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 hover:text-white active:bg-red-300 text-xs flex justify-center items-center w-28">
+    <div className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 hover:text-white active:bg-red-300 text-xs flex justify-center wards-center w-28">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
@@ -436,7 +474,7 @@ const ButtonCancel = ({ icon, label, label2 }) => {
 };
 const ButtonGroup = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center w-32">
+    <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-32">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
