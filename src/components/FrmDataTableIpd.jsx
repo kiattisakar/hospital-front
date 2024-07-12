@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import Modal from 'react-modal';
 import addDoc from '../../img/addDoc.png';
 import close from '../../img/close.png';
@@ -82,7 +81,8 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             <ButtonWithIcon icon={homeIcon} label="ผู้ป่วยกลับบ้าน" />
           </div>
         </div>
-/        <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10 ">
+        <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10 ">
+          {/* djjj */}
           <input
             type="text"
             placeholder="ค้นหา"
@@ -100,22 +100,22 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
           />
           <form className="flex space-x-4 mr-7 ">
             <div>
-              <input type="radio" name="patientStatus"/>
+              <input type="radio" name="patientStatus" />
               <label className="ml-2">แสดงทั้งหมด</label>
             </div>
             <div>
-              <input type="radio" name="patientStatus"/>
+              <input type="radio" name="patientStatus" />
               <label className="ml-2">ผู้ป่วย Admit</label>
             </div>
             <div>
-            <input type="radio" name="patientStatus" />
+              <input type="radio" name="patientStatus" />
               <label className="ml-2">ผู้ป่วย Discharged</label>
             </div>
           </form>
           <button className="bg-red-500 text-white p-1 rounded hover:bg-red-700 active:bg-red-300 text-sm">
             Discharge
           </button>
-/        </div>
+        </div>
       </div>
       <div className="w-full h-5/6 ">
         <FrmDataTable />
@@ -146,8 +146,8 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
               <p>0 = ใบสั่งยาผู้ป่วยใน </p>
               <p>1 = ใบสั่งยาผู้ป่วยกลับบ้าน </p>
               <p>3 = ใบสั่งยาผู้ป่วยเพิ่มเติม </p>
-            </div>
-         ///   <div className="flex gap-3 text-sm p-1 justify-center">
+            </div>{' '}
+            <div className="flex gap-3 text-sm p-1 justify-center">
               <p>ชนิดใบสั่งยา: </p>
               <input
                 type="text"
@@ -202,7 +202,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
 const ButtonWithIcon = ({ icon, label, func }) => {
   return (
     <button
-      // onClick={func}
+      onClick={func}
       className="bg-white text-gray-700 border-2 p-1 rounded cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32"
     >
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />

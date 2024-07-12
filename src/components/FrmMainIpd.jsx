@@ -29,7 +29,6 @@ export default function FrmMainIpd() {
   );
 }
 
-
 import FrmProfile from './Profile/FrmProfile';
 import Test from './Profile/Test';
 // import React from 'react';
@@ -41,7 +40,7 @@ import Test from './Profile/Test';
 //   return (
 //     <Router>
 //       <Routes>
-        // <Route path="/" element={<Screenning />} />
+// <Route path="/" element={<Screenning />} />
 //         {/* เช่น */}
 //         <Route path="/screen" element={<FrmMainIpd />} />
 //         {/* หรือตามที่คุณต้องการให้มันแสดงผล */}

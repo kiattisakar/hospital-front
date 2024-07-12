@@ -10,7 +10,7 @@ export default function FrmDataTable() {
 
   // Fetch ward data on component mount
   useEffect(() => {
-    axios 
+    axios
       .post('http://localhost:3000/api/first')
       .then((response) => {
         setWards(response.data);
@@ -124,17 +124,20 @@ export default function FrmDataTable() {
               <tr className="bg-gray-200 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
                 {/* <th className="text-left p-2">Discharged Date</th> */}
-                <th className="text-left p-2 text-center">HN</th>
-                <th className="text-left p-2 text-center">AN</th>
-                <th className="text-left p-2 text-center">ชื่อ - นามสกุล</th>
-                <th className="text-left p-2 text-center">จำนวนใบสั่งยา</th>
-                <th className="text-left p-2 text-center">หอผู้ป่วย</th>
+                <th className="p-2 text-center">HN</th>
+                <th className="p-2 text-center">AN</th>
+                <th className="p-2 text-center">ชื่อ - นามสกุล</th>
+                <th className="p-2 text-center">จำนวนใบสั่งยา</th>
+                <th className="p-2 text-center">หอผู้ป่วย</th>
               </tr>
             </thead>
             <tbody>
               {patients.map((record, index) => (
-                <tr key={index} className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                onClick={() => setSelectedWard(ward)}>
+                <tr
+                  key={index}
+                  className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                  onClick={() => setSelectedWard(ward)}
+                >
                   <td className="p-2">
                     {new Date(record.admitteddate).toLocaleDateString()}
                   </td>

@@ -53,20 +53,15 @@ const DropdownIPD = ({ icon, label }) => {
       display: 'block',
       transition: {
         type: 'spring',
-        stiffness: 300,
+        stiffness: 800,
         damping: 20,
       },
     },
     closed: {
       opacity: 0,
-      y: -20,
+      y: -5,
       transitionEnd: {
         display: 'none',
-      },
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 20,
       },
     },
   };

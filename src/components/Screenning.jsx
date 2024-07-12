@@ -20,7 +20,6 @@ import doc from '../../img/doc.png';
 
 const data3 = {
   prescrip: [
-
     {
       date: '17/06/2024',
       time: '12 .. JUN MRPS',
@@ -114,7 +113,7 @@ export default function () {
         ward: 'ICUTM (IV)',
         status: 'รอ Screen',
         room: 'ห้องยา IPD[001]',
-      }
+      },
     ],
   };
 
@@ -147,9 +146,8 @@ export default function () {
       });
   }, []);
 
-  
-const [selectedWard, setSelectedWard] = useState(null);
-const [patients, setPatients] = useState([]);
+  const [selectedWard, setSelectedWard] = useState(null);
+  const [patients, setPatients] = useState([]);
 
   useEffect(() => {
     if (selectedWard) {
@@ -172,8 +170,10 @@ const [patients, setPatients] = useState([]);
   return (
     <div className="flex-grow flex flex-col h-full w-screen">
       <div className="h-full">
-        <div className="h-[15%] w-full flex justify-between wards-center mb-2 ">
+        <div className="h-[13%] w-full flex justify-between wards-center mb-2 ">
           <div className="space-x-2 mt-1 ml-4 w-full flex">
+            {' '}
+            {/* ปุ่มด้านบน */}
             <ButtonWithIcon icon={icon1} label="ยา Stat" bgColor="bg-white" />
             <ButtonWithIcon
               icon={icon2}
@@ -217,7 +217,7 @@ const [patients, setPatients] = useState([]);
             />
           </div>
         </div>
-        <div className="h-[85%] flex w-screen p-1 ">
+        <div className="h-[90%] flex w-screen p-1 ">
           <div className="h-full w-1/5 mr-2 border-2 p-3">
             <div className="h-1/5 w-full ">
               <div className="h-1/2 ">
@@ -255,52 +255,49 @@ const [patients, setPatients] = useState([]);
               </div>
             </div>
             <div className="h-4/5 w-full flex flex-col mt-1">
-
-
-
-      <div className="max-h-96 overflow-auto">
-        <table className="min-w-full border-collapse border border-gray-400">
-          <thead className="stick top-0">
-            <tr>
-              <th className="border border-gray-300 p-2 text-xs">
-                <input type="checkbox" />
-              </th>
-              <th className="border border-gray-300 p-2 text-xs">
-                หอผู้ป่วย
-              </th>
-              <th className="border border-gray-300 p-2 text-xs">
-                จำนวน
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {wards.map((ward, index) => (
-              <tr key={index}
-                className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                onClick={() => setSelectedWard(ward)}
-                >
-                
-                <td className="border border-gray-300 p-2 text-xs text-center">
-                  <input type="checkbox" />
-                </td>
-                <td className="border border-gray-300 p-2 text-xs">
-                  {/* [ {ward.wardcode} ]  */}
-                  {ward.wardname}
-                </td>
-                <td className="border border-gray-300 p-2 text-xs text-center">
-                  {ward.counpres}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-    </div>
+              {/* ตารางด้านซ้าย */}
+              <div className="max-h-96 overflow-auto">
+                <table className="min-w-full border-collapse border border-gray-400">
+                  <thead className="stick top-0">
+                    <tr>
+                      <th className="border border-gray-300 p-2 text-xs">
+                        <input type="checkbox" />
+                      </th>
+                      <th className="border border-gray-300 p-2 text-xs">
+                        หอผู้ป่วย
+                      </th>
+                      <th className="border border-gray-300 p-2 text-xs">
+                        จำนวน
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {wards.map((ward, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                        onClick={() => setSelectedWard(ward)}
+                      >
+                        <td className="border border-gray-300 p-2 text-xs text-center">
+                          <input type="checkbox" />
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {/* [ {ward.wardcode} ]  */}
+                          {ward.wardname}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs text-center">
+                          {ward.counpres}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
           <div className="h-full w-4/5 ">
             <div className="border-2 border-gray-400 w-full h-[45%] bg-white p-1">
-              <div className="w-full h-1/4  flex ">
+              <div className="w-full h-[20%]  flex ">
                 <ButtonGroup
                   icon={inImg}
                   label="จัดยา"
@@ -325,8 +322,8 @@ const [patients, setPatients] = useState([]);
                 </div>
               </div>
 
-
-              <div className="w-full h-3/4 ">
+              <div className="w-full h-[80%] ">
+                {/* ตารางบน */}
                 <div className="flex flex-col h-full">
                   <div className="flex-grow overflow-auto">
                     <table className="min-w-full border-collapse border border-gray-400">
@@ -368,11 +365,11 @@ const [patients, setPatients] = useState([]);
                         </tr>
                       </thead>
                       <tbody>
-                    
                         {patients.map((ward, index) => (
-                          <tr key={index}
-                          className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                          onClick={() => setSelectedWard(ward)}
+                          <tr
+                            key={index}
+                            className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                            onClick={() => setSelectedWard(ward)}
                           >
                             <td className="border border-gray-300 p-1 text-xs text-center">
                               <input type="checkbox" />
@@ -414,9 +411,10 @@ const [patients, setPatients] = useState([]);
                 </div>
               </div>
             </div>
-            <div className="h-[55%] w-full  border-2 border-gray-400 p-1 mt-[2px] ">
-              <div className="w-full h-[20%]  flex">
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-62">
+            <div className=" h-[55%] w-full  border-2  border-gray-400 p-1 mt-[2px] ">
+              {/* ตารางล่าง */}
+              <div className="w-full h-[15%]  flex">
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-62">
                   <img src={inImg} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">
@@ -424,7 +422,7 @@ const [patients, setPatients] = useState([]);
                     </span>
                   </div>
                 </div>
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-32">
+                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-32">
                   <img src={printer} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">Reprint</span>
@@ -439,7 +437,7 @@ const [patients, setPatients] = useState([]);
                   <div>จำนวน 4 รายการ</div>
                 </div>
               </div>
-              <div className="h-[80%] w-full">
+              <div className="h-[85%] w-full">
                 <DataTable />
               </div>
             </div>
@@ -452,15 +450,15 @@ const [patients, setPatients] = useState([]);
 
 const ButtonWithIcon = ({ icon, label, bgColor }) => {
   return (
-    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col wards-center w-32">
-      <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
-      <span className="mt-2 text-sm text-center">{label}</span>
+    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white  active:bg-gray-300 text-sm flex flex-col justify-center items-center cursor-pointer wards-center w-32">
+      <img src={icon} alt={label} className="w-5 h-5 mr-2 " />
+      <span className="mt-2 text-[13px] text-center">{label}</span>
     </div>
   );
 };
 const ButtonCancel = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 hover:text-white active:bg-red-300 text-xs flex justify-center wards-center w-28">
+    <div className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-28">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
@@ -471,7 +469,7 @@ const ButtonCancel = ({ icon, label, label2 }) => {
 };
 const ButtonGroup = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center w-32">
+    <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 cursor-pointer hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center items-center w-32">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
