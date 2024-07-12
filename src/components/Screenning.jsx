@@ -296,8 +296,6 @@ const [patients, setPatients] = useState([]);
         </table>
       </div>
 
-
-
     </div>
           </div>
           <div className="h-full w-4/5 ">
@@ -328,7 +326,6 @@ const [patients, setPatients] = useState([]);
               </div>
 
 
-              
               <div className="w-full h-3/4 ">
                 <div className="flex flex-col h-full">
                   <div className="flex-grow overflow-auto">

@@ -39,8 +39,8 @@ export default function FrmDataTable() {
   }, [selectedWard, orderdate, ptstatus]);
 
   return (
-    <div className="h-full flex w-screen">
-      <div className="w-1/4 h-[489px] overflow-auto border-2 border-gray-300 px-2">
+    <div className="h-full  flex w-screen ">
+      <div className="w-1/4 h-[600px] overflow-auto border-2 border-gray-300 px-2">
         <table className="min-w-full border-collapse">
           <thead className="sticky top-0 bg-gray-100 z-9">
             <tr className="bg-white">
@@ -66,7 +66,7 @@ export default function FrmDataTable() {
           </tbody>
         </table>
       </div>
-      <div className="w-3/4 max-h-[489px] border-1 overflow-auto border-gray-300 pl-4">
+      <div className="w-3/4 max-h-[600px] border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <h4 className="font-bold">
@@ -124,11 +124,11 @@ export default function FrmDataTable() {
               <tr className="bg-gray-200 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
                 {/* <th className="text-left p-2">Discharged Date</th> */}
-                <th className="text-left p-2">HN</th>
-                <th className="text-left p-2">AN</th>
-                <th className="text-left p-2">ชื่อ - นามสกุล</th>
-                <th className="text-left p-2">จำนวนใบสั่งยา</th>
-                <th className="text-left p-2">หอผู้ป่วย</th>
+                <th className="text-left p-2 text-center">HN</th>
+                <th className="text-left p-2 text-center">AN</th>
+                <th className="text-left p-2 text-center">ชื่อ - นามสกุล</th>
+                <th className="text-left p-2 text-center">จำนวนใบสั่งยา</th>
+                <th className="text-left p-2 text-center">หอผู้ป่วย</th>
               </tr>
             </thead>
             <tbody>
@@ -139,11 +139,11 @@ export default function FrmDataTable() {
                     {new Date(record.admitteddate).toLocaleDateString()}
                   </td>
                   {/* <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td> */}
-                  <td className="p-2">{record.hn}</td>
-                  <td className="p-2">{record.an}</td>
-                  <td className="p-2">{record.patientname}</td>
-                  <td className="p-2">{record.SumPresc}</td>
-                  <td className="p-2">{record.warddesc}</td>
+                  <td className="p-2 text-center">{record.hn}</td>
+                  <td className="p-2 text-center">{record.an}</td>
+                  <td className="p-2 text-center">{record.patientname}</td>
+                  <td className="p-2 text-center">{record.SumPresc}</td>
+                  <td className="p-2 text-center">{record.warddesc}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // เพิ่ม useNavigate
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // ใช้ useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ const LoginPage = () => {
       });
       setMessage('เข้าสู่ระบบสำเร็จ');
       localStorage.setItem('token', response.data.token);
+      navigate('/mainIPD'); // นำทางไปที่หน้า mainIPD หลังจากการล็อกอินสำเร็จ
     } catch (err) {
       setMessage('รหัสผ่านหรือชื่อไม่ถูกต้อง');
       console.error(err);
@@ -34,7 +37,7 @@ const LoginPage = () => {
               className="block text-sm font-medium mb-2"
               htmlFor="username"
             >
-              รหัส
+              ชื่อผู้ใช้
             </label>
             <input
               type="text"

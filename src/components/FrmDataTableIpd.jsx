@@ -62,8 +62,8 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   return (
     <div className="h-full w-screen">
       <div className="้h-1/6">
-        <div className="flex h-2/4 justify-between items-center mb-2">
-          <div className="space-x-2 mt-2 ml-4 w-full flex">
+        <div className="flex h-2/4 justify-between items-center mb-2 ">
+          <div className="space-x-2 mt-2 ml-4 w-full flex ">
             <ButtonWithIcon
               icon={addDoc}
               label="สร้างใบยาใหม่"
@@ -82,7 +82,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             <ButtonWithIcon icon={homeIcon} label="ผู้ป่วยกลับบ้าน" />
           </div>
         </div>
-        <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10">
+/        <div className="flex items-center mb-2 bg-blue-100 p-1 border-2 border-blue-300 text-sm h-10 ">
           <input
             type="text"
             placeholder="ค้นหา"
@@ -98,26 +98,26 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             value={currentDate.split('/').reverse().join('-')}
             onChange={handleDateChange}
           />
-          <div className="flex space-x-4 mr-7">
+          <form className="flex space-x-4 mr-7 ">
             <div>
-              <label className="mr-2">แสดงทั้งหมด</label>
-              <input type="radio" />
+              <input type="radio" name="patientStatus"/>
+              <label className="ml-2">แสดงทั้งหมด</label>
             </div>
             <div>
-              <label className="mr-2">ผู้ป่วย Admit</label>
-              <input type="radio" name="patientStatus" />
+              <input type="radio" name="patientStatus"/>
+              <label className="ml-2">ผู้ป่วย Admit</label>
             </div>
             <div>
-              <label className="mr-2">ผู้ป่วย Discharged</label>
-              <input type="radio" name="patientStatus" />
+            <input type="radio" name="patientStatus" />
+              <label className="ml-2">ผู้ป่วย Discharged</label>
             </div>
-          </div>
+          </form>
           <button className="bg-red-500 text-white p-1 rounded hover:bg-red-700 active:bg-red-300 text-sm">
             Discharge
           </button>
-        </div>
+/        </div>
       </div>
-      <div className="w-full h-5/6">
+      <div className="w-full h-5/6 ">
         <FrmDataTable />
       </div>
       <Modal
@@ -126,7 +126,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
         className=" z-10 w-[650px] h-[550px] flex justify-center items-center"
         overlayClassName="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center"
       >
-        <div className="grid grid-rows-12 bg-white grid-cols-1 w-full h-full">
+        <div className="grid grid-rows-12 bg-white grid-cols-1 w-full h-full ">
           <div className="row-span-1 px-2 bg-gray-400">
             <div className="flex items-center justify-between h-full w-full">
               <div className="flex items-center justify-center">
@@ -142,12 +142,12 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             </div>
           </div>
           <div className="row-span-1 px-5">
-            <div className="text-green-600 text-sm flex justify-around px-16">
+            <div className="text-green-600 text-sm flex justify-around px-16 ">
               <p>0 = ใบสั่งยาผู้ป่วยใน </p>
               <p>1 = ใบสั่งยาผู้ป่วยกลับบ้าน </p>
               <p>3 = ใบสั่งยาผู้ป่วยเพิ่มเติม </p>
             </div>
-            <div className="flex gap-3 text-sm p-1 justify-center">
+         ///   <div className="flex gap-3 text-sm p-1 justify-center">
               <p>ชนิดใบสั่งยา: </p>
               <input
                 type="text"
@@ -202,7 +202,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
 const ButtonWithIcon = ({ icon, label, func }) => {
   return (
     <button
-      onClick={func}
+      // onClick={func}
       className="bg-white text-gray-700 border-2 p-1 rounded cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32"
     >
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />

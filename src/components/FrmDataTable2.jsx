@@ -69,7 +69,7 @@ export default function FrmDataTeble2() {
             value={currentDate.split('/').reverse().join('-')}
             onChange={handleDateChange}
           />
-          <div className="flex space-x-4 mr-7">
+          <form className="flex space-x-4 mr-7">
             <div>
               <label className="mr-2">แสดงทั้งหมด</label>
               <input type="radio" />
@@ -82,7 +82,7 @@ export default function FrmDataTeble2() {
               <label className="mr-2">ผู้ป่วย Discharged</label>
               <input type="radio" name="patientStatus" />
             </div>
-          </div>
+          </form>
           <button className="bg-red-500 text-white p-1 rounded hover:bg-red-700 active:bg-red-300 text-sm">
             Discharge
           </button>
