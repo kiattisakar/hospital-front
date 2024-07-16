@@ -37,34 +37,38 @@ export default function FrmDataTable() {
         });
     }
   }, [selectedWard, orderdate, ptstatus]);
+  const [selectedRadio, setSelectedRadio] = useState('all');
 
+  const handleRadioAdmit = (event) => {};
   return (
-    <div className="h-full  flex w-screen ">
-      <div className="w-1/4 h-[600px] overflow-auto border-2 border-gray-300 px-2">
-        <table className="min-w-full border-collapse">
-          <thead className="sticky top-0 bg-gray-100 z-9">
-            <tr className="bg-white">
-              <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
-              <th className="px-4 py-2 border border-gray-300">จำนวน</th>
-            </tr>
-          </thead>
-          <tbody>
-            {wards.map((ward, index) => (
-              <tr
-                key={index}
-                className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                onClick={() => setSelectedWard(ward)}
-              >
-                <td className="px-4 py-2 border border-gray-300">
-                  {ward.warddesc}
-                </td>
-                <td className="px-4 py-2 border border-gray-300 text-center">
-                  {ward.countadmit}
-                </td>
+    <div className="h-full  flex w-screen">
+      <div className="w-1/4 border-2 border-gray-300 px-2 flex flex-col">
+        <div className=" w-full h-[600px] overflow-y-auto px-2 flex flex-col">
+          <table className="w-full min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50 sticky top-0">
+              <tr>
+                <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
+                <th className="px-4 py-2 border border-gray-300">จำนวน</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {wards.map((ward, index) => (
+                <tr
+                  key={index}
+                  className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                  onClick={() => setSelectedWard(ward)}
+                >
+                  <td className="px-4 py-2 border border-gray-300">
+                    {ward.warddesc}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300 text-center">
+                    {ward.countadmit}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="w-3/4 max-h-[600px] border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
@@ -80,9 +84,14 @@ export default function FrmDataTable() {
             <div>
               <label className="mr-2">แสดงทั้งหมด</label>
               <input
+                value="all"
+                checked={selectedRadio === 'all'}
                 type="radio"
                 name="patientStatus"
-                onChange={() => setPtstatus('')}
+                onChange={(event) => {
+                  setSelectedRadio(event.target.value);
+                  setPtstatus('');
+                }}
               />
             </div>
             <div>
@@ -90,9 +99,12 @@ export default function FrmDataTable() {
               <input
                 type="radio"
                 name="patientStatus"
-                onChange={() =>
-                  setPtstatus(' AND dbo.ms_patientadmit.DCdatetime is null')
-                }
+                value="haveNot"
+                checked={selectedRadio === 'haveNot'}
+                onChange={(event) => {
+                  setSelectedRadio(event.target.value);
+                  setPtstatus(' AND dbo.ms_patientadmit.DCdatetime is null');
+                }}
               />
             </div>
             <div>
@@ -100,9 +112,13 @@ export default function FrmDataTable() {
               <input
                 type="radio"
                 name="patientStatus"
-                onChange={() => {
+                value="have"
+                checked={selectedRadio === 'have'}
+                onChange={(event) => {
                   const startDate = new Date();
                   const endDate = new Date();
+
+                  setSelectedRadio(event.target.value);
                   endDate.setHours(23, 59, 59);
                   setPtstatus(
                     ` AND dbo.ms_patientadmit.DCdatetime BETWEEN '${startDate

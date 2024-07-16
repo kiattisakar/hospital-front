@@ -10,6 +10,10 @@ import searchIcon from '../../img/searchIcon.png';
 import Footer from '../header/Footer';
 import IpdHeader from '../header/IpdHeader';
 import FrmDataTable from './FrmDataTable';
+import porson from '../../img/lab.png';
+import scalesIcon from '../../img/scales.png';
+import successIcon from '../../img/success.png';
+import cancelIcon from '../../img/cancel.png';
 import { HomeIcon } from '@heroicons/react/16/solid';
 
 Modal.setAppElement('#root');
@@ -58,6 +62,11 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   const CloseModal = () => {
     setIsOpen(false);
   };
+  const [selectedStatus, setSelectedStatus] = useState('admit');
+
+  const handleRadioAdmit = (event) => {
+    setSelectedStatus(event.target.value);
+  };
   return (
     <div className="h-full w-screen">
       <div className="้h-1/6">
@@ -100,15 +109,33 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
           />
           <form className="flex space-x-4 mr-7 ">
             <div>
-              <input type="radio" name="patientStatus" />
+              <input
+                type="radio"
+                name="patientStatus"
+                value="all"
+                checked={selectedStatus === 'all'}
+                onChange={handleRadioAdmit}
+              />
               <label className="ml-2">แสดงทั้งหมด</label>
             </div>
             <div>
-              <input type="radio" name="patientStatus" />
+              <input
+                type="radio"
+                name="patientStatus"
+                value="admit"
+                checked={selectedStatus === 'admit'}
+                onChange={handleRadioAdmit}
+              />
               <label className="ml-2">ผู้ป่วย Admit</label>
             </div>
             <div>
-              <input type="radio" name="patientStatus" />
+              <input
+                type="radio"
+                name="patientStatus"
+                value="discharged"
+                checked={selectedStatus === 'discharged'}
+                onChange={handleRadioAdmit}
+              />
               <label className="ml-2">ผู้ป่วย Discharged</label>
             </div>
           </form>
@@ -123,7 +150,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={onClose}
-        className=" z-10 w-[650px] h-[550px] flex justify-center items-center"
+        className=" z-10 w-[750px] h-[550px] flex justify-center items-center"
         overlayClassName="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center"
       >
         <div className="grid grid-rows-12 bg-white grid-cols-1 w-full h-full ">
@@ -192,8 +219,221 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
               </button>
             </div>
           </div>
-          <div className="row-span-8 bg-yellow-500"></div>
-          <div className="row-span-1 bg-green-500"></div>
+          <div className="row-span-8 flex">
+            <div className="w-3/5 h-full  flex">
+              <div className="h-full w-full ">
+                <div className="flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">HN:</div>
+                  <input
+                    type="text"
+                    className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                  <div className="w-[12%] flex justify-center ">AN:</div>
+                  <input
+                    type="text"
+                    className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">
+                    ชื่อ-นามสกุล:
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">
+                    หอผู้ป่วย:
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className="flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">ห้อง:</div>
+                  <input
+                    type="text"
+                    className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                  <div className="w-[12%] flex justify-center ">เตียง:</div>
+                  <input
+                    type="text"
+                    className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">แพทย์:</div>
+                  <input
+                    type="text"
+                    className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">วันเกิด:</div>
+                  <input
+                    type="text"
+                    className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                  <div className="w-[42%]"></div>
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">อายุ:</div>
+                  <input
+                    type="text"
+                    className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                  <div className="w-[42%] flex">
+                    <div className="w-[35%] flex justify-end mr-2">
+                      น้ำหนัก:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[45%] border border-collapse border-gray-700 cursor-default text-center text-red-600"
+                      value="0"
+                      readOnly
+                    />
+                    <div className="w-[15%] flex ml-2">kg.</div>
+                  </div>
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">เพศ:</div>
+                  <input
+                    type="text"
+                    className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                  <div className="w-[42%] flex">
+                    <div className="w-[35%] flex justify-end mr-2">
+                      ส่วนสูง:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[45%] border border-collapse border-gray-700 cursor-default text-center text-red-600"
+                      value="0"
+                      readOnly
+                    />
+                    <div className="w-[15%] flex ml-2">cm.</div>
+                  </div>
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">
+                    สิทธิ์ผู้ป่วย:
+                  </div>
+                  <input
+                    type="text"
+                    className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className=" flex w-full">
+                  <div className="w-[23%] flex justify-end mr-2">
+                    ประวัติแพ้ยา:
+                  </div>
+                  <textarea
+                    type="text"
+                    className="w-[77%] h-[120px] border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="w-2/5   grid grid-cols-4 grid-rows-8">
+              <div className="h-full col-start-1 col-span-5 row-start-1 row-span-1 ">
+                <div className="flex justify-around items-center">
+                  Admit Date:
+                  <input
+                    type="text"
+                    className="w-[60%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="h-full row-start-2 row-span-5 col-start-1 col-span-1">
+                <div className="h-full w-full grid grid-cols-1 grid-rows-3">
+                  <div className=" w-full p-2 ">
+                    <ButtonWithModal icon={hospitalicon} label="เลือก" />
+                  </div>
+                  <div className="w-full p-2">
+                    <ButtonWithModal icon={porson} label="เลือก" />
+                  </div>
+                  <div className="w-full p-2">
+                    <ButtonWithModal icon={scalesIcon} label="เลือก" />
+                  </div>
+                </div>
+              </div>
+              <div className="p-3 h-full row-start-2 row-span-5 col-start-2 col-span-5">
+                <div className="w-full h-full border border-collapse border-gray-500"></div>
+              </div>
+              <div className="h-full col-start-1 col-span-5 row-start-7 row-span-8 pl-5 grid grid-rows-3 grid-cols-1">
+                <div className=" flex ml-24 items-center">
+                  <input type="checkbox" className="mr-2" />
+                  <label> D/C</label>
+                </div>
+                <div className=" flex justify-around">
+                  สถานะ D/C:{' '}
+                  <input
+                    type="text"
+                    className="w-[60%]  border border-collapse border-gray-700 cursor-default"
+                    readOnly
+                  />
+                </div>
+                <div className=" flex justify-around items-center">
+                  สถานะ :
+                  <div className="w-[70%] h-full border-collapse border bg-red-400 flex justify-center items-center cursor-pointer hover:bg-red-600 hover:text-white active:bg-red-950 ">
+                    <img
+                      src={homeIcon}
+                      alt="Discharge"
+                      className="w-6 h-6 mr-3"
+                    />
+                    Discharge
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row-span-1 py-1 flex px-10">
+            <div className="flex h-full w-[50%]">
+              <div className=" h-full w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-green-600 hover:text-white active:bg-green-800 mr-3">
+                <img
+                  src={successIcon}
+                  alt="Discharge"
+                  className="w-6 h-6 mr-3"
+                />
+                ยืนยัน
+              </div>
+              <div className=" h-full w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-red-600 hover:text-white active:bg-red-800">
+                <img
+                  src={cancelIcon}
+                  alt="Discharge"
+                  className="w-6 h-6 mr-3"
+                />
+                ยกเลิก
+              </div>
+            </div>
+            <div className=" w-[50%] flex items-center justify-end">
+              <div className=" h-full w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-red-600 hover:text-white active:bg-red-800 ">
+                <img
+                  src={cancelIcon}
+                  alt="Discharge"
+                  className="w-6 h-6 mr-3"
+                />
+                Discharge
+              </div>
+            </div>
+          </div>
         </div>
       </Modal>
     </div>
@@ -206,6 +446,17 @@ const ButtonWithIcon = ({ icon, label, func }) => {
       className="bg-white text-gray-700 border-2 p-1 rounded cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32"
     >
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
+      <span className="mt-2 text-sm text-center">{label}</span>
+    </button>
+  );
+};
+const ButtonWithModal = ({ icon, label, func }) => {
+  return (
+    <button
+      onClick={func}
+      className="w-full h-full border border-collapse border-gray-500 flex flex-col bg-white justify-center items-center cursor-pointer hover:bg-gray-300 active:bg-gray-50"
+    >
+      <img src={icon} alt={label} className="w-6 h-6" />
       <span className="mt-2 text-sm text-center">{label}</span>
     </button>
   );
