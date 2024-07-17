@@ -13,7 +13,7 @@ export default function FrmMainIpd() {
       <header className="h-[3%]">
         <IpdHeader />
       </header>
-      <main className=" flex bg-red-200 w-full h-[90%]">
+      <main className=" flex  w-full h-[90%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmDataTebleIPD />} />
           <Route path="/screening" element={<Screenning />} />

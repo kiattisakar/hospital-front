@@ -71,7 +71,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   return (
     <div className="h-full w-screen">
       <div className="้h-1/6">
-        <div className="flex h-2/4 justify-between items-center bg-slate-600 ">
+        <div className="flex h-2/4 justify-between items-center my-1 ">
           <div className="space-x-2  ml-4 w-full flex ">
             <ButtonWithIcon
               icon={addDoc}

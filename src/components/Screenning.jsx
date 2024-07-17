@@ -217,7 +217,7 @@ export default function () {
             />
           </div>
         </div>
-        <div className="h-[90%] flex w-screen p-1 ">
+        <div className="h-[86%] flex w-screen p-1 ">
           <div className="h-full w-1/5 mr-2 border-2 p-3">
             <div className="h-1/5 w-full ">
               <div className="h-1/2 ">
@@ -229,8 +229,8 @@ export default function () {
                   />
                 </form>
               </div>
-              <div className="h-1/2 flex justify-between wards-center">
-                <button className=" h-full w-[45%] bg-white text-gray-700 border-2 p-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex wards-center">
+              <div className="h-1/2 flex justify-between">
+                <button className=" h-full w-[45%] bg-white text-gray-700 border-2 p-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex items-center wards-center ">
                   <img src={inImg} className="h-7 w-6 mr-2" />
                   <span>จัดยาโดยเลือกห้องผู้ป่วย</span>
                 </button>
@@ -256,7 +256,7 @@ export default function () {
             </div>
             <div className="h-4/5 w-full flex flex-col mt-1">
               {/* ตารางด้านซ้าย */}
-              <div className="max-h-96 overflow-auto">
+              <div className="max-h-full overflow-auto">
                 <table className="min-w-full border-collapse border border-gray-400">
                   <thead className="stick top-0">
                     <tr>
