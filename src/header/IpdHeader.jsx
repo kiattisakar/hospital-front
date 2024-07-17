@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function IpdHeader() {
   return (
     <div className="">
-      <div className="flex items-center bg-gray-200 ">
+      <div className="flex items-center bg-blue-100">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
         <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="">💊</span>

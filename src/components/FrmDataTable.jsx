@@ -45,7 +45,7 @@ export default function FrmDataTable() {
       <div className="h-full w-1/4 border-2 border-gray-300 flex flex-col px-2">
         <div className="h-full overflow-auto px-2 ">
           <table className="w-full min-w-full">
-            <thead className="bg-gray-50 sticky top-0">
+            <thead className="bg-custom-r1 sticky top-0">
               <tr>
                 <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
                 <th className="px-4 py-2 border border-gray-300">จำนวน</th>
@@ -71,7 +71,7 @@ export default function FrmDataTable() {
         </div>
       </div>
       <div className="w-3/4 max-h-full   border-2 border-gray-300 ml-2 overflow-auto ">
-        <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
+        <div className="w-full h-8 bg-custom-r3 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <h4 className="font-bold">
               รหัสหอผู้ป่วย : {selectedWard ? selectedWard.wardcode : ''}
@@ -137,7 +137,7 @@ export default function FrmDataTable() {
         <div className="">
           <table className="w-full bg-white rounded shadow">
             <thead>
-              <tr className="bg-gray-200 sticky top-0">
+              <tr className="bg-custom-r1 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
                 {/* <th className="text-left p-2">Discharged Date</th> */}
                 <th className="p-2 text-center">HN</th>

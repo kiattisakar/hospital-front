@@ -13,14 +13,14 @@ export default function FrmMainIpd() {
       <header className="h-[3%]">
         <IpdHeader />
       </header>
-      <main className=" flex  w-full h-[90%]">
+      <main className=" flex bg-custom-or w-full h-[90%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmDataTebleIPD />} />
           <Route path="/screening" element={<Screenning />} />
         </Routes>
       </main>
 
-      <div className="h-[7%] bg-gray-500 text-white py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
+      <div className="h-[7%] bg-blue-100 py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
         <div className="container mx-auto">
           <Footer />
         </div>
