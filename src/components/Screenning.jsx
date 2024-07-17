@@ -82,7 +82,7 @@ const DataTable = () => {
               <td className="border border-gray-300 p-1 text-center">
                 <input type="checkbox" checked={ward.print} readOnly />
               </td>
-              <td className="border border-gray-300 p-1">{ward.room}</td>
+              <td className="border border-gray-300 p-1">{ward.room }</td>
             </tr>
           ))}
         </tbody>
@@ -218,7 +218,7 @@ export default function () {
           </div>
         </div>
         <div className="h-[86%] flex w-screen p-1 ">
-          <div className="h-full w-1/5 mr-2 border-2 p-3">
+          <div className="h-full bg-white w-1/5 mr-2 border-2 p-3">
             <div className="h-1/5 w-full ">
               <div className="h-1/2 ">
                 <form onSubmit={''}>
@@ -411,7 +411,7 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className=" h-[55%] w-full  border-2  border-gray-400 p-1 mt-[2px] ">
+            <div className=" h-[55%] w-full bg-white border-2  border-gray-400 p-1 mt-[2px] ">
               {/* ตารางล่าง */}
               <div className="w-full h-[15%]  flex">
                 <button className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-62">
