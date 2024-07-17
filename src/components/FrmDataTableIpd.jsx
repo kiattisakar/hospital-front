@@ -20,7 +20,8 @@ Modal.setAppElement('#root');
 
 export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   const [currentDate, setCurrentDate] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalCreate, setIsCreate] = useState(false);
+  const [modalMoveDorm, setModalMoveDorm] = useState(false);
   useEffect(() => {
     const today = new Date();
     const formattedDate = formatDateToDDMMYYYY(today); ///ใช่ตัวแปล formattedDate
@@ -57,10 +58,10 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
     { name: 'ENT', count: 14 },
   ];
   const createBill = () => {
-    setIsOpen(true);
+    setIsCreate(true);
   };
   const CloseModal = () => {
-    setIsOpen(false);
+    setIsCreate(false);
   };
   const [selectedStatus, setSelectedStatus] = useState('admit');
 
@@ -70,8 +71,8 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   return (
     <div className="h-full w-screen">
       <div className="้h-1/6">
-        <div className="flex h-2/4 justify-between items-center mb-2 ">
-          <div className="space-x-2 mt-2 ml-4 w-full flex ">
+        <div className="flex h-2/4 justify-between items-center bg-slate-600 ">
+          <div className="space-x-2  ml-4 w-full flex ">
             <ButtonWithIcon
               icon={addDoc}
               label="สร้างใบยาใหม่"
@@ -86,7 +87,13 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             />
             <ButtonWithIcon icon={homeIcon} label="สร้างใบยากลับบ้าน" />
             <ButtonWithIcon icon={patientIcon} label="ผู้ป่วย Admit ใหม่" />
-            <ButtonWithIcon icon={hospitalicon} label="ย้ายหอผู้ป่วย" />
+            <ButtonWithIcon
+              icon={hospitalicon}
+              label="ย้ายหอผู้ป่วย"
+              func={() => {
+                setModalMoveDorm(true);
+              }}
+            />
             <ButtonWithIcon icon={homeIcon} label="ผู้ป่วยกลับบ้าน" />
           </div>
         </div>
@@ -148,7 +155,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
         <FrmDataTable />
       </div>
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={modalCreate}
         onRequestClose={onClose}
         className=" z-10 w-[750px] h-[550px] flex justify-center items-center"
         overlayClassName="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center"
@@ -436,6 +443,231 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
           </div>
         </div>
       </Modal>
+      <Modal
+        isOpen={modalMoveDorm}
+        onRequestClose={onClose}
+        className=" z-10 w-[750px] h-[550px] flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center"
+      >
+        <div className=" bg-white grid-cols-1 w-full h-full flex-col ">
+          <div className="bg-red-100 px-5 w-full h-12 flex justify-between">
+            <div className="flex items-center ">
+              <img src={hospitalicon} alt="หอพัก" className="w-6 h-6 mr-2 " />
+              <label className="font-bold text-lg">
+                ข้อมูลผู้ป่วย ย้ายหอผู้ป่วย
+              </label>
+            </div>
+            <div className="flex items-center">
+              <img
+                src={close}
+                alt="close"
+                className="cursor-pointer w-6 h-6 hover:border-4 hover:border-gray-200 active:border-gray-400"
+                onClick={() => {
+                  setModalMoveDorm(false);
+                }}
+              />
+            </div>
+          </div>
+          <div className="w-full h-[70px] border border-collapse border-gray-400 mt-2 grid grid-rows-2 grid-cols-2">
+            <div className="h-full w-full flex justify-center items-center">
+              <label> HN : </label>
+              <input
+                type="text"
+                className="w-[65%] ml-3 border border-collapse px-1 border-gray-700 cursor-default"
+              />
+            </div>
+            <div className="h-full w-full col-start-2 col-span-3 row-start-1 row-span-2 flex items-center">
+              <button className="bg-blue-700 text-white w-24 h-12 p-1 rounded mr-10 ml-4 hover:bg-blue-900 active:bg-blue-400 text-sm flex justify-center items-center">
+                <img src={searchIcon} alt="ภาพ" className="w-6 h-6 mr-1" />
+                ค้นหา
+              </button>
+              <label className="text-lg">สถานะ: </label>
+            </div>
+            <div className="h-full w-full flex justify-center items-center">
+              <label> AN : </label>
+              <input
+                type="text"
+                className="w-[65%] ml-3 border px-1 border-collapse border-gray-700 cursor-default"
+              />
+            </div>
+          </div>
+          <div className="mt-2">
+            <div className="w-full bg-red-300"></div>
+            <div className="row-span-8 flex">
+              <div className="w-3/5 h-full  flex">
+                <div className="h-full w-full ">
+                  <div className="flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">HN:</div>
+                    <input
+                      type="text"
+                      className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                    <div className="w-[12%] flex justify-center ">AN:</div>
+                    <input
+                      type="text"
+                      className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">
+                      ชื่อ-นามสกุล:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">
+                      หอผู้ป่วย:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">ห้อง:</div>
+                    <input
+                      type="text"
+                      className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                    <div className="w-[12%] flex justify-center ">เตียง:</div>
+                    <input
+                      type="text"
+                      className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">แพทย์:</div>
+                    <input
+                      type="text"
+                      className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">
+                      วันเกิด:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                    <div className="w-[42%]"></div>
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">อายุ:</div>
+                    <input
+                      type="text"
+                      className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                    <div className="w-[42%] flex">
+                      <div className="w-[35%] flex justify-end mr-2">
+                        น้ำหนัก:
+                      </div>
+                      <input
+                        type="text"
+                        className="w-[45%] border border-collapse border-gray-700 cursor-default text-center text-red-600"
+                        value="0"
+                        readOnly
+                      />
+                      <div className="w-[15%] flex ml-2">kg.</div>
+                    </div>
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">เพศ:</div>
+                    <input
+                      type="text"
+                      className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                    <div className="w-[42%] flex">
+                      <div className="w-[35%] flex justify-end mr-2">
+                        ส่วนสูง:
+                      </div>
+                      <input
+                        type="text"
+                        className="w-[45%] border border-collapse border-gray-700 cursor-default text-center text-red-600"
+                        value="0"
+                        readOnly
+                      />
+                      <div className="w-[15%] flex ml-2">cm.</div>
+                    </div>
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">
+                      สิทธิ์ผู้ป่วย:
+                    </div>
+                    <input
+                      type="text"
+                      className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                  <div className=" flex w-full">
+                    <div className="w-[23%] flex justify-end mr-2">
+                      ประวัติแพ้ยา:
+                    </div>
+                    <textarea
+                      type="text"
+                      className="w-[77%] h-[120px] border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="w-2/5   grid grid-cols-4 grid-rows-8">
+                <div className="h-full col-start-1 col-span-5 row-start-1 row-span-1 ">
+                  <div className="flex justify-around items-center">
+                    Admit Date:
+                    <input
+                      type="text"
+                      className="w-[60%]  border border-collapse border-gray-700 cursor-default"
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="h-full row-start-2 row-span-5 col-start-1 col-span-1">
+                  <div className="h-full w-full grid grid-cols-1 grid-rows-3">
+                    <div className=" w-full p-2 ">
+                      <ButtonWithModal icon={hospitalicon} label="เลือก" />
+                    </div>
+                    <div className="w-full p-2">
+                      <ButtonWithModal icon={porson} label="เลือก" />
+                    </div>
+                    <div className="w-full p-2">
+                      <ButtonWithModal icon={scalesIcon} label="เลือก" />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-3 h-full row-start-2 row-span-5 col-start-2 col-span-5">
+                  <div className="w-full h-full border border-collapse border-gray-500"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex h-16  items-center justify-center">
+            <button className=" h-12 w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-green-600 hover:text-white active:bg-green-800 mr-3">
+              <img src={successIcon} alt="Discharge" className="w-6 h-6 mr-3" />
+              ยืนยัน
+            </button>
+            <button className=" h-12 w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-red-600 hover:text-white active:bg-red-800">
+              <img src={cancelIcon} alt="Discharge" className="w-6 h-6 mr-3" />
+              ยกเลิก
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -443,7 +675,7 @@ const ButtonWithIcon = ({ icon, label, func }) => {
   return (
     <button
       onClick={func}
-      className="bg-white text-gray-700 border-2 p-1 rounded cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center w-32"
+      className="bg-white text-gray-700 border-2 p-1 rounded cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 text-sm flex flex-col items-center h-full w-32"
     >
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <span className="mt-2 text-sm text-center">{label}</span>

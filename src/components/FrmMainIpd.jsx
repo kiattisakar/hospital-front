@@ -9,22 +9,22 @@ import { Route, Routes } from 'react-router-dom';
 
 export default function FrmMainIpd() {
   return (
-    <div className="font-sans flex flex-col h-screen w-screen text-[12px]">
-      <header>
+    <div className=" font-sans flex flex-col h-screen w-screen text-[12px]">
+      <header className="h-[3%]">
         <IpdHeader />
       </header>
-      <main className="flex-grow flex flex-col ">
+      <main className=" flex bg-red-200 w-full h-[90%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmDataTebleIPD />} />
           <Route path="/screening" element={<Screenning />} />
         </Routes>
       </main>
 
-      <footer className="bg-gray-500 text-white py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
+      <div className="h-[7%] bg-gray-500 text-white py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
         <div className="container mx-auto">
           <Footer />
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

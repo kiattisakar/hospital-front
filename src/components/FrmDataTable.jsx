@@ -41,10 +41,10 @@ export default function FrmDataTable() {
 
   const handleRadioAdmit = (event) => {};
   return (
-    <div className="h-full  flex w-screen">
-      <div className="w-1/4 border-2 border-gray-300 px-2 flex flex-col">
-        <div className=" w-full h-[600px] overflow-y-auto px-2 flex flex-col">
-          <table className="w-full min-w-full divide-y divide-gray-200">
+    <div className=" h-full bg-red-100 flex w-screen">
+      <div className="h-full w-1/4 border-2 border-gray-300 flex flex-col px-2">
+        <div className="h-full overflow-auto px-2 ">
+          <table className="w-full min-w-full">
             <thead className="bg-gray-50 sticky top-0">
               <tr>
                 <th className="px-4 py-2 border border-gray-300">หอผู้ป่วย</th>
@@ -70,7 +70,7 @@ export default function FrmDataTable() {
           </table>
         </div>
       </div>
-      <div className="w-3/4 max-h-[600px] border-1 overflow-auto border-gray-300 pl-4">
+      <div className="w-3/4 max-h-full border-1 overflow-auto border-gray-300 pl-4">
         <div className="w-full h-8 bg-blue-200 flex justify-between items-center">
           <div className="w-2/4 h-full flex justify-around items-center px-5">
             <h4 className="font-bold">

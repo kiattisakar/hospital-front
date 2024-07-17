@@ -325,7 +325,7 @@ export default function () {
               <div className="w-full h-[80%] ">
                 {/* ตารางบน */}
                 <div className="flex flex-col h-full">
-                  <div className="flex-grow overflow-auto">
+                  <div className=" h-[250px] overflow-auto">
                     <table className="min-w-full border-collapse border border-gray-400">
                       <thead>
                         <tr>
@@ -414,20 +414,20 @@ export default function () {
             <div className=" h-[55%] w-full  border-2  border-gray-400 p-1 mt-[2px] ">
               {/* ตารางล่าง */}
               <div className="w-full h-[15%]  flex">
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-62">
+                <button className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-62">
                   <img src={inImg} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">
                       จัดยาโดยเลือกตามรายการยา
                     </span>
                   </div>
-                </div>
-                <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-32">
+                </button>
+                <button className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-32">
                   <img src={printer} alt="คืนยา" className="w-6 h-6 mr-2 " />
                   <div className="flex flex-col">
                     <span className="text-center">Reprint</span>
                   </div>
-                </div>
+                </button>
                 <div className="flex flex-col justify-center h-full w-52 text-sm">
                   <div>HN : 69855541</div>
                   <div>ชื่อผู้ป่วย : นาย เกียติศักษ์ อารมย์</div>
@@ -450,31 +450,31 @@ export default function () {
 
 const ButtonWithIcon = ({ icon, label, bgColor }) => {
   return (
-    <div className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white  active:bg-gray-300 text-sm flex flex-col justify-center items-center cursor-pointer wards-center w-32">
+    <button className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white  active:bg-gray-300 text-sm flex flex-col justify-center items-center cursor-pointer wards-center w-32">
       <img src={icon} alt={label} className="w-5 h-5 mr-2 " />
       <span className="mt-2 text-[13px] text-center">{label}</span>
-    </div>
+    </button>
   );
 };
 const ButtonCancel = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-28">
+    <button className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-28">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
         <span className="text-center">{label2}</span>
       </div>
-    </div>
+    </button>
   );
 };
 const ButtonGroup = ({ icon, label, label2 }) => {
   return (
-    <div className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 cursor-pointer hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center items-center w-32">
+    <button className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 cursor-pointer hover:text-white active:bg-gray-300 text-xs flex justify-center wards-center items-center w-32">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>
         <span className="text-center">{label2}</span>
       </div>
-    </div>
+    </button>
   );
 };

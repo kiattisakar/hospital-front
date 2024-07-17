@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <div className="container mx-auto flex justify-between items-center px-4">
+    <div className="container flex justify-between items-center px-4">
       <div className="flex items-center space-x-2">
         <span>Computer Name: LAPTOP-I0GR4VBC</span>
         <span>IP: 192.168.56.1</span>
