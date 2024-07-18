@@ -82,7 +82,7 @@ const DataTable = () => {
               <td className="border border-gray-300 p-1 text-center">
                 <input type="checkbox" checked={ward.print} readOnly />
               </td>
-              <td className="border border-gray-300 p-1">{ward.room }</td>
+              <td className="border border-gray-300 p-1">{ward.room}</td>
             </tr>
           ))}
         </tbody>
@@ -296,7 +296,7 @@ export default function () {
             </div>
           </div>
           <div className="h-full w-4/5 ">
-            <div className="border-2 border-gray-400 w-full h-[45%] bg-white p-1">
+            <div className="border-2 border-gray-400 w-full h-[50%] bg-white p-1">
               <div className="w-full h-[20%]  flex ">
                 <ButtonGroup
                   icon={inImg}
@@ -325,7 +325,7 @@ export default function () {
               <div className="w-full h-[80%] ">
                 {/* ตารางบน */}
                 <div className="flex flex-col h-full">
-                  <div className=" h-[250px] overflow-auto">
+                  <div className=" h-full overflow-auto">
                     <table className="min-w-full border-collapse border border-gray-400">
                       <thead>
                         <tr>
@@ -411,7 +411,7 @@ export default function () {
                 </div>
               </div>
             </div>
-            <div className=" h-[55%] w-full bg-white border-2  border-gray-400 p-1 mt-[2px] ">
+            <div className=" h-[50%] w-full bg-white border-2  border-gray-400 p-1 mt-[2px] ">
               {/* ตารางล่าง */}
               <div className="w-full h-[15%]  flex">
                 <button className="bg-white text-gray-700 border-2 p-1 mr-1 rounded hover:bg-gray-700 hover:text-white active:bg-gray-300 text-xs flex justify-center items-center wards-center w-62">
@@ -458,7 +458,7 @@ const ButtonWithIcon = ({ icon, label, bgColor }) => {
 };
 const ButtonCancel = ({ icon, label, label2 }) => {
   return (
-    <button className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-28">
+    <button className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-32">
       <img src={icon} alt={label} className="w-6 h-6 mr-2 " />
       <div className="flex flex-col">
         <span className="text-center">{label}</span>

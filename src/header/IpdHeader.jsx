@@ -67,11 +67,7 @@ const DropdownIPD = ({ icon, label }) => {
   };
 
   return (
-    <div
-      className="relative inline-block text-left"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
+    <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
@@ -135,11 +131,7 @@ const DropdownReport = ({ icon, label }) => {
   };
 
   return (
-    <div
-      className="relative inline-block text-left"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
+    <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
