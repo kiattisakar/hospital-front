@@ -30,7 +30,6 @@ export default function FrmMainIpd() {
 }
 
 import FrmProfile from './Profile/FrmProfile';
-import Test from './Profile/Test';
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import FrmMainIpd from './components/FrmMainIpd';

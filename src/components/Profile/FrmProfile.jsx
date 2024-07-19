@@ -14,6 +14,10 @@ import chemoRoom from '../../../img/chemoRoom.png';
 import IPDRoom from '../../../img/IPDRoom.png';
 import TPNRoom from '../../../img/TPNRoom.png';
 import IVRoom from '../../../img/IVRoom.png';
+import { Tabs, Tab } from './TabControlProfile';
+import LabResult from './LabResult';
+import NoteDrp from './NoteDrp';
+import IhosDue from './IhosDue';
 
 // import backIcon from '../../../img/back.png';
 export default function FrmProfile() {
@@ -65,6 +69,8 @@ export default function FrmProfile() {
             </div>
           </div>
           <div className="h-full w-[53%] ">
+            {' '}
+            {/* block2 */}
             <div className="h-[15%] w-full flex justify-start ">
               <div className="h-full w-full flex justify-start ">
                 <ButtonWithIcon icon={profileIcon} label="Medication Profile" />
@@ -81,15 +87,15 @@ export default function FrmProfile() {
             </div>
             <div className="w-full my-1 h-[83%] grid grid-rows-8 grid-cols-6">
               <div className=" flex row-start-1 row-span-1 col-start-1 col-span-2 ">
-                <div className="w-[50%] h-full flex justify-end items-center ">
+                <div className="w-[60%] h-full flex justify-end items-center ">
                   <p className="h-[70%] w-[30%] text-right">HN: </p>
                   <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
                     รหัส HN
                   </div>
                 </div>
-                <div className="w-[50%] h-full flex justify-end items-center ">
-                  <p className="h-[70%] w-[30%] text-right">AN: </p>
-                  <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                <div className="w-[40%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[15%] text-right">AN: </p>
+                  <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
                     รหัส AN
                   </div>
                 </div>
@@ -120,8 +126,8 @@ export default function FrmProfile() {
                 </div>
               </div>
               <div className=" row-start-2 row-span-1 col-start-1 col-span-2 flex items-center">
-                <p className="h-[70%] w-[15%] text-right"> ชื่อ : </p>
-                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                <p className="h-[70%] w-[25%] text-right"> ชื่อ : </p>
+                <div className="h-[90%] w-[75%] border border-collapse border-gray-400 pl-[2px] flex items-center">
                   ชื่อ
                 </div>
               </div>
@@ -148,8 +154,8 @@ export default function FrmProfile() {
                 </div>
               </div>
               <div className=" row-start-3 row-span-1 col-start-1 col-span-2 flex items-center ">
-                <p className="h-[70%] w-[15%] text-right"> บัตรปชช: </p>
-                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                <p className="h-[70%] w-[25%] text-right"> บัตรปชช: </p>
+                <div className="h-[90%] w-[75%] border border-collapse border-gray-400 pl-[2px] flex items-center">
                   เลขบัตรประชาชน
                 </div>
               </div>
@@ -172,8 +178,8 @@ export default function FrmProfile() {
               </div>
               <div className=" row-start-4 row-span-1 col-start-1 col-span-2 flex items-center">
                 <div className="w-full h-full  flex justify-end items-center">
-                  <p className="h-[70%] w-[15%] text-right  "> หอผู้ป่วย : </p>
-                  <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                  <p className="h-[70%] w-[25%] text-right  "> หอผู้ป่วย : </p>
+                  <div className="h-[90%] w-[75%] border border-collapse border-gray-400 pl-[2px] flex items-center">
                     หอผู้ป่วย
                   </div>
                 </div>
@@ -212,14 +218,14 @@ export default function FrmProfile() {
                     </div>
                   </div>
                   <div className="flex w-full h-[50%] ">
-                    <div className="w-[50%] h-full flex justify-center items-center ">
+                    <div className="w-[45%] h-full flex justify-end items-center ">
                       <p className="h-[70%] w-[33%] text-right">WBC: </p>
-                      <div className="h-[90%] w-[47%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
-                        0.42
+                      <div className="h-[90%] w-[51%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                        0
                       </div>
-                      <p className="h-[70%] w-[15%]"></p>
+                      <p className="w-[7%]"></p>
                     </div>
-                    <div className="w-[50%] h-full flex justify-end items-center ">
+                    <div className="w-[55%] h-full flex justify-end items-center ">
                       <p className="h-[70%] w-[55%] text-right">
                         Neutrophil%:{' '}
                       </p>
@@ -241,8 +247,8 @@ export default function FrmProfile() {
                 </div>
               </div>
               <div className=" row-start-5 row-span-1 col-start-1 col-span-2 flex items-center">
-                <p className="h-[70%] w-[15%] text-right"> สิทธิ์: </p>
-                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                <p className="h-[70%] w-[25%] text-right"> สิทธิ์ผู้ป่วย: </p>
+                <div className="h-[90%] w-[75%] border border-collapse bg-orange-200 border-gray-400 pl-[2px] flex items-center">
                   สิทธิ์ผู้ป่วย
                 </div>
               </div>
@@ -308,7 +314,28 @@ export default function FrmProfile() {
               </div>
             </div>
           </div>
-          <div className="h-full w-[35%] bg-red-300"></div>
+          <div className="h-full w-[35%] border border-collapse border-gray-400 bg-white">
+            {/* block3 */}
+            <div className="h-full w-full">
+              <Tabs>
+                <Tab label="LAB Result">
+                  <div className=" w-full h-[85%]">
+                    <LabResult />
+                  </div>
+                </Tab>
+                <Tab label="Note Drp">
+                  <div className=" w-full h-[85%]">
+                    <NoteDrp />
+                  </div>
+                </Tab>
+                <Tab label="IHOS DUE">
+                  <div className=" w-full h-[85%]">
+                    <IhosDue />
+                  </div>
+                </Tab>
+              </Tabs>
+            </div>
+          </div>
         </div>
         <div className="w-screen h-[13%]  flex items-center space-x-[2px] px-5">
           <ButtonWithIcon icon={IPDRoom} label="ห้องยา IPD" />
