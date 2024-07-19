@@ -23,14 +23,14 @@ export default function FrmProfile() {
         <div className="w-screen h-[87%] flex ">
           <div className="h-full w-[12%] text-[10px] flex flex-col">
             <div className="w-full h-[15%]  flex justify-center  items-center">
-              <button className="w-3/4 h-full flex justify-center items-center rounded-sm 2xl:text-[13px] 3xl:text-[15px] 4xl:text-[14px] bg-gray-500 text-xs text-white hover:bg-gray-800 active:bg-gray-400">
+              <button className="w-3/4 h-full flex justify-center items-center rounded-sm text-[13px] bg-gray-500 text-xs text-white hover:bg-gray-800 active:bg-gray-400">
                 รายละเอียดผู้ป่วย
               </button>
             </div>
             <div className="w-full h-[63%] mt-1 ">
               <div className="flex w-full h-full">
-                <div className="flex flex-col justify-start pl-2 2xl:text-[11px] 3xl:text-[15px] 4xl:text-[14px] w-1/2 h-full">
-                  <div className="w-[70%] h-[55%] bg-gray-300  flex items-center justify-center mb-2">
+                <div className="flex flex-col justify-center items-center pl-2 text-[11px] w-full h-full">
+                  <div className="w-[40%] h-[55%] bg-gray-300  flex items-center justify-center mb-2">
                     <svg
                       className="w-8 h-8 text-gray-500"
                       fill="currentColor"
@@ -53,32 +53,6 @@ export default function FrmProfile() {
                     </span>
                   </div>
                 </div>
-                <div className="ml-4 flex flex-col justify-top 2xl:text-[13px] 3xl:text-[16px] 4xl:text-[18px] items-end">
-                  <div className="mb-1  underline">
-                    <span className="block text-gray-700 font-medium">HN:</span>
-                  </div>
-                  <div className="mb-1  underline">
-                    <span className="block text-gray-700 2xl:text-[12px] 3xl:text-[17px] font-medium">
-                      ชื่อ - นามสกุล:
-                    </span>
-                  </div>
-                  <div className="mb-1  underline">
-                    <span className="block text-gray-700 font-medium">
-                      <p>เลขบัตรปชช: </p>
-                    </span>
-                  </div>
-
-                  <div className="mb-1  underline">
-                    <span className="block text-gray-700 font-medium">
-                      หอผู้ป่วย:
-                    </span>
-                  </div>
-                  <div className="mb-1  underline">
-                    <span className="block text-gray-700 font-medium">
-                      สิทธิ์ผู้ป่วย:
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="w-full h-[22%] flex justify-between px-2 items-center 2xl:text-[13px] 3xl:text-[15px] my-1 ">
@@ -92,7 +66,7 @@ export default function FrmProfile() {
           </div>
           <div className="h-full w-[53%] ">
             <div className="h-[15%] w-full flex justify-start ">
-              <div className="h-     w-full flex justify-start ">
+              <div className="h-full w-full flex justify-start ">
                 <ButtonWithIcon icon={profileIcon} label="Medication Profile" />
                 <ButtonWithIcon icon={noteBookIcon} label="รายการสั่งยา" />
                 <ButtonWithIcon icon={editIcon} label="Medical Reconcile" />
@@ -101,258 +75,234 @@ export default function FrmProfile() {
                 <ButtonWithIcon icon={drug} label="ME/DRP" />
                 <ButtonWithIcon icon={note} label="Note" />
               </div>
-              <div className=" flex justify-end">
+              <div className=" flex justify-end mr-2">
                 <ButtonWithIcon icon={back} label="[ Ctrl+E ] กลับ" />
               </div>
             </div>
-            <div className="w-full my-1 h-[83%]">
-              <div className="flex  w-full h-[65%] ">
-                <div className="ml-2  h-full w-[23%] ">
-                  <div className="  flex justify-start w-full  boeder-[2px] mb-1">
-                    <div className="  w-[45%] border-[1px] border-gray-700 flex justify-center items-center font-medium">
-                      65078921
-                    </div>
-                    <div className="mx-2 w-[10%] flex justify-center font-medium items-end">
-                      AN:
-                    </div>
-                    <div className=" w-[45%] border-[1px] font-medium border-gray-700 flex justify-center items-center">
-                      65078921
-                    </div>
-                  </div>
-                  <div className="mb-1 w-full  mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
-                    นาย วิศรุต เชื้อคำ
-                  </div>
-                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
-                    1419901859xxx
-                  </div>
-                  <div className="w-full mb-1  mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
-                    ศัลยกรรมชาย 1
-                  </div>
-                  <div className="w-full mb-1 mt-[1px] font-medium border-[1px] border-gray-700 flex px-1">
-                    นาย วิศรุต เชื้อคำ
+            <div className="w-full my-1 h-[83%] grid grid-rows-8 grid-cols-6">
+              <div className=" flex row-start-1 row-span-1 col-start-1 col-span-2 ">
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">HN: </p>
+                  <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                    รหัส HN
                   </div>
                 </div>
-                <div className=" h-full w-[38%] ">
-                  <div className="flex w-full mb-1">
-                    <div className="w-[15%] flex justify-end">วันเกิด:</div>
-                    <div className="w-[35%]  border-[1px] border-gray-700 flex justify-center items-center font-medium">
-                      20/07/1999
-                    </div>
-                    <div className="w-[15%] flex justify-end">อายุ:</div>
-                    <div className="w-[35%] border-[1px] border-gray-700 flex justify-center items-center font-medium">
-                      20/07/1999
-                    </div>
-                  </div>
-                  <div className="flex w-full ">
-                    <div className="w-[15%] flex justify-end">ที่อยู่:</div>
-                    <textarea
-                      className=" p-[2px] w-[85%] mb-1 border-[1px] cursor-default bg-gray-200 border-gray-700 flex justify-center items-center font-medium"
-                      value={
-                        'บ้านเลขที่ 163 หมู่3 ต.เชียงยืน อ.เมือง จ.อุดรธานี 41000'
-                      }
-                      readonly
-                    />
-                  </div>
-                  <div className="flex w-full mb-1 justify-end">
-                    <div className="w-[33%] h-full flex justify-end item-center">
-                      <div>ห้อง : </div>
-                      <input
-                        className="ml-1 cursor-default h-full w-[55%] bg-gray-200 border-[1px] border-gray-700 flex justify-center items-center font-medium px-2 "
-                        type="text"
-                        readOnly
-                      />
-                    </div>
-                    <div className="w-[33%] h-full flex justify-end item-center">
-                      <div>เตียง : </div>
-                      <input
-                        className="ml-1 cursor-default h-full w-[55%] bg-gray-200 border-[1px] border-gray-700 flex justify-center items-center font-medium px-2"
-                        type="text"
-                        readOnly
-                      />
-                    </div>
-                    <div className="w-[33%] h-full flex justify-end item-center">
-                      <div>เพศ : </div>
-                      <input
-                        className="ml-1 cursor-default h-full w-[55%] bg-gray-200 border-[1px] border-gray-700 flex justify-center items-center font-medium px-2"
-                        type="text"
-                        value={'ชาย'}
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                  <div className="flex w-full space-x-5">
-                    <div className="w-[15%]"></div>
-                    <p>profile = 0</p>
-                    <p>copy = 0</p>
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">AN: </p>
+                  <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                    รหัส AN
                   </div>
                 </div>
-                <div className=" h-full w-[39%] ">
-                  <div className="flex mb-1 w-full">
-                    <div className="ml-1 w-[15%] flex justify-end">
-                      แพทย์ :{' '}
-                    </div>
-                    <input
-                      type="text"
-                      className="w-[85%] border-[1px] bg-green-50 border-gray-700 px-2 cursor-default"
-                      value={'น.พ.กิตติธรรม ผดุงเวียง'}
-                      readOnly
-                    />
-                  </div>
-                  <div className="flex mb-1 w-full">
-                    <div className="w-[50%] h-full flex">
-                      <div className="w-[31%] ml-1 flex justify-end">
-                        น้ำหนัก:
-                      </div>
-                      <input
-                        type="text"
-                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
-                        value={'57'}
-                        readOnly
-                      />
-                      <div className="w-[34%] ">kg. </div>
-                    </div>
-                    <div className="w-[50%] h-full flex">
-                      <div className="w-[30%] ml-1 text-right flex justify-end">
-                        BSA:
-                      </div>
-                      <input
-                        type="text"
-                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
-                        value={'1.59'}
-                        readOnly
-                      />
-                      <div className="w-[35%] ">m2 </div>
+              </div>
+              <div className=" row-start-1 row-span-1 col-start-3 col-span-4 ">
+                <div className="w-[50%] h-full grid grid-cols-2 grid-rows-1">
+                  <div className="w-full h-full flex justify-end items-center">
+                    <p className="h-[70%] w-[30%] text-right"> วันเกิด :</p>
+                    <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                      20/7/42
                     </div>
                   </div>
-                  <div className="flex mb-1 w-full">
-                    <div className="w-[50%] h-full flex">
-                      <div className="w-[31%] ml-1 flex justify-end">
-                        ส่วนสูง :{' '}
-                      </div>
-                      <input
-                        type="text"
-                        className="w-[35%]  border-[1px] bg-green-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
-                        value={'168'}
-                        readOnly
-                      />
-                      <div className="w-[34%] ">cm. </div>
-                    </div>
-                    <div className="w-[50%] h-full flex">
-                      <div className="w-[30%] ml-1 text-right">eGFR:</div>
-                      <input
-                        type="text"
-                        className="w-[35%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default mr-1"
-                        value={'130'}
-                        readOnly
-                      />
-                      <div className="w-[35%] "></div>
-                    </div>
-                  </div>
-                  <div className="w-full flex  ">
-                    <div className="w-[40%] ">
-                      <div className="flex justify-end items-end p-0 mb-1">
-                        <div className="w-[20%] ml-1 text-right">scr :</div>
-                        <input
-                          type="text"
-                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-2 mr-1"
-                          value={'0'}
-                          readOnly
-                        />
-                        <div className="w-[15.2%]"> </div>
-                      </div>{' '}
-                      <div className="flex justify-end items-end p-0">
-                        <div className="w-[%] ml-1 text-right">WBC:</div>
-                        <input
-                          type="text"
-                          className="w-[42%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-2 mr-1"
-                          value={'0'}
-                          readOnly
-                        />
-                        <div className="w-[15.2%]"></div>
-                      </div>
-                    </div>
-                    <div className="w-[42.3%] ">
-                      <div className="flex justify-end items-end p-0 mb-1">
-                        <div className=" ml-1 text-right">Clcr :</div>
-                        <input
-                          type="text"
-                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default  ml-1"
-                          value={'0'}
-                          readOnly
-                        />
-                      </div>{' '}
-                      <div className="flex justify-end items-end p-0">
-                        <div className=" ml-1 text-right">Neutrophil:</div>
-                        <input
-                          type="text"
-                          className="w-[40%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-1 "
-                          value={'0'}
-                          readOnly
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-[17.7%]  flex justify-center items-center p-1">
-                      <ButtonWithSave icon={saveImg} />
+                  <div className="w-full h-full  flex justify-end items-center">
+                    <p className="h-[70%] w-[30%] text-right mr-1"> อายุ :</p>
+                    <div className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                      อายุ
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="w-full h-[35%] flex ">
-                <div className="mx-2 h-full w-[50%] ">
-                  <textarea
-                    name=""
-                    id="1"
-                    className=" w-full h-full border-[2px] border-gray-700 bg-yellow-50"
-                  ></textarea>
+              <div className=" row-start-1 row-span-1 col-start-5 col-span-6 ">
+                <div className="w-full h-full  flex justify-end items-center">
+                  <p className="h-[70%] w-[15%] text-right"> แพทย์ : </p>
+                  <div className="h-[90%] w-[80%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                    ชื่อแพทย์
+                  </div>
+                  <p className="w-[5%]"></p>
                 </div>
-                <div className="h-full w-[50%]  ">
-                  <div className="flex mt-1 h-1/3 w-full">
-                    <div className="flex justify-start items-start p-0 h-full  2xl:w-[50%] 3xl:w-[60%]">
-                      <p className="mr-1 ">Band form Neutrophil%:</p>
-                      <input
-                        type="text"
-                        className="w-[26.5%]  border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default  ml-1"
-                        value={'0'}
-                        readOnly
-                      />
-                    </div>{' '}
-                    <div className="flex justify-start item-start h-full 2xl:w-[50%] 3xl:w-[40%]">
-                      <div className="text-right w-[42.8%] ">ANC:</div>
-                      <input
-                        type="text"
-                        className=" w-[25.7%] border-[1px] bg-yellow-50 text-red-500 border-gray-700 text-center cursor-default ml-1 "
-                        value={'0'}
-                        readOnly
-                      />
-                      <div className=" ml-1 text-right">cells/mL</div>
+              </div>
+              <div className=" row-start-2 row-span-1 col-start-1 col-span-2 flex items-center">
+                <p className="h-[70%] w-[15%] text-right"> ชื่อ : </p>
+                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                  ชื่อ
+                </div>
+              </div>
+              <div className=" row-start-2 row-span-2 col-start-3 col-span-2 flex justify-end items-center">
+                <p className="h-[80%] w-[15%] text-right"> ที่อยู่: </p>
+                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 p-[2px] flex items-top">
+                  ที่อยู่
+                </div>
+              </div>
+              <div className=" row-start-2 row-span-1 col-start-5 col-span-6 flex items-center">
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">น้ำหนัก: </p>
+                  <div className="h-[90%] w-[40%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                    80
+                  </div>
+                  <p className="h-[70%] w-[30%]">kg.</p>
+                </div>
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">BSA: </p>
+                  <div className="h-[90%] w-[40%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500">
+                    88
+                  </div>
+                  <p className="h-[70%] w-[30%]">m2</p>
+                </div>
+              </div>
+              <div className=" row-start-3 row-span-1 col-start-1 col-span-2 flex items-center ">
+                <p className="h-[70%] w-[15%] text-right"> บัตรปชช: </p>
+                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                  เลขบัตรประชาชน
+                </div>
+              </div>
+
+              <div className=" row-start-3 row-span-1 col-start-5 col-span-2 flex items-center">
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">ส่วนสูง: </p>
+                  <div className="h-[90%] w-[40%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                    120
+                  </div>
+                  <p className="h-[70%] w-[30%]">cm.</p>
+                </div>
+                <div className="w-[50%] h-full flex justify-end items-center ">
+                  <p className="h-[70%] w-[30%] text-right">eGFR: </p>
+                  <div className="h-[90%] w-[40%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500">
+                    0
+                  </div>
+                  <p className="h-[70%] w-[30%]"></p>
+                </div>
+              </div>
+              <div className=" row-start-4 row-span-1 col-start-1 col-span-2 flex items-center">
+                <div className="w-full h-full  flex justify-end items-center">
+                  <p className="h-[70%] w-[15%] text-right  "> หอผู้ป่วย : </p>
+                  <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                    หอผู้ป่วย
+                  </div>
+                </div>
+              </div>
+              <div className=" row-start-4 row-span-1 col-start-3 col-span-2 flex items-center">
+                <div className="grid h-full ml-2 w-full grid-rows-1 grid-col-3">
+                  <div className="row-start-1 row-span-1 col-span-1 col-start-1 flex justify-around items-center">
+                    <p className="h-[70%] w-[20%] text-right  ">ห้อง:</p>
+                    <div className="h-[90%] w-[55%] border border-collapse border-gray-400 pl-[2px] flex items-center"></div>
+                  </div>
+                  <div className="row-start-1 row-span-1 col-span-1 col-start-2  flex justify-around items-center ">
+                    <p className="h-[70%] w-[20%] text-right  ">เตียง:</p>
+                    <div className="h-[90%] w-[55%] border border-collapse border-gray-400 pl-[2px] flex items-center"></div>
+                  </div>
+                  <div className="row-start-1 row-span-1 col-span-1 col-start-3 flex justify-around items-center">
+                    <p className="h-[70%] w-[20%] text-right  ">เพศ:</p>
+                    <div className="h-[90%] w-[55%] border border-collapse border-gray-400 pl-[2px] flex items-center"></div>
+                  </div>
+                </div>
+              </div>
+              <div className=" row-start-4 row-span-2 col-start-5 col-span-2 flex">
+                <div className="w-[85%] h-full">
+                  <div className="flex w-full h-[50%] ">
+                    <div className="w-[50%] h-full flex justify-center items-center ">
+                      <p className="h-[70%] w-[33%] text-right">scr: </p>
+                      <div className="h-[90%] w-[47%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                        0.42
+                      </div>
+                      <p className="h-[70%] w-[15%]"></p>
+                    </div>
+                    <div className="w-[50%] h-full flex justify-end items-center ">
+                      <p className="h-[70%] w-[55%] text-right">Clcr: </p>
+                      <div className="h-[90%] w-[45%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500">
+                        118.00
+                      </div>
                     </div>
                   </div>
-                  <div className="flex w-full h-1/3">
-                    <div className="flex justify-start items-start p-0 h-full w-full ">
-                      <p className="mr-1">วินิจฉัยโรค :</p>
-                      <input
-                        type="text"
-                        className="w-[69.5%] border-[1px] bg-white px-2 border-gray-700 ml-1"
-                      />
-                      <button className="bg-black text-white w-[5%] h-hull rotate-180 ml-[5%] hover:text-gray-800 hover:bg-gray-400 active:bg-slate-500">
-                        {'^'}
-                      </button>
-                    </div>{' '}
-                  </div>
-                  <div className="flex w-full h-1/3">
-                    <div className="flex justify-start items-start p-0 h-full w-full ">
-                      <p className="mr-1 2xl:w-[14.3%] 3xl:w-[16.3%]">
-                        Protocol :
+                  <div className="flex w-full h-[50%] ">
+                    <div className="w-[50%] h-full flex justify-center items-center ">
+                      <p className="h-[70%] w-[33%] text-right">WBC: </p>
+                      <div className="h-[90%] w-[47%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                        0.42
+                      </div>
+                      <p className="h-[70%] w-[15%]"></p>
+                    </div>
+                    <div className="w-[50%] h-full flex justify-end items-center ">
+                      <p className="h-[70%] w-[55%] text-right">
+                        Neutrophil%:{' '}
                       </p>
-                      <input
-                        type="text"
-                        className="w-[69.6%] border-[1px] bg-white px-2 border-gray-700 ml-1"
-                      />
-                      <button className="bg-black text-white w-[5%] h-hull rotate-180 ml-[5%] hover:text-gray-800 hover:bg-gray-400 active:bg-slate-500">
-                        {'^'}
-                      </button>
-                    </div>{' '}
+                      <div className="h-[90%] w-[45%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500">
+                        118.00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[15%] h-full  p-1 flex justify-center items-center">
+                  <button className="flex flex-col justify-center items-center border border-collapse border-gray-400  bg-white hover:bg-yellow-50 active:bg-gray-200 ">
+                    <img
+                      className=" w-[50%] h-[50%] m-[4px]"
+                      src={saveImg}
+                      alt="save"
+                    />
+                    <span>บันทึก</span>
+                  </button>
+                </div>
+              </div>
+              <div className=" row-start-5 row-span-1 col-start-1 col-span-2 flex items-center">
+                <p className="h-[70%] w-[15%] text-right"> สิทธิ์: </p>
+                <div className="h-[90%] w-[85%] border border-collapse border-gray-400 pl-[2px] flex items-center">
+                  สิทธิ์ผู้ป่วย
+                </div>
+              </div>
+              <div className=" row-start-5 row-span-1 col-start-3 col-span-2 flex justify-around items-center">
+                <p>profile = {'0'}</p>
+                <p>coppy = {'0'}</p>
+                <p> - </p>
+              </div>
+              <div className=" row-start-6 row-span-3 col-start-1 col-span-3 flex items-center justify-center">
+                <textarea
+                  name=""
+                  id=""
+                  className="h-[90%] w-[98%] bg-yellow-50 p-2 border border-collapse border-gray-400"
+                ></textarea>
+              </div>
+              <div className=" row-start-6 row-span-3 col-start-4 col-span-3 flex items-center">
+                <div className="h-full w-full grid grid-cols-1 grid-rows-3">
+                  <div className="row-start-1 row-span-1 col-span-1 col-start-1 w-full h-full flex ml-[8.8%]">
+                    <div className="w-[50%] h-full flex justify-end items-center ">
+                      <p className="h-[74%] w-[50%] text-right">
+                        Band form Neutrophil%:{' '}
+                      </p>
+                      <div className="h-[90%] w-[26%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500 ">
+                        0
+                      </div>
+                      <p className="w-[4%]"></p>
+                    </div>
+                    <div className="w-[30%] h-full flex justify-end items-center ">
+                      <p className="h-[70%] w-[54%] text-right">ANC:</p>
+                      <div className="h-[90%] w-[37%] border border-collapse border-gray-400 pl-[2px] flex justify-center items-center mx-[2px] text-red-500">
+                        0
+                      </div>
+                      <p className="h-[70%] w-[0%] text-right">cell/mL</p>
+                    </div>
+                  </div>
+                  <div className="row-start-2 row-span-1 col-span-1 col-start-1 w-full h-full flex items-center">
+                    <span className="w-[20%] text-right">วินิจฉัยโรค:</span>
+
+                    <input
+                      type="text"
+                      className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center px-3"
+                    />
+
+                    <p className="w-[2%]"></p>
+                    <button className="w-6 rounded-sm h-6 bg-black hover:bg-gray-500 rotate-180 active:bg-gray-600">
+                      <span className="text-white text-[15px] ">^</span>
+                    </button>
+                  </div>
+                  <div className="row-start-3 row-span-1 col-span-1 col-start-1 w-full h-full flex items-center">
+                    <span className="w-[20%] text-right">Protocal:</span>
+
+                    <input
+                      type="text"
+                      className="h-[90%] w-[70%] border border-collapse border-gray-400 pl-[2px] flex items-center px-3"
+                    />
+
+                    <p className="w-[2%]"></p>
+                    <button className="w-6 rounded-sm h-6 bg-black hover:bg-gray-500 rotate-180 active:bg-gray-600">
+                      <span className="text-white text-[15px] ">^</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -377,10 +327,10 @@ export default function FrmProfile() {
 }
 const ButtonWithIcon = ({ icon, label }) => {
   return (
-    <div className="bg-white 2xl:text-[10px] 3xl:text-[12px] text-gray-700 border-2 rounded h-full px-1 cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 flex justify-center items-center w-24">
+    <button className="bg-white 2xl:text-[10px] 3xl:text-[12px] text-gray-700 border-2 rounded h-full px-1 cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-300 flex justify-center items-center w-24">
       <img src={icon} alt={label} className="mr-[2px] w-6 h-6" />
       <span className=" text-center">{label}</span>
-    </div>
+    </button>
   );
 };
 const ButtonWithSave = ({ icon, label }) => {
