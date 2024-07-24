@@ -10,14 +10,19 @@ import drug from '../../../img/drug.png';
 import note from '../../../img/note.png';
 import back from '../../../img/back.png';
 import saveImg from '../../../img/save.png';
+import increase from '../../../img/increase.png';
 import chemoRoom from '../../../img/chemoRoom.png';
 import IPDRoom from '../../../img/IPDRoom.png';
 import TPNRoom from '../../../img/TPNRoom.png';
 import IVRoom from '../../../img/IVRoom.png';
+import stopIcon from '../../../img/Stop.png';
+import playIcon from '../../../img/play.png';
+import cancel from '../../../img/cancel.png';
 import { Tabs, Tab } from './TabControlProfile';
 import LabResult from './LabResult';
 import NoteDrp from './NoteDrp';
 import IhosDue from './IhosDue';
+import DataTable from './DataTable';
 
 // import backIcon from '../../../img/back.png';
 export default function FrmProfile() {
@@ -119,9 +124,11 @@ export default function FrmProfile() {
               <div className=" row-start-1 row-span-1 col-start-5 col-span-6 ">
                 <div className="w-full h-full  flex justify-end items-center">
                   <p className="h-[70%] w-[15%] text-right"> แพทย์ : </p>
-                  <div className="h-[90%] w-[80%] border border-collapse border-gray-400 pl-[2px] flex items-center">
-                    ชื่อแพทย์
-                  </div>
+                  <input
+                    type="text"
+                    className="h-[90%] w-[80%] border border-collapse bg-green-50 border-gray-400 pl-[2px] flex items-center"
+                  />
+
                   <p className="w-[5%]"></p>
                 </div>
               </div>
@@ -348,7 +355,72 @@ export default function FrmProfile() {
           </div>
         </div>
       </div>
-      <div className="w-screen h-3/5 bg-yellow-600"></div>
+      <div className="w-screen h-3/5  bg-yellow-100">
+        <div className="w-full h-[85%] bg-white ">
+          <DataTable />
+        </div>
+        <div className="w-full h-[5%] bg-black flex  items-center ">
+          <div className=" w-full h-full flex justify-between items-center px-5">
+            <div className="flex items-center">
+              <input type="checkbox" />
+              <label className=" text-white text-sm ml-2">แสดงรายการ Off</label>
+              <label className=" text-white text-sm ml-5">จำนวน</label>
+              <label className=" text-white text-sm ml-2">{'0'}</label>
+              <label className=" text-white text-sm ml-2">รายการ</label>
+            </div>
+            <div className="flex justify-end items-center">
+              <input type="checkbox" />
+              <label className=" text-yellow-400 text-sm ml-5 font-bold">
+                ให้ยาส่งผลิตจัดมือ
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-[9%]  flex">
+          <div className="flex w-full justify-between px-[1px] items-center">
+            <div className="flex h-full items-center space-x-[1px]">
+              <ButtonWithUnder
+                icon={increase}
+                label={'เพิ่ม'}
+                shortcut={'[F5]'}
+              />
+              <ButtonWithUnder icon={note} label={'แก้ไข'} shortcut={'[F7]'} />
+              <ButtonWithUnder
+                icon={cancel}
+                label={'ลบ'}
+                shortcut={'[F6,Del]'}
+              />
+              <ButtonWithUnder
+                icon={stopIcon}
+                label={'Off ยา'}
+                shortcut={'[F4]'}
+              />
+              <ButtonWithUnder
+                icon={playIcon}
+                label={'Hold ยา'}
+                shortcut={'[F3]'}
+              />
+              <ButtonWithUnder
+                icon={saveImg}
+                label={'บันทึก'}
+                shortcut={'[Ctrl+s]'}
+              />
+            </div>
+            <div className="flex h-full space-x-[1px] items-center">
+              <ButtonWithUnder2
+                label={'สร้างรายการยากลับบ้าน'}
+                icon={homeIcon}
+                shortcut={'[Ctrl+H]'}
+              />
+              <ButtonWithUnder2
+                label={'สร้างรายการยา'}
+                icon={editIcon}
+                shortcut={'[Ctrl+End]'}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -366,5 +438,31 @@ const ButtonWithSave = ({ icon, label }) => {
       <img src={icon} alt={label} className="mr-[2px] w-6 h-6" />
       <span className=" text-center">{label}</span>
     </div>
+  );
+};
+const ButtonWithUnder = ({ icon, label, shortcut }) => {
+  return (
+    <button className="bg-white text-[15px] text-gray-700 border-[1px] border-black h-full px-1 cursor-pointer hover:bg-gray-200 active:bg-gray-400 flex justify-between items-center w-[100px]">
+      <img src={icon} alt={label} className="mr-[2px] w-8 h-8" />
+      <div className="flex flex-col items-end">
+        {shortcut && (
+          <span className="text-gray-500 text-[10px]">{shortcut}</span>
+        )}
+        <span className="text-center">{label}</span>
+      </div>
+    </button>
+  );
+};
+const ButtonWithUnder2 = ({ icon, label, shortcut }) => {
+  return (
+    <button className="bg-white text-[15px] text-gray-700 border-[1px] border-black h-full px-1 cursor-pointer hover:bg-gray-200 active:bg-gray-400 flex justify-between items-center w-[200px]">
+      <img src={icon} alt={label} className="mr-[2px] w-8 h-8" />
+      <div className="flex flex-col items-end">
+        {shortcut && (
+          <span className="text-gray-500 text-[10px]">{shortcut}</span>
+        )}
+        <span className="text-center">{label}</span>
+      </div>
+    </button>
   );
 };

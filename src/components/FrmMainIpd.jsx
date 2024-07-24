@@ -13,15 +13,15 @@ export default function FrmMainIpd() {
       <header className="h-[3%]">
         <IpdHeader />
       </header>
-      <main className=" flex bg-custom-or w-full h-[90%]">
+      <main className=" flex bg-custom-or w-full h-[92%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmProfile />} />
           <Route path="/screening" element={<Screenning />} />
         </Routes>
       </main>
 
-      <div className="h-[7%] bg-blue-100 py-4 text-xs w-full relative bottom-0 left-0 border-y-2 border-white-300">
-        <div className="container mx-auto">
+      <div className="h-[5%] bg-blue-100 py-4 text-xs w-full relative  flex justify-between items-center bottom-0 left-0 border-y-2 border-white-300">
+        <div className="container mx-auto  flex justify-between items-center">
           <Footer />
         </div>
       </div>
