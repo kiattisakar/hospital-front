@@ -4,6 +4,8 @@ import { FaChevronDown } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export default function IpdHeader() {
+  const navigate = useNavigate();
+
   return (
     <div className="">
       <div className="flex items-center bg-blue-100">
@@ -22,7 +24,10 @@ export default function IpdHeader() {
         </button>
         <DropdownReport icon="📄" label="Report" />
 
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button
+          className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => '/subtreasury' && navigate('/subtreasury')}
+        >
           <span className="text-sx">📝</span>
           <span className="ml-2">คลังย่อย</span>
         </button>
@@ -104,7 +109,6 @@ const DropdownIPD = ({ icon, label }) => {
 
 const DropdownReport = ({ icon, label }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const menuVariants = {
     open: {
       opacity: 1,

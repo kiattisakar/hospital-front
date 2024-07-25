@@ -5,7 +5,7 @@ import FrmDataTable2 from './FrmDataTable2';
 import Screenning from './Screenning';
 import IpdHeader from '../header/IpdHeader';
 import Footer from '../header/Footer';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function FrmMainIpd() {
   return (
@@ -16,6 +16,7 @@ export default function FrmMainIpd() {
       <main className=" flex bg-custom-or w-full h-[92%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmProfile />} />
+          <Route path="/subtreasury/*" element={<FrmSubTreasury />} />
           <Route path="/screening" element={<Screenning />} />
         </Routes>
       </main>
@@ -30,24 +31,4 @@ export default function FrmMainIpd() {
 }
 
 import FrmProfile from './Profile/FrmProfile';
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import FrmMainIpd from './components/FrmMainIpd';
-// import Login from './login/Login';
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-// <Route path="/" element={<Screenning />} />
-//         {/* เช่น */}
-//         <Route path="/screen" element={<FrmMainIpd />} />
-//         {/* หรือตามที่คุณต้องการให้มันแสดงผล */}
-//         <Route path="/login" element={<Login />} />
-//         {/* และ Route อื่น ๆ ตามที่ต้องการ */}
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
+import FrmSubTreasury from './menucomponents/FrmSubTreasury';
