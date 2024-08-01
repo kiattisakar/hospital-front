@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+textarea:focus {
+  outline: none;
+  border-color: #d1d5db; /* gray-300 */
+  box-shadow: none;
+}
+input:focus {
+  outline: none;
+  border-color: #d1d5db; /* gray-300 */
+  box-shadow: none;
+}
