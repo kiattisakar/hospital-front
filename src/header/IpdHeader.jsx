@@ -96,12 +96,16 @@ const DropdownIPD = ({ icon, label }) => {
         <DropdownItem label="ห้องยา IPD Profile" path="/mainIPD" />
         <DropdownItem label="Screen Create Order" shortcut="Alt+S" />
         <DropdownItem label="Screening" shortcut="Alt+S" path="/screening" />
-        <DropdownItem label="[ER] Quick Order" shortcut="Alt+Q" />
+        <DropdownItem
+          label="[ER] Quick Order"
+          shortcut="Alt+Q"
+          path="/quickorder"
+        />
         <DropdownItem label="Prescription Order" shortcut="Alt+P" />
         <DropdownItem label="Screen Create Order" />
         <DropdownItem label="Matching" />
         <DropdownItem label="Check Out" shortcut="Alt+C" />
-        <DropdownItem label="Med Tranfer" shortcut="Alt+T" />
+        <DropdownItem label="Med Tranfer" shortcut="Alt+T" path="/medtranfer" />
       </motion.div>
     </div>
   );

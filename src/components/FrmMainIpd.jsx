@@ -16,8 +16,10 @@ export default function FrmMainIpd() {
       <main className=" flex bg-custom-or w-full h-[92%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmProfile />} />
+          <Route path="/quickorder" element={<QuickOrder />} />
           <Route path="/subtreasury/*" element={<FrmSubTreasury />} />
           <Route path="/screening" element={<Screenning />} />
+          <Route path="/medtranfer/*" element={<MadTranfer />} />
         </Routes>
       </main>
 
@@ -32,3 +34,5 @@ export default function FrmMainIpd() {
 
 import FrmProfile from './Profile/FrmProfile';
 import FrmSubTreasury from './menucomponents/FrmSubTreasury';
+import QuickOrder from './menucomponents/IPDRoom/QuickOrder';
+import MadTranfer from './menucomponents/IPDRoom/MadTranfer/MadTranfer';
