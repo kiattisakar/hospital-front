@@ -1,5 +1,22 @@
 import React from 'react';
 
+// function Button({ onClick, children }) {
+//   return (
+//     <Button
+//       onClick={onClick}
+//       className="bg-red-400 hover:bg-blue-300 text-black font-bold py-4 px-7 rounded"
+//     >
+//       {children}
+//     </Button>
+//   );
+// }
+
+// export default function Dispense() {
+//   const handleClick = () => {
+//     alert('Button clicked!');
+//   };
+// }
+
 export default function Dispense() {
   return (
     <div className="w-full h-full bg-red-200">
@@ -29,12 +46,48 @@ export default function Dispense() {
               <option value="5">ห้องยา D/C</option>
             </select>
           </div>
-          <div className="row-start-1 row-span-1 col-start-4 col-span-2 bg-green-300"></div>
-          <div className="row-start-2 row-span-1 col-start-4 col-span-2 bg-green-400"></div>
+          <div className="row-start-1 row-span-1 col-start-4 col-span-2 bg-green-300">
+            <button>test</button>
+          </div>
+          <div className="row-start-2 row-span-1 col-start-4 col-span-2 bg-green-400">
+            <span className="text-right w-[40%]">หอผู้ป่วย :</span>
+            <select
+              className="w-[40%] h-[60%] border border-gray-400 "
+              name="ward"
+              id="1"
+            >
+              <option value="1">test1</option>
+              <option value="2">tes2</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div className="w-[100%] h-[80%] bg-blue-300">
-        <div></div>
+      <div className="w-[70%] h-[80%] bg-blue-300">
+        <div className=" border border-collapse border-black w-full h-full bg-white">
+          <div className="max-h-full w-full overflow-auto">
+            <table className="w-full border-collapse bg-white border border-gray-400">
+              <thead className="stick top-0 ">
+                <tr>
+                  <th className="border border-gray-300 p-2 text-xs min-w-[40px]"></th>
+                  <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
+                    รหัสยา
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs  min-w-[220px]">
+                    ชื่อยา
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
+                    จำนวน
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
+                    หน่วย
+                  </th>
+                  <th className="border border-gray-300 p-2 text-xs  min-w-[40px]"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
