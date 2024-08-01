@@ -14,7 +14,13 @@ export default function IpdHeader() {
           <span className="">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button
+          className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => {
+            if ('/DataDispenseDose') navigate('/DataDispenseDose');
+            onclick();
+          }}
+        >
           <span className="text-sx">🏥</span>
           <span className="ml-2">ข้อมูลการจ่าย</span>
         </button>
