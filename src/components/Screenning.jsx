@@ -36,9 +36,7 @@ const data3 = {
   ],
 };
 
-const DataTable = () => {
-  
-};
+const DataTable = () => {};
 
 export default function () {
   const [selectedPatient, setSelectedPatient] = useState(null);
@@ -133,7 +131,7 @@ export default function () {
 
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
-    console.log(patient)
+    console.log(patient);
   };
   return (
     <div className="flex-grow flex flex-col h-full w-screen">
@@ -407,58 +405,83 @@ export default function () {
               </div>
               <div className="h-[85%] w-full">
                 {/* <DataTable /> */}
-                return (
-    <div className="flex-grow flex flex-col overflow-auto max-h-56 ">
-      <table className="min-w-full border-collapse border border-gray-400 text-sm">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 p-1">
-              <input type="checkbox" />
-            </th>
-            <th className="border border-gray-300 p-1">วันที่</th>
-            <th className="border border-gray-300 p-1">เวลารับประทาน</th>
-            <th className="border border-gray-300 p-1">รหัสยา</th>
-            <th className="border border-gray-300 p-1">ชื่อยา</th>
-            <th className="border border-gray-300 p-1">Dose</th>
-            <th className="border border-gray-300 p-1">QTY</th>
-            <th className="border border-gray-300 p-1">รหัสวิธีใช้</th>
-            <th className="border border-gray-300 p-1">คำอธิบายวิธีใช้</th>
-            <th className="border border-gray-300 p-1">ที่เก็บยา</th>
-            <th className="border border-gray-300 p-1">Print</th>
-            <th className="border border-gray-300 p-1">ห้อง</th>
-          </tr>
-        </thead>
-        <tbody>
-        {prescrip.map((ward, index) => (
-            <tr key={index}>
-              <td className="border border-gray-300 p-1 text-center">
-                <input type="checkbox" />
-              </td>
-              <td className="border border-gray-300 p-1">{ward.takedate}</td>
-              <td className="border border-gray-300 p-1">{ward.time }</td>
-              <td className="border border-gray-300 p-1">{ward.drug}</td>
-              <td className="border border-gray-300 p-1">{ward.orderitemname}</td>
-              <td className="border border-gray-300 p-1 text-center">
-                {ward.dosage}
-              </td>
-              <td className="border border-gray-300 p-1 text-center">
-                {ward.orderqty}
-              </td>
-              <td className="border border-gray-300 p-1">{ward.timecode}</td>
-              <td className="border border-gray-300 p-1">
-                {ward.freetext2}
-              </td>
-              <td className="border border-gray-300 p-1">{ward.locationname}</td>
-              <td className="border border-gray-300 p-1 text-center">
-                <input type="checkbox" checked={ward.printstatus} readOnly />
-              </td>
-              <td className="border border-gray-300 p-1">{ward.fromlocationname}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+
+                <div className="flex-grow flex flex-col overflow-auto max-h-56 ">
+                  <table className="min-w-full border-collapse border border-gray-400 text-sm">
+                    <thead>
+                      <tr>
+                        <th className="border border-gray-300 p-1">
+                          <input type="checkbox" />
+                        </th>
+                        <th className="border border-gray-300 p-1">วันที่</th>
+                        <th className="border border-gray-300 p-1">
+                          เวลารับประทาน
+                        </th>
+                        <th className="border border-gray-300 p-1">รหัสยา</th>
+                        <th className="border border-gray-300 p-1">ชื่อยา</th>
+                        <th className="border border-gray-300 p-1">Dose</th>
+                        <th className="border border-gray-300 p-1">QTY</th>
+                        <th className="border border-gray-300 p-1">
+                          รหัสวิธีใช้
+                        </th>
+                        <th className="border border-gray-300 p-1">
+                          คำอธิบายวิธีใช้
+                        </th>
+                        <th className="border border-gray-300 p-1">
+                          ที่เก็บยา
+                        </th>
+                        <th className="border border-gray-300 p-1">Print</th>
+                        <th className="border border-gray-300 p-1">ห้อง</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prescrip.map((ward, index) => (
+                        <tr key={index}>
+                          <td className="border border-gray-300 p-1 text-center">
+                            <input type="checkbox" />
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.takedate}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.time}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.drug}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.orderitemname}
+                          </td>
+                          <td className="border border-gray-300 p-1 text-center">
+                            {ward.dosage}
+                          </td>
+                          <td className="border border-gray-300 p-1 text-center">
+                            {ward.orderqty}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.timecode}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.freetext2}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.locationname}
+                          </td>
+                          <td className="border border-gray-300 p-1 text-center">
+                            <input
+                              type="checkbox"
+                              checked={ward.printstatus}
+                              readOnly
+                            />
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {ward.fromlocationname}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

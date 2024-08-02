@@ -103,6 +103,7 @@ export default function DoseIntoCart() {
         </div>
       </div>
       <div className="h-full w-[70%] border border-collapse border-gray-600">
+        {' '}
         {/*ตารางขวา */}
         <div className="w-full h-[92%] bg-white">
           <div className="w-full h-full px-2 bg-white border border-collapse border-gray-400 ">

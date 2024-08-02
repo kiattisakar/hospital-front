@@ -10,10 +10,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 export default function FrmMainIpd() {
   return (
     <div className=" font-sans flex flex-col h-screen w-screen text-[12px]">
-      <header className="h-[3%]">
+      <header className="h-[5%]">
         <IpdHeader />
       </header>
-      <main className=" flex bg-custom-or w-full h-[92%]">
+      <main className=" flex bg-custom-or w-full h-[90%]">
         <Routes>
           <Route path="/mainIPD" element={<FrmProfile />} />
           <Route path="/quickorder" element={<QuickOrder />} />

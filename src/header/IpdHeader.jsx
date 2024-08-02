@@ -7,8 +7,8 @@ export default function IpdHeader() {
   const navigate = useNavigate();
 
   return (
-    <div className="">
-      <div className="flex items-center bg-blue-100">
+    <div className="w-full h-full">
+      <div className="flex items-center bg-blue-100 w-full h-full">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
         <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="">💊</span>
@@ -41,11 +41,11 @@ export default function IpdHeader() {
           <span className="text-sx">🛒</span>
           <span className="ml-2">คืนยา</span>
         </button>
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="text-sx">📊</span>
           <span className="ml-2">Med Reconcile</span>
         </button>
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
           <span className="">⚙️</span>
           <span className="ml-2">Setting</span>
         </button>
@@ -81,7 +81,7 @@ const DropdownIPD = ({ icon, label }) => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
+        className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
         <span className="">{icon}</span>
         <span className="ml-2">{label}</span>
@@ -148,7 +148,7 @@ const DropdownReport = ({ icon, label }) => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
+        className="h-[80%] flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md transition duration-300 ease-in-out"
       >
         <span className="">{icon}</span>
         <span className="ml-2">{label}</span>

@@ -56,7 +56,7 @@ export default function FrmSubTreasury() {
           onClick={() => setSelectedButton('dispense')}
         />{' '}
         <ButtonWithMenu
-          w={'[150px]'}
+          w={'[200px]'}
           label={'เบิกยาเสพติดและวัดถุออกฤทธิ์'}
           icon={para}
           path={'narcotics'}
@@ -82,13 +82,13 @@ const ButtonWithMenu = ({ icon, label, path, isSelected, onClick, w }) => {
 
   return (
     <button
-      className={`w-${w} h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
+      className={`w-${w} h-[90%] text-black font-bold space-x-2 bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
       onClick={() => {
         if (path) navigate(path);
         onClick();
       }}
     >
-      <img src={icon} alt={label} className="w-10 h-10" />
+      <img src={icon} alt={label} className="w-7 h-7" />
       <span className="text-[16px]">{label}</span>
     </button>
   );

@@ -13,9 +13,8 @@ export default function MadTranfer() {
 
   return (
     <div className="w-full h-full ">
-      <div className="w-[100%] h-[8%] flex space-x-1">
+      <div className="w-[100%] h-[8%] flex items-center space-x-1">
         <ButtonWithMenu
-          w={'[200px]'}
           label={'บรรจุยาเข้ารถเข็น'}
           icon={cart1}
           path={'doseintocart'}
@@ -23,7 +22,6 @@ export default function MadTranfer() {
           onClick={() => setSelectedButton('doseintocart')}
         />
         <ButtonWithMenu
-          w={'[200px]'}
           label={'สถานะบรรจุยาเข้ารถเข็น'}
           icon={cart2}
           path={'statedoseintocart'}
@@ -41,12 +39,12 @@ export default function MadTranfer() {
   );
 }
 
-const ButtonWithMenu = ({ icon, label, path, isSelected, onClick, w }) => {
+const ButtonWithMenu = ({ icon, label, path, isSelected, onClick }) => {
   const navigate = useNavigate();
 
   return (
     <button
-      className={`w-${w} h-[90%] text-black font-bold space-x-1 bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-blue-400' : ''}`}
+      className={`w-[200px] h-[90%] text-black font-bold space-x-1 bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-blue-400' : ''}`}
       onClick={() => {
         if (path) navigate(path);
         onClick();
