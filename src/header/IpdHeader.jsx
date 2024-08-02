@@ -14,6 +14,7 @@ export default function IpdHeader() {
           <span className="">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
+
         <button
           className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
           onClick={() => {
@@ -24,10 +25,19 @@ export default function IpdHeader() {
           <span className="text-sx">🏥</span>
           <span className="ml-2">ข้อมูลการจ่าย</span>
         </button>
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+
+        <button
+          className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => {
+            if ('/NurseStation') navigate('/NurseStation');
+            onclick();
+            // console.log('clicik');
+          }}
+        >
           <span className="text-sx">👩‍⚕️</span>
           <span className="ml-2">Nurse Station</span>
         </button>
+
         <DropdownReport icon="📄" label="Report" />
 
         <button

@@ -56,7 +56,7 @@ export default function FrmSubTreasury() {
           onClick={() => setSelectedButton('dispense')}
         />{' '}
         <ButtonWithMenu
-          w={'[200px]'}
+          w={'[150px]'}
           label={'เบิกยาเสพติดและวัดถุออกฤทธิ์'}
           icon={para}
           path={'narcotics'}
@@ -69,7 +69,7 @@ export default function FrmSubTreasury() {
           <Route path="recivedose" element={<ReciveDose />} />
           <Route path="donatedose" element={<DonatedDose />} />
           <Route path="inventory" element={<Inventory />} />
-          <Route path="dispense" element={<Dispense />} />
+          <Route path="dispense/*" element={<Dispense />} />
           <Route path="narcotics" element={<Narcotics />} />
         </Routes>
       </div>
@@ -82,13 +82,13 @@ const ButtonWithMenu = ({ icon, label, path, isSelected, onClick, w }) => {
 
   return (
     <button
-      className={`w-${w} h-[90%] text-black font-bold space-x-2 bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
+      className={`w-${w} h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
       onClick={() => {
         if (path) navigate(path);
         onClick();
       }}
     >
-      <img src={icon} alt={label} className="w-7 h-7" />
+      <img src={icon} alt={label} className="w-10 h-10" />
       <span className="text-[16px]">{label}</span>
     </button>
   );
