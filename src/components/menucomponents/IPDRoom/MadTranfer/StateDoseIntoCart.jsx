@@ -27,11 +27,11 @@ export default function StateDoseIntoCart() {
           <div className="w-full h-full px-2 bg-white border border-collapse border-gray-400 ">
             <table className="w-full bg-white rounded shadow">
               <thead>
-                <tr className=" sticky top-0">
-                  <th className="p-2 border-collapse border border-gray-200 text-center min-w-[220px]">
+                <tr className="w-full sticky top-0">
+                  <th className="p-2 border-collapse border border-gray-200 text-center">
                     <span>หอผู้ป่วย</span>
                   </th>
-                  <th className="p-2 border-collapse border border-gray-200 text-center min-w-[80px]">
+                  <th className="p-2 border-collapse border border-gray-200 text-center">
                     <span>จำนวน</span>
                   </th>
                 </tr>
@@ -47,6 +47,7 @@ export default function StateDoseIntoCart() {
       </div>
 
       <div className="w-[80%] h-full  border-[2px] border-collapse border-gray-400">
+        {' '}
         {/*ตารางขวา */}
         <div className="w-full h-[10%] grid grid-rows-2 grid-cols-10">
           <div className="row-start-1 row-span-1 col-start-1 col-span-10 flex justify-center items-center">
