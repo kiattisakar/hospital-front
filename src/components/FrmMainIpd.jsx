@@ -9,11 +9,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function FrmMainIpd() {
   return (
-    <div className=" font-sans flex flex-col h-screen w-screen text-[12px]">
+    <div className=" font-sans flex flex-col h-screen w-screen text-[12px] ">
       <header className="h-[5%]">
         <IpdHeader />
       </header>
-      <main className=" flex bg-custom-or w-full h-[90%]">
+      <main className=" flex bg-custom-or w-full h-[90%] font-bold">
         <Routes>
           <Route path="/mainIPD" element={<FrmProfile />} />
           <Route path="/nurseStation/*" element={<FrmNurseStation />} />
@@ -21,6 +21,7 @@ export default function FrmMainIpd() {
           <Route path="/DataDispenseDose/" element={<DataDispenseDose />} />
           <Route path="/subtreasury/*" element={<FrmSubTreasury />} />
           <Route path="/screening" element={<Screenning />} />
+          <Route path="/returndose" element={<FrmReturnDose />} />
           <Route path="/medtranfer/*" element={<MadTranfer />} />
         </Routes>
       </main>
@@ -40,3 +41,4 @@ import QuickOrder from './menucomponents/IPDRoom/QuickOrder';
 import MadTranfer from './menucomponents/IPDRoom/MadTranfer/MadTranfer';
 import DataDispenseDose from './menucomponents/DataDispenseDose/DataDispenseDose';
 import FrmNurseStation from './menucomponents/FrmNurseStation';
+import FrmReturnDose from './menucomponents/FrmReturnDose';

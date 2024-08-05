@@ -47,7 +47,10 @@ export default function IpdHeader() {
           <span className="text-sx">📝</span>
           <span className="ml-2">คลังย่อย</span>
         </button>
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button
+          className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => '/returndose' && navigate('/returndose')}
+        >
           <span className="text-sx">🛒</span>
           <span className="ml-2">คืนยา</span>
         </button>

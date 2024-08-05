@@ -46,7 +46,7 @@ export default function ChooseDose() {
           </div>
         </div>
       </div>
-      <div className="w-[70%] h-[78%] bg-blue-300">
+      <div className="w-[100%] h-[83%] bg-blue-300">
         <div className=" border border-collapse border-black w-full h-full bg-white">
           <div className="max-h-full w-full overflow-auto">
             <table className="w-full border-collapse bg-white border border-gray-400">
