@@ -73,7 +73,7 @@ export default function FrmProfile() {
               </button>
             </div>
           </div>
-          <div className="h-full w-[53%] ">
+          <div className="h-full w-[58%] ">
             {' '}
             {/* block2 */}
             <div className="h-[15%] w-full flex justify-start ">
@@ -321,7 +321,7 @@ export default function FrmProfile() {
               </div>
             </div>
           </div>
-          <div className="h-full w-[35%] border border-collapse border-gray-400 bg-white">
+          <div className="h-full w-[30%] border border-collapse border-gray-400 bg-white">
             {/* block3 */}
             <div className="h-full w-full">
               <Tabs>

@@ -1,5 +1,5 @@
 // src/component/FrmMainlpd.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FrmDataTebleIPD from './FrmDataTableIpd';
 import FrmDataTable2 from './FrmDataTable2';
 import Screenning from './Screenning';
@@ -8,6 +8,33 @@ import Footer from '../header/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function FrmMainIpd() {
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    // ทำการร้องขอข้อมูลจากเซิร์ฟเวอร์ Fastify พร้อมกับส่ง API Key
+    fetch('https://interface.kkh.go.th/v1/drug/adr/adr/search?search=', {
+      headers: {
+        'x-api-key': 'BVWPp60xrzavEXnyff0ZjG41h62kXeRt',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((error) => {
+        console.error(
+          'There has been a problem with your fetch operation:',
+          error
+        );
+      });
+  }, []);
   return (
     <div className=" font-sans flex flex-col h-screen w-screen text-[12px] ">
       <header className="h-[5%]">

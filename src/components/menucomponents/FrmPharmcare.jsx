@@ -43,7 +43,7 @@ export default function FrmPharmcare() {
             </table>
           </div>
         </div>
-        <div className="w-[80%] h-full border border-collapse border-gray-400 bg-custom-r2">
+        <div className="w-[80%] h-full border border-collapse border-gray-400 bg-white">
           <Tabs>
             <Tab label="DRP">
               <div className=" w-full h-[92%] ">
