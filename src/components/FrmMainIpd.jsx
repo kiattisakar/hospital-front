@@ -20,6 +20,7 @@ export default function FrmMainIpd() {
           <Route path="/quickorder" element={<QuickOrder />} />
           <Route path="/DataDispenseDose/" element={<DataDispenseDose />} />
           <Route path="/subtreasury/*" element={<FrmSubTreasury />} />
+          <Route path="/pharmcare" element={<FrmPharmcare />} />
           <Route path="/screening" element={<Screenning />} />
           <Route path="/returndose" element={<FrmReturnDose />} />
           <Route path="/medtranfer/*" element={<MadTranfer />} />
@@ -42,3 +43,4 @@ import MadTranfer from './menucomponents/IPDRoom/MadTranfer/MadTranfer';
 import DataDispenseDose from './menucomponents/DataDispenseDose/DataDispenseDose';
 import FrmNurseStation from './menucomponents/FrmNurseStation';
 import FrmReturnDose from './menucomponents/FrmReturnDose';
+import FrmPharmcare from './menucomponents/FrmPharmcare';

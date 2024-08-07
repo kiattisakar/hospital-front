@@ -10,7 +10,13 @@ export default function IpdHeader() {
     <div className="w-full h-full">
       <div className="flex items-center bg-blue-100 w-full h-full">
         <DropdownIPD icon="🛏️" label="ห้องยา IPD" />
-        <button className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button
+          className="flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => {
+            if ('/pharmcare') navigate('/pharmcare');
+            onclick();
+          }}
+        >
           <span className="">💊</span>
           <span className="ml-2">Pharmcare</span>
         </button>
