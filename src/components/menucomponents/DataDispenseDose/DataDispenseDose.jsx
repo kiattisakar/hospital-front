@@ -19,8 +19,14 @@ export default function DataDispenseDose() {
           <option value="4">ห้องยา ER</option>
           <option value="5">ห้องยา D/C</option>
         </select>
-        <input type="text" className="w-[15%] h-[55%]" />
-        <input type="date" className="w-[8%] h-[60%] font-bold text-[16px]" />
+        <input
+          type="text"
+          className="w-[15%] h-[55%] border border-collapse border-gray-400"
+        />
+        <input
+          type="date"
+          className="w-[8%] h-[60%] font-bold text-[16px] border border-collapse border-gray-400"
+        />
         <ButtonWithClick
           colortxt="green"
           label={'เลือกหอผู้ป่วย'}

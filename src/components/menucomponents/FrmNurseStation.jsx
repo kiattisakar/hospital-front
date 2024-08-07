@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import treasury from '../../../img/treasury.png';
-import addDose from '../../../img/addDose.png';
-import sendDose from '../../../img/sendDose.png';
-import page from '../../../img/page.png';
-import para from '../../../img/para.png';
+import treasury from '../../../img/nurse-3.png';
+import addDose from '../../../img/nurse-1.png';
+import sendDose from '../../../img/nurse-2.png';
+import document1 from '../../../img/document1.png';
+import document2 from '../../../img/document2.png';
+import cate from '../../../img/cartnurse.png';
+import file from '../../../img/file.png';
+import setting from '../../../img/setting.png';
 
 import MARsNewLabel from './NurseStation/MARsNewLabel';
 import MarsAllLabel from './NurseStation/MarsAllLabel';
@@ -53,7 +56,7 @@ export default function FrmNurseStation() {
         <ButtonWithMenu
           w={'36'}
           label={'A4MARs'}
-          icon={page}
+          icon={document1}
           path={'A4MARs'}
           isSelected={selectedButton === 'A4MARs'}
           onClick={() => setSelectedButton('A4MARs')}
@@ -61,7 +64,7 @@ export default function FrmNurseStation() {
         <ButtonWithMenu
           w={'[200px]'}
           label={'FormA4MARs'}
-          icon={para}
+          icon={document2}
           path={'FormA4MARs'}
           isSelected={selectedButton === 'FormA4MARs'}
           onClick={() => setSelectedButton('FormA4MARs')}
@@ -69,7 +72,7 @@ export default function FrmNurseStation() {
         <ButtonWithMenu
           w={'[200px]'}
           label={'FootNote'}
-          icon={para}
+          icon={file}
           path={'FootNote'}
           isSelected={selectedButton === 'FootNote'}
           onClick={() => setSelectedButton('FootNote')}
@@ -77,7 +80,7 @@ export default function FrmNurseStation() {
         <ButtonWithMenu
           w={'[200px]'}
           label={'MARs สำหรับรถเข็น'}
-          icon={para}
+          icon={cate}
           path={'MarsCate'}
           isSelected={selectedButton === 'MarsCate'}
           onClick={() => setSelectedButton('MarsCate')}
@@ -85,7 +88,7 @@ export default function FrmNurseStation() {
         <ButtonWithMenu
           w={'[200px]'}
           label={'Setting Printer'}
-          icon={para}
+          icon={setting}
           path={'SettingPrinter'}
           isSelected={selectedButton === 'SettingPrinter'}
           onClick={() => setSelectedButton('SettingPrinter')}
@@ -112,14 +115,14 @@ const ButtonWithMenu = ({ icon, label, path, isSelected, onClick, w }) => {
 
   return (
     <button
-      className={`w-${w} h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
+      className={`px-3 h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center flex-col ${isSelected ? 'bg-green-300' : ''}`}
       onClick={() => {
         if (path) navigate(path);
         onClick();
       }}
     >
-      <img src={icon} alt={label} className="w-10 h-10" />
-      <span className="text-[16px]">{label}</span>
+      <img src={icon} alt={label} className="w-5 h-5" />
+      <span className="">{label}</span>
     </button>
   );
 };
