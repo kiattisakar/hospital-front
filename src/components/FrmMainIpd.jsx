@@ -51,6 +51,7 @@ export default function FrmMainIpd() {
           <Route path="/screening" element={<Screenning />} />
           <Route path="/returndose" element={<FrmReturnDose />} />
           <Route path="/medtranfer/*" element={<MadTranfer />} />
+          <Route path="/setting/*" element={<FrmSetting />} />
         </Routes>
       </main>
 
@@ -71,3 +72,4 @@ import DataDispenseDose from './menucomponents/DataDispenseDose/DataDispenseDose
 import FrmNurseStation from './menucomponents/FrmNurseStation';
 import FrmReturnDose from './menucomponents/FrmReturnDose';
 import FrmPharmcare from './menucomponents/FrmPharmcare';
+import FrmSetting from './setting/FrmSetting';

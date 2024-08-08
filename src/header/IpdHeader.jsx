@@ -64,7 +64,10 @@ export default function IpdHeader() {
           <span className="text-sx">📊</span>
           <span className="ml-2">Med Reconcile</span>
         </button>
-        <button className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md ">
+        <button
+          className=" flex items-center hover:bg-gray-500 active:bg-gray-300 px-3 py-1 rounded-md "
+          onClick={() => '/setting' && navigate('/setting')}
+        >
           <span className="">⚙️</span>
           <span className="ml-2">Setting</span>
         </button>
