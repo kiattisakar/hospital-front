@@ -42,6 +42,7 @@ export default function FrmMainIpd() {
       </header>
       <main className=" flex bg-custom-or w-full h-[90%] font-bold">
         <Routes>
+          <Route path="/" element={<FrmDataTebleIPD />} />
           <Route path="/mainIPD" element={<FrmProfile />} />
           <Route path="/nurseStation/*" element={<FrmNurseStation />} />
           <Route path="/quickorder" element={<QuickOrder />} />

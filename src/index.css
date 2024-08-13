@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+textarea {
+  resize: none;
+}
 textarea:focus {
   outline: none;
   border-color: #d1d5db; /* gray-300 */

@@ -82,7 +82,7 @@ const ButtonWithMenu = ({ icon, label, path, isSelected, onClick, w }) => {
 
   return (
     <button
-      className={`w-${w} h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-green-300' : ''}`}
+      className={`w-${w} h-[90%] text-black font-bold bg-white border border-collapse border-black hover:bg-slate-100 active:bg-slate-300 flex items-center justify-center ${isSelected ? 'bg-pink-200' : ''}`}
       onClick={() => {
         if (path) navigate(path);
         onClick();
