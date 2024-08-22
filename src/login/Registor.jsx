@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../config';
+
 export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
@@ -28,7 +30,7 @@ export default function Register() {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/register', formData);
+      const response = await axios.post(API_URL + '/register', formData);
       alert(response.data);
     } catch (err) {
       alert(err.response.data);
@@ -83,7 +85,10 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="position">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="position"
+            >
               ตำแหน่ง
             </label>
             <input
@@ -97,7 +102,10 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="Department">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="Department"
+            >
               แผนก
             </label>
             <input
@@ -129,7 +137,10 @@ export default function Register() {
             </select>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="Username">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="Username"
+            >
               Username
             </label>
             <input
@@ -143,7 +154,10 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="Password">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="Password"
+            >
               Password
             </label>
             <input
@@ -157,7 +171,10 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="confirmPassword">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <input
@@ -171,7 +188,10 @@ export default function Register() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="profile-picture">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="profile-picture"
+            >
               รูปภาพ
             </label>
             <input
@@ -181,7 +201,7 @@ export default function Register() {
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>
-          
+
           <div className="flex justify-between items-center">
             <button
               type="submit"

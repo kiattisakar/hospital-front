@@ -1,43 +1,76 @@
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// front/screen/App.jsx
+import React, { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import axios from 'axios';
 import FrmMainIpd from './components/FrmMainIpd';
 import Login from './login/Login';
 
-const App = () => {
-  const isAuthenticated = !!localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
+function PrivateRoute({ element }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    const verifyToken = async () => {
+      try {
+        if (!token) {
+          setIsAuthenticated(false);
+          return;
+        }
+
+        const response = await axios.get('http://localhost:3000/api/auth', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Token verification failed:', error);
+        setIsAuthenticated(false);
+      }
+    };
+
+    verifyToken();
+
+    // Add event listener to watch for localStorage changes
+    const handleStorageChange = () => {
+      const newToken = localStorage.getItem('token');
+      if (!newToken) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>; // คุณสามารถใส่ loading spinner ได้ที่นี่
+  }
+
+  return isAuthenticated ? element : <Navigate to="/login" replace />;
+}
+
+function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        {!isAuthenticated ? (
-          <Route path="/*" element={<Navigate to="/login" />} />
-        ) : (
-          <Route path="/*" element={<FrmMainIpd user={user} />} />
-        )}
+        <Route path="/*" element={<PrivateRoute element={<FrmMainIpd />} />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
-
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import FrmMainIpd from './components/FrmMainIpd';
-// import Login from './login/Login';
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/*" element={<FrmMainIpd />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;

@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login', { replace: true });
+  };
+
   return (
     <div className="container flex justify-between items-center px-4">
       <div className="flex items-center space-x-2">
@@ -46,7 +54,10 @@ export default function Footer() {
         <span>User ID: 0201</span>
         <span>User Name: System Test</span>
         <span>Position: เภสัชกร</span>
-        <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
+          onClick={handleLogout}
+        >
           ออกจากระบบ
         </button>
       </div>

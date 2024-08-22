@@ -18,6 +18,8 @@ import printer from '../../img/printer.png';
 import cancel from '../../img/cancel.png';
 import doc from '../../img/doc.png';
 
+import { API_URL } from '../../config';
+
 const data3 = {
   prescrip: [
     {
@@ -64,70 +66,62 @@ export default function () {
     ],
   };
 
-  // const [ward, setData] = useState([]);
-  const [wards, setWards] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState('ห้องยา IPD[001]');
+  const [wards, setWards] = useState([]); // สร้าง state สำหรับเก็บข้อมูล wards ที่ได้รับ
 
-  // useEffect(() => {
-  //   // ดึงข้อมูลจาก API เมื่อคอมโพเนนต์ถูกสร้างขึ้นมา
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios.post('http://localhost:3000/api/screen', {
-  //         wardcode: null, // ส่งข้อมูลตามที่ต้องการ ถ้ามี
-  //       });
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
+  // ฟังก์ชันที่ใช้สำหรับการส่งข้อมูลไปยัง Backend
+  const sendRoomData = async () => {
+    try {
+      const response = await axios.post(API_URL + '/screen', {
+        selectroom: selectedRoom,
+      });
+      setWards(response.data); // เก็บข้อมูลที่ได้รับใน state
+      console.log('ข้อมูลที่ได้รับจาก Backend:', response.data);
+      console.log(selectedRoom);
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .post('http://localhost:3000/api/screen')
-      .then((response) => {
-        setWards(response.data);
-      })
-      .catch((error) => {
-        console.error('There was an error fetching the ward data!', error);
-      });
-  }, []);
+    sendRoomData();
+  }, [selectedRoom]);
+
+  // ฟังก์ชันที่เรียกใช้เมื่อมีการเปลี่ยนแปลงค่าใน select
+  const handleRoomChange = (e) => {
+    setSelectedRoom(e.target.value); // ตั้งค่าห้องที่เลือก
+  };
 
   const [selectedWard, setSelectedWard] = useState([]);
   const [patients, setPatients] = useState([]);
 
-  useEffect(() => {
-    if (selectedWard) {
-      axios
-        .post('http://localhost:3000/api/screentwo', {
-          wardcode: selectedWard.wardcode,
-        })
-        .then((response) => {
-          setPatients(response.data);
-        })
-        .catch((error) => {
-          console.error('There was an error fetching the patient data!', error);
-        });
+  const handleWardClick = async (wardcode) => {
+    try {
+      const response = await axios.post(API_URL + '/screentwo', {
+        wardcode,
+        selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วย
+      });
+      console.log('ข้อมูลที่ได้รับจากการกรอง:', response.data);
+      setPatients(response.data); // เก็บข้อมูลที่ได้รับใน state patients
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
-  }, [selectedWard]);
+  };
 
-  const [selectedprescriptionno, setSelectedprescriptionno] = useState([]);
   const [prescrip, setPrescrip] = useState([]);
 
-  useEffect(() => {
-    if (selectedprescriptionno) {
-      axios
-        .post('http://localhost:3000/api/screenthree', {
-          prescriptionno: selectedprescriptionno.prescriptionno,
-        })
-        .then((response) => {
-          setPrescrip(response.data);
-        })
-        .catch((error) => {
-          console.error('There was an error fetching the patient data!', error);
-        });
+  const setSelectedprescriptionno = async (prescriptionno) => {
+    try {
+      const response = await axios.post(API_URL + '/screenthree', {
+        prescriptionno,
+        selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วยถ้าจำเป็น
+      });
+      console.log('ข้อมูลที่ได้รับจากการกรอง:', response.data);
+      setPrescrip(response.data); // เก็บข้อมูลที่ได้รับใน state prescrip
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
-  }, [selectedprescriptionno]);
+  };
 
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
@@ -201,14 +195,20 @@ export default function () {
                   <span>จัดยาโดยเลือกห้องผู้ป่วย</span>
                 </button>
                 <div className="h-full w-[55%] flex flex-col ">
-                  <div className="h-1/2 flex wards-center justify-center">
-                    <p className="text-xs mr-2">เลือกห้อง</p>
+                  <div className="h-1/2 flex items-center justify-center">
+                    <p className="text-xs mr-2"></p>
                     <select
                       name="room"
                       id="1"
-                      className="w-[50%] h-5/6 border border-gray-300 text-xs "
+                      className="w-[100%] h-5/6 border border-gray-300 text-xs"
+                      value={selectedRoom}
+                      onChange={handleRoomChange} // เรียกใช้เมื่อมีการเปลี่ยนแปลงค่า
                     >
-                      <option value="1">IPD</option>
+                      <option value="ห้องยา IPD[001]">ห้องยา IPD[001]</option>
+                      <option value="ห้องเตรียมยาอาคารเภสัชกรรม[002]">
+                        ห้องเตรียมยาอาคารเภสัชกรรม
+                      </option>
+                      <option value="ห้องยา ICU[003]">ห้องยา ICU[003]</option>
                     </select>
                   </div>
                   <div className="h-1/2 flex justify-center wards-center">
@@ -242,14 +242,13 @@ export default function () {
                       <tr
                         key={index}
                         className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                        onClick={() => setSelectedWard(ward)}
+                        onClick={() => handleWardClick(ward.wardcode)} // ส่งค่า wardcode เมื่อคลิก
                       >
                         <td className="border border-gray-300 p-2 text-xs text-center">
                           <input type="checkbox" />
                         </td>
                         <td className="border border-gray-300 p-2 text-xs">
-                          {/* [ {ward.wardcode} ]  */}
-                          {ward.wardname}
+                          [ {ward.wardcode} ] {ward.wardname}
                         </td>
                         <td className="border border-gray-300 p-2 text-xs text-center">
                           {ward.counpres}
@@ -335,7 +334,9 @@ export default function () {
                           <tr
                             key={index}
                             className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                            onClick={() => setSelectedprescriptionno(ward)} /// ส่งไป prescriptionno
+                            onClick={() =>
+                              setSelectedprescriptionno(ward.prescriptionno)
+                            } /// ส่งไป prescriptionno
                           >
                             <td className="border border-gray-300 p-1 text-xs text-center">
                               <input type="checkbox" />
