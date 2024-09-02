@@ -121,7 +121,7 @@ const DropdownIPD = ({ icon, label }) => {
         variants={menuVariants}
         className="absolute left-0 mt-2 w-64 bg-white border border-gray-400 rounded-lg shadow-lg z-10"
       >
-        <DropdownItem label="ห้องยา IPD Profile" path="/mainIPD" />
+        <DropdownItem label="ห้องยา IPD Profile" path="/" />
         <DropdownItem label="Screen Create Order" shortcut="Alt+S" />
         <DropdownItem label="Screening" shortcut="Alt+S" path="/screening" />
         <DropdownItem

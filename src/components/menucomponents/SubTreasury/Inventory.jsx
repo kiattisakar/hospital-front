@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import search from '../../../../img/searchList.svg';
 import searchBlack from '../../../../img/searchBlack.png';
 import print from '../../../../img/print.png';
 
 import addDoc from '../../../../img/addDoc.png';
+
+import axios from 'axios';
+import { API_URL } from '../../../../config';
+
 export default function Inventory() {
+  const [drugs, setDrugs] = useState([]); // State สำหรับเก็บข้อมูลยา
+
+  useEffect(() => {
+    // ฟังก์ชันสำหรับดึงข้อมูลจาก API
+    const fetchDrugs = async () => {
+      try {
+        const response = await axios.post(API_URL + '/ucHouse', {
+          roomcode: '001', // ส่ง wardcode ไปยัง Backend
+        });
+        setDrugs(response.data); // เก็บข้อมูลที่ได้รับจาก API ลงใน state
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchDrugs(); // เรียกใช้งานฟังก์ชันดึงข้อมูล
+  }, []); // useEffect จะทำงานครั้งเดียวหลังจาก component ถูก mount
+
   return (
     <div className="w-full h-full text-sm flex space-x-1">
       <div className="w-[35%] h-[98.4%] mt-1 border border-collapse border-gray-400 border-1">
@@ -25,7 +47,7 @@ export default function Inventory() {
                 name="ward"
                 id="1"
               >
-                <option value="1">ห้อง IPD</option>
+                <option value="001">ห้อง IPD</option>
                 <option value="2">ห้อง เตรียมยาอาคารเภสัช</option>
                 <option value="3">ห้องยา OPD อาคารรังสี</option>
                 <option value="4">ห้องยา ER</option>
@@ -53,18 +75,29 @@ export default function Inventory() {
         </div>
         <div className="flex w-full h-[85%] p-2">
           <div className="max-h-full w-full overflow-auto bg-white">
-            <table className="w-full border-collapse  border border-gray-400">
-              <thead className="stick top-0 ">
+            <table className="w-full border-collapse border border-gray-400">
+              <thead className="stick top-0">
                 <tr>
                   <th className="border border-gray-300 p-2 text-xs min-w-[20px]">
                     รหัสยา
                   </th>
-                  <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
+                  <th className="border border-gray-300 p-2 text-xs min-w-[120px]">
                     ชื่อยา
                   </th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {drugs.map((drug) => (
+                  <tr key={drug.orderitemcode}>
+                    <td className="border border-gray-300 p-2 text-xs">
+                      {drug.orderitemcode}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-xs">
+                      {drug.orderitemENname}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>

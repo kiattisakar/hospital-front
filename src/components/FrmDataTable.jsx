@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../config';
+
 export default function FrmDataTable() {
   const [wards, setWards] = useState([]);
   const [selectedWard, setSelectedWard] = useState(null);
@@ -11,7 +13,7 @@ export default function FrmDataTable() {
   // Fetch ward data on component mount
   useEffect(() => {
     axios
-      .post('http://localhost:3000/api/first')
+      .post(API_URL + '/first')
       .then((response) => {
         setWards(response.data);
       })
@@ -24,7 +26,7 @@ export default function FrmDataTable() {
   useEffect(() => {
     if (selectedWard) {
       axios
-        .post('http://localhost:3000/api/second', {
+        .post(API_URL + '/second', {
           orderdate: orderdate,
           ptstatus: ptstatus,
           wardcode: selectedWard.wardcode,
