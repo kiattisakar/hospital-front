@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import search from '../../../../img/searchList.svg';
 import searchBlack from '../../../../img/searchBlack.png';
 import print from '../../../../img/print.png';
-
 import addDoc from '../../../../img/addDoc.png';
 
 import axios from 'axios';
 import { API_URL } from '../../../../config';
 
 export default function Inventory() {
-  const [drugs, setDrugs] = useState([]); // State สำหรับเก็บข้อมูลยา
+  const [drugs, setDrugs] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState('001'); // ตั้งค่าเริ่มต้นให้กับ roomcode
+  const [selectedDrug, setSelectedDrug] = useState({
+    orderitemcode: '',
+    orderitemENname: '',
+  });
 
   useEffect(() => {
-    // ฟังก์ชันสำหรับดึงข้อมูลจาก API
     const fetchDrugs = async () => {
       try {
         const response = await axios.post(API_URL + '/ucHouse', {
-          roomcode: '001', // ส่ง wardcode ไปยัง Backend
+          roomcode: selectedRoom, // ส่ง roomcode ไปยัง Backend
         });
         setDrugs(response.data); // เก็บข้อมูลที่ได้รับจาก API ลงใน state
       } catch (error) {
@@ -24,8 +27,46 @@ export default function Inventory() {
       }
     };
 
-    fetchDrugs(); // เรียกใช้งานฟังก์ชันดึงข้อมูล
-  }, []); // useEffect จะทำงานครั้งเดียวหลังจาก component ถูก mount
+    fetchDrugs(); // เรียกใช้งานฟังก์ชันดึงข้อมูลทุกครั้งที่ roomcode เปลี่ยน
+  }, [selectedRoom]); // useEffect จะทำงานทุกครั้งเมื่อ selectedRoom เปลี่ยน
+
+  // ฟังก์ชันจัดการการเปลี่ยนแปลงห้อง
+  const handleRoomChange = (e) => {
+    setSelectedRoom(e.target.value); // ตั้งค่า roomcode ใหม่เมื่อมีการเลือกห้อง
+  };
+
+  const [receive, setReceive] = useState(0);
+  const [dispense, setDispense] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [data, setData] = useState([]);
+  const [selectedOrderItemCode, setSelectedOrderItemCode] = useState('');
+  // const [selectedRoom, setSelectedRoom] = useState(''); // เพิ่มการจัดการ roomcode
+
+  const handleRowClick = async (orderitemcode, orderitemENname) => {
+    try {
+      // ตั้งค่า orderitemcode และ orderitemENname ที่ถูกคลิก
+      setSelectedDrug({ orderitemcode, orderitemENname });
+      setSelectedOrderItemCode(orderitemcode); // เก็บ orderitemcode ที่ถูกคลิก
+
+      // เรียกใช้ API เพื่อดึงข้อมูล balance, receive, dispense
+      const response = await axios.post(API_URL + '/balancestockHouse', {
+        roomcode: selectedRoom, // ใช้ค่า roomcode ที่เลือกจาก state
+        orderitemcode: orderitemcode,
+      });
+
+      const responseData = response.data;
+
+      // อัปเดต state ด้วยข้อมูลที่ได้จาก API
+      setReceive(responseData.receive);
+      setDispense(responseData.dispense);
+      setBalance(responseData.balance);
+      setData(responseData.data); // Set the data to be displayed in the table
+
+      console.log('ข้อมูลที่ได้รับจากการกรอง:', responseData);
+    } catch (error) {
+      console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+    }
+  };
 
   return (
     <div className="w-full h-full text-sm flex space-x-1">
@@ -43,15 +84,15 @@ export default function Inventory() {
             </div>
             <div className="row-start-2 row-span-2 col-start-3 col-span-2  flex flex-col justify-center items-center">
               <select
-                className="w-[90%] h-[70%] border border-collapse border-gray-400 "
-                name="ward"
+                name="room"
                 id="1"
+                className="w-[100%] h-5/6 border border-gray-300 text-xs"
+                value={selectedRoom} // ใช้ state ที่เก็บ roomcode
+                onChange={handleRoomChange} // เรียกใช้เมื่อมีการเปลี่ยนแปลงค่า
               >
-                <option value="001">ห้อง IPD</option>
-                <option value="2">ห้อง เตรียมยาอาคารเภสัช</option>
-                <option value="3">ห้องยา OPD อาคารรังสี</option>
-                <option value="4">ห้องยา ER</option>
-                <option value="5">ห้องยา D/C</option>
+                <option value="001">ห้องยา IPD[001]</option>
+                <option value="002">ห้องเตรียมยาอาคารเภสัชกรรม</option>
+                <option value="003">ห้องยา ICU[003]</option>
               </select>
             </div>
             <div className="row-start-4 row-span-2 col-start-1 col-span-2  space-x-2 flex justify-start items-center px-1">
@@ -88,7 +129,13 @@ export default function Inventory() {
               </thead>
               <tbody>
                 {drugs.map((drug) => (
-                  <tr key={drug.orderitemcode}>
+                  <tr
+                    key={drug.orderitemcode}
+                    className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
+                    onClick={() =>
+                      handleRowClick(drug.orderitemcode, drug.orderitemENname)
+                    }
+                  >
                     <td className="border border-gray-300 p-2 text-xs">
                       {drug.orderitemcode}
                     </td>
@@ -112,36 +159,37 @@ export default function Inventory() {
             </div>
             <div className=" row-start-1 row-span-1 col-span-2 col-start-2 flex justify-start space-x-1 items-center">
               <span className="font-bold">รหัสยา : </span>
-              <span className="font-bold">{''}</span>
+              <span className="font-bold">{selectedDrug.orderitemcode}</span>
             </div>
             <div className=" row-start-2 row-span-1 col-span-2 col-start-2 flex justify-start space-x-1 items-center">
               <span className="font-bold">ชื่อยา : </span>
-              <span className="font-bold">{''}</span>
+              <span className="font-bold">{selectedDrug.orderitemENname}</span>
             </div>
             <div className=" row-start-4 row-span-1 col-span-1 col-start-2 flex justify-start space-x-1 items-center">
               <span className="font-bold">Max : </span>
               <span className="font-bold">{'0'}</span>
             </div>
-            <div className=" row-start-5 row-span-1 col-span-1 col-start-2 flex justify-start items-center space-x-1">
+            <div className="row-start-5 row-span-1 col-span-1 col-start-2 flex justify-start items-center space-x-1">
               <span className="font-bold">รับเข้า : </span>
-              <span className="font-bold"> {'0'}</span>
+              <span className="font-bold">{receive}</span>
             </div>
             <div className=" row-start-4 row-span-1 col-span-1 col-start-3 flex justify-start items-center space-x-1">
               <span className="font-bold">Min : </span>
               <span className="font-bold">{'0'}</span>
             </div>
-            <div className=" row-start-5 row-span-1 col-span-1 col-start-3 flex justify-start items-center space-x-1">
+            <div className="row-start-5 row-span-1 col-span-1 col-start-3 flex justify-start items-center space-x-1">
               <span className="font-bold">จ่ายออก : </span>
-              <span className="font-bold">{'0'}</span>
+              <span className="font-bold">{dispense}</span>
             </div>
+
             <div className="row-start-4 row-span-1 col-span-1 col-start-4 flex justify-start items-center space-x-1">
               <button className="w-10 h-10 rounded-sm text-black font-bold bg-gray-400 hover:bg-slate-200 active:bg-slate-300 flex flex-col items-center justify-center space-x-2">
                 <img src={addDoc} alt={'ค้นหา'} className="w-6 h-6" />
               </button>
             </div>
-            <div className=" row-start-5 row-span-1 col-span-1 col-start-4 flex justify-start items-center space-x-1">
+            <div className="row-start-5 row-span-1 col-span-1 col-start-4 flex justify-start items-center space-x-1">
               <span className="font-bold">คงเหลือ : </span>
-              <span className="font-bold">{'0'}</span>
+              <span className="font-bold">{balance}</span>
             </div>
           </div>
         </div>
