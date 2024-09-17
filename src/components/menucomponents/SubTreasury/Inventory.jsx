@@ -41,6 +41,8 @@ export default function Inventory() {
   const [data, setData] = useState([]);
   const [selectedOrderItemCode, setSelectedOrderItemCode] = useState('');
   // const [selectedRoom, setSelectedRoom] = useState(''); // เพิ่มการจัดการ roomcode
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const handleRowClick = async (orderitemcode, orderitemENname) => {
     try {
@@ -48,21 +50,37 @@ export default function Inventory() {
       setSelectedDrug({ orderitemcode, orderitemENname });
       setSelectedOrderItemCode(orderitemcode); // เก็บ orderitemcode ที่ถูกคลิก
 
+      // ตรวจสอบว่ามีการเลือกวันที่หรือไม่ ถ้าไม่มีให้ใช้วันที่ปัจจุบัน
+      const currentDate = new Date().toISOString().split('T')[0]; // วันที่ปัจจุบันในรูปแบบ YYYY-MM-DD
+      const selectedStartDate = startDate || currentDate;
+      const selectedEndDate = endDate || currentDate;
+
       // เรียกใช้ API เพื่อดึงข้อมูล balance, receive, dispense
       const response = await axios.post(API_URL + '/balancestockHouse', {
         roomcode: selectedRoom, // ใช้ค่า roomcode ที่เลือกจาก state
         orderitemcode: orderitemcode,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate,
       });
 
       const responseData = response.data;
 
-      // อัปเดต state ด้วยข้อมูลที่ได้จาก API
+      // ฟังก์ชันสำหรับการกรองข้อมูลวันที่ให้อยู่ในช่วงที่กำหนด
+      const filteredData = responseData.data.filter((item) => {
+        const itemDate = new Date(item.ordercreatedate); // แปลง ordercreatedate เป็น Date object
+        return (
+          itemDate >= new Date(selectedStartDate) &&
+          itemDate <= new Date(selectedEndDate)
+        ); // เช็คว่าอยู่ในช่วงที่ต้องการหรือไม่
+      });
+
+      // อัปเดต state ด้วยข้อมูลที่กรองแล้ว
       setReceive(responseData.receive);
       setDispense(responseData.dispense);
       setBalance(responseData.balance);
-      setData(responseData.data); // Set the data to be displayed in the table
+      setData(filteredData); // Set the filtered data to be displayed in the table
 
-      console.log('ข้อมูลที่ได้รับจากการกรอง:', responseData);
+      console.log('ข้อมูลที่ได้รับจากการกรอง:', filteredData);
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
@@ -203,6 +221,8 @@ export default function Inventory() {
               <input
                 type="date"
                 className="h-[60%] w-[80%] border border-collapse border-gray-400 px-2"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
             <div className="row-start-2 row-span-2 col-start-4 col-span-3 px-2 flex justify-center space-x-2 items-center">
@@ -210,8 +230,11 @@ export default function Inventory() {
               <input
                 type="date"
                 className="h-[60%] w-[80%] border border-collapse border-gray-400 px-2"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
+
             <div className="row-start-2 row-span-2 col-start-7 col-span-1 px-2 flex justify-center space-x-2 items-center ">
               <button className="w-[80%] h-[80%] rounded-sm text-black font-bold bg-green-400 hover:bg-slate-200 active:bg-slate-300 flex flex-col items-center justify-center space-x-2">
                 <img src={searchBlack} alt={'ค้นหา'} className="w-6 h-6" />
@@ -236,7 +259,7 @@ export default function Inventory() {
             </div>
             <div className="row-start-3 row-span-1 col-start-11 col-span-2 px-2 flex justify-start space-x-2 items-center">
               <span className="font-bold">คงเหลือ : </span>
-              <span className="font-bold">{'0'}</span>
+              <span className="font-bold">{balance}</span>
             </div>
           </div>
           <div className="h-[85%] w-full p-2">
@@ -246,26 +269,49 @@ export default function Inventory() {
                   <thead className="stick top-0 ">
                     <tr>
                       <th className="border border-gray-300 p-2 text-xs min-w-[120px]">
-                        วันที่
+                        วันที่ (ordercreatedate)
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        ใบเบิก
+                        ใบเบิก (prescriptionno)
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        รับเข้า
+                        รับเข้า (Qty)
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        คืนยา
+                        คืนยา (RETURN_Qty)
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        จ่ายออก
+                        จ่ายออก (IN_Qty)
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        คงเหลือ
+                        คงเหลือ (Balance)
                       </th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+                    {data.map((item, index) => (
+                      <tr key={index}>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.ordercreatedate}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.prescriptionno}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.Qty}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.RETURN_Qty}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.IN_Qty}
+                        </td>
+                        <td className="border border-gray-300 p-2 text-xs">
+                          {item.balance} {/* แสดงค่าคงเหลือ */}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </table>
               </div>
             </div>
