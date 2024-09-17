@@ -13,6 +13,7 @@ import barcodeicon from '../../../img/barcode.png';
 import ManageDoseData from './ManageDoseData';
 import MainDoseData from './manageDoseData/MainDoseData';
 import ManagePatientData from './ManagePatientData';
+import ManageWard from './ManageWard';
 
 export default function FrmSetting() {
   const [selectedButton, setSelectedButton] = useState('manage-dose-data');
@@ -118,6 +119,7 @@ export default function FrmSetting() {
           <Routes>
             <Route path="manage-dose-data" element={<ManageDoseData />} />
             <Route path="manage-patient-data" element={<ManagePatientData />} />
+            <Route path="manage-ward" element={<ManageWard />} />
           </Routes>
         </div>
       </div>
