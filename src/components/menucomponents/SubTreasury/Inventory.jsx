@@ -3,18 +3,20 @@ import search from '../../../../img/searchList.svg';
 import searchBlack from '../../../../img/searchBlack.png';
 import print from '../../../../img/print.png';
 import addDoc from '../../../../img/addDoc.png';
-
+import close from '../../../../img/close.png';
 import axios from 'axios';
 import { API_URL } from '../../../../config';
+import Modal from 'react-modal';
 
+Modal.setAppElement('#root');
 export default function Inventory() {
   const [drugs, setDrugs] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState('001'); // ตั้งค่าเริ่มต้นให้กับ roomcode
+  const [modalEXP, setModalEXP] = useState(false); //ข้อมูลหอผู้ป่วย
   const [selectedDrug, setSelectedDrug] = useState({
     orderitemcode: '',
     orderitemENname: '',
   });
-
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
@@ -41,8 +43,6 @@ export default function Inventory() {
   const [data, setData] = useState([]);
   const [selectedOrderItemCode, setSelectedOrderItemCode] = useState('');
   // const [selectedRoom, setSelectedRoom] = useState(''); // เพิ่มการจัดการ roomcode
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
   const handleRowClick = async (orderitemcode, orderitemENname) => {
     try {
@@ -50,37 +50,21 @@ export default function Inventory() {
       setSelectedDrug({ orderitemcode, orderitemENname });
       setSelectedOrderItemCode(orderitemcode); // เก็บ orderitemcode ที่ถูกคลิก
 
-      // ตรวจสอบว่ามีการเลือกวันที่หรือไม่ ถ้าไม่มีให้ใช้วันที่ปัจจุบัน
-      const currentDate = new Date().toISOString().split('T')[0]; // วันที่ปัจจุบันในรูปแบบ YYYY-MM-DD
-      const selectedStartDate = startDate || currentDate;
-      const selectedEndDate = endDate || currentDate;
-
       // เรียกใช้ API เพื่อดึงข้อมูล balance, receive, dispense
       const response = await axios.post(API_URL + '/balancestockHouse', {
         roomcode: selectedRoom, // ใช้ค่า roomcode ที่เลือกจาก state
         orderitemcode: orderitemcode,
-        startDate: selectedStartDate,
-        endDate: selectedEndDate,
       });
 
       const responseData = response.data;
 
-      // ฟังก์ชันสำหรับการกรองข้อมูลวันที่ให้อยู่ในช่วงที่กำหนด
-      const filteredData = responseData.data.filter((item) => {
-        const itemDate = new Date(item.ordercreatedate); // แปลง ordercreatedate เป็น Date object
-        return (
-          itemDate >= new Date(selectedStartDate) &&
-          itemDate <= new Date(selectedEndDate)
-        ); // เช็คว่าอยู่ในช่วงที่ต้องการหรือไม่
-      });
-
-      // อัปเดต state ด้วยข้อมูลที่กรองแล้ว
+      // อัปเดต state ด้วยข้อมูลที่ได้จาก API
       setReceive(responseData.receive);
       setDispense(responseData.dispense);
       setBalance(responseData.balance);
-      setData(filteredData); // Set the filtered data to be displayed in the table
+      setData(responseData.data); // Set the data to be displayed in the table
 
-      console.log('ข้อมูลที่ได้รับจากการกรอง:', filteredData);
+      console.log('ข้อมูลที่ได้รับจากการกรอง:', responseData);
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
@@ -125,7 +109,10 @@ export default function Inventory() {
               </button>
             </div>
             <div className="row-start-2 row-span-2 col-start-6 col-span-1 space-x-2 flex justify-center items-center px-1">
-              <button className="w-[80%] h-[90%] rounded-sm text-black font-bold bg-purple-200  hover:bg-slate-200 active:bg-slate-300 flex flex-col items-center justify-center space-x-2">
+              <button
+                className="w-[80%] h-[90%] rounded-sm text-black font-bold bg-purple-200  hover:bg-slate-200 active:bg-slate-300 flex flex-col items-center justify-center space-x-2"
+                onClick={() => setModalEXP(true)}
+              >
                 <img src={search} alt={'ค้นหา'} className="w-6 h-6" />
                 <span>{'EXP'}</span>
               </button>
@@ -221,8 +208,6 @@ export default function Inventory() {
               <input
                 type="date"
                 className="h-[60%] w-[80%] border border-collapse border-gray-400 px-2"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
             <div className="row-start-2 row-span-2 col-start-4 col-span-3 px-2 flex justify-center space-x-2 items-center">
@@ -230,11 +215,8 @@ export default function Inventory() {
               <input
                 type="date"
                 className="h-[60%] w-[80%] border border-collapse border-gray-400 px-2"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
-
             <div className="row-start-2 row-span-2 col-start-7 col-span-1 px-2 flex justify-center space-x-2 items-center ">
               <button className="w-[80%] h-[80%] rounded-sm text-black font-bold bg-green-400 hover:bg-slate-200 active:bg-slate-300 flex flex-col items-center justify-center space-x-2">
                 <img src={searchBlack} alt={'ค้นหา'} className="w-6 h-6" />
@@ -259,7 +241,7 @@ export default function Inventory() {
             </div>
             <div className="row-start-3 row-span-1 col-start-11 col-span-2 px-2 flex justify-start space-x-2 items-center">
               <span className="font-bold">คงเหลือ : </span>
-              <span className="font-bold">{balance}</span>
+              <span className="font-bold">{'0'}</span>
             </div>
           </div>
           <div className="h-[85%] w-full p-2">
@@ -269,55 +251,80 @@ export default function Inventory() {
                   <thead className="stick top-0 ">
                     <tr>
                       <th className="border border-gray-300 p-2 text-xs min-w-[120px]">
-                        วันที่ (ordercreatedate)
+                        วันที่
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        ใบเบิก (prescriptionno)
+                        ใบเบิก
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        รับเข้า (Qty)
+                        รับเข้า
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        คืนยา (RETURN_Qty)
+                        คืนยา
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        จ่ายออก (IN_Qty)
+                        จ่ายออก
                       </th>
                       <th className="border border-gray-300 p-2 text-xs  min-w-[120px]">
-                        คงเหลือ (Balance)
+                        คงเหลือ
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {data.map((item, index) => (
-                      <tr key={index}>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.ordercreatedate}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.prescriptionno}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.Qty}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.RETURN_Qty}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.IN_Qty}
-                        </td>
-                        <td className="border border-gray-300 p-2 text-xs">
-                          {item.balance} {/* แสดงค่าคงเหลือ */}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                  <tbody></tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalEXP}
+        onRequestClose={() => setModalEXP(false)}
+        className=" z-10 w-[80%] h-[80%] bg-white flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center"
+      >
+        <div className="h-full w-full">
+          <HeaderModal
+            label={`*รายการยาที่ใกล้หมดอายุ*`}
+            closePage={() => setModalEXP(false)}
+          />
+          <div className="w-full h-[95%]">
+            <div className="flex justify-center items-center h-[10%] w-[100%] space-x-3 ">
+              <span>วันที่ EXP : </span>
+              <input
+                type="date"
+                className="border border-collapse border-black px-2"
+              />
+              <span>ถึง : </span>
+              <input
+                type="date"
+                className="border border-collapse border-black px-2"
+              />
+              <button className="w-[2.5%] h-[50%] p-1 bg-green-300 rounded hover:bg-gray-500 active:bg-gray-300 flex justify-center items-center">
+                <img
+                  src={searchBlack}
+                  alt="ค้นหา"
+                  className="w-[90%] h-[90%]"
+                />
+              </button>
+            </div>
+            <div className="w-full h-[90%] bg-red-200"></div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
+const HeaderModal = ({ label, closePage }) => {
+  return (
+    <div className="w-full h-[7%] py-2 bg-blue-900 flex items-center justify-between px-5 ">
+      <span className="text-lg text-white font-bold">{label}</span>
+      <button
+        className="w-[30px] h-[30px] hover:border-[3px] hover:border-gray-400"
+        onClick={closePage}
+      >
+        <img src={close} alt="รูป" className="w-full h-full" />
+      </button>
+    </div>
+  );
+};
