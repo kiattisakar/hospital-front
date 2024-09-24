@@ -10,6 +10,8 @@ import axios from 'axios';
 import FrmMainIpd from './components/FrmMainIpd';
 import Login from './login/Login';
 
+import { API_URL } from '../config';
+
 function PrivateRoute({ element }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
@@ -23,7 +25,7 @@ function PrivateRoute({ element }) {
           return;
         }
 
-        const response = await axios.get('http://localhost:3000/api/auth', {
+        const response = await axios.get(API_URL + '/auth', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
