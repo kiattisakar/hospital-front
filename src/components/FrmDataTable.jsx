@@ -1,7 +1,11 @@
+// FrmDataTable.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../../config';
+
+import { useNavigate } from 'react-router-dom';
+// import { labResult } from '../../../back/services/medicationProfile/lab';
 
 export default function FrmDataTable() {
   const [wards, setWards] = useState([]);
@@ -41,7 +45,142 @@ export default function FrmDataTable() {
   }, [selectedWard, orderdate, ptstatus]);
   const [selectedRadio, setSelectedRadio] = useState('all');
 
-  const handleRadioAdmit = (event) => {};
+  const navigate = useNavigate();
+
+  const handleDoubleClick = async (an, hn) => {
+    try {
+      const fetchWithErrorHandling = (apiCall) => {
+        return apiCall.catch((error) => {
+          console.error('Error in API call:', error);
+          return null; // Return null or default value
+        });
+      };
+
+      const [
+        responseView,
+        response144,
+        responselabResult,
+        responsenoteDrp,
+        responsemedIPD,
+        responsedrugallergy,
+      ] = await Promise.all([
+        fetchWithErrorHandling(
+          axios.post(API_URL + '/Profile_private_hn', { hn })
+        ),
+        fetchWithErrorHandling(
+          axios.post(API_URL + '/Profile_private_an', { an })
+        ),
+        fetchWithErrorHandling(axios.post(API_URL + '/labResult', { hn })),
+        fetchWithErrorHandling(axios.post(API_URL + '/noteDrp', { hn })),
+        fetchWithErrorHandling(
+          axios.post(API_URL + '/medIPD', { an, roomType: 'IPD' })
+        ), // ✅ เพิ่ม roomType: 'IPD'
+        fetchWithErrorHandling(axios.post(API_URL + '/drugallergy', { hn })),
+      ]);
+      console.log('ส่งค่ายาจาก medIPD:', responsemedIPD?.data);
+
+      console.log('AN sent to backend:', an);
+      console.log('HN sent to backend:', hn);
+
+      navigate('/mainIPD', {
+        state: {
+          // ข้อมูลสำหรับ /mainIPD
+          patientDataView: responseView?.data || {},
+          patientData144: response144?.data || {},
+          labResult: responselabResult?.data || [],
+          noteDrp: responsenoteDrp?.data || [],
+          medIPD: responsemedIPD?.data || [],
+          drugAllergyData: responsedrugallergy?.data || '',
+
+          // ข้อมูลเพิ่มเติมสำหรับ FrmProfile
+          profileData: responseView?.data || {}, // ตัวอย่างข้อมูลที่อาจจะเกี่ยวข้องกับ Profile
+        },
+      });
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+    }
+  };
+
+  ///////////// version มีconsolelog และ api อื่นๆก็จะใช้ไม่ได้เมื่อมีตัวไหนพัง
+  // const handleDoubleClick = async (an, hn) => {
+  //   try {
+  //     const [
+  //       responseView,
+  //       response144,
+  //       responselabResult,
+  //       responsenoteDrp,
+  //       responsemedIPD,
+  //       responsedrugallergy,
+  //     ] = await Promise.all([
+  //       axios.post(API_URL + '/Profile_private_hn', { hn: hn }),
+  //       axios.post(API_URL + '/Profile_private_an', { an: an }),
+  //       axios.post(API_URL + '/labResult', { hn: hn }),
+  //       axios.post(API_URL + '/noteDrp', { hn: hn }),
+  //       axios.post(API_URL + '/medIPD', { an: an }),
+  //       axios.post(API_URL + '/drugallergy', { hn: hn }),
+  //     ]);
+
+  //     console.log('AN sent to backend:', an);
+  //     console.log('HN sent to backend:', hn);
+
+  //     if (
+  //       responseView.status === 200 &&
+  //       response144.status === 200 &&
+  //       responselabResult.status === 200 &&
+  //       responsenoteDrp.status === 200 &&
+  //       responsemedIPD.status === 200 &&
+  //       responsedrugallergy.status === 200
+  //     ) {
+  //       console.log('ข้อมูลจาก Profile_private_hn:', responseView.data);
+  //       console.log('ข้อมูลจาก Profile_private_an:', response144.data);
+  //       console.log('ข้อมูลจาก labResult_hn:', responselabResult.data);
+  //       console.log('ข้อมูลจาก noteDrp_hn:', responsenoteDrp.data);
+  //       console.log('ข้อมูลจาก medIPD_an:', responsemedIPD.data);
+  //       console.log('ข้อมูลจาก drugallergy:', responsedrugallergy.data);
+
+  //       navigate('/mainIPD', {
+  //         state: {
+  //           patientDataView: responseView.data,
+  //           patientData144: response144.data,
+  //           labResult: responselabResult.data,
+  //           noteDrp: responsenoteDrp.data,
+  //           noteDrpData: responsenoteDrp.data,
+  //           medIPD: responsemedIPD.data,
+  //           drugAllergyData: responsedrugallergy.data, // ใช้ชื่อใหม่เพื่อไม่ให้ซ้ำ
+  //         },
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching patient data:', error);
+  //   }
+  // };
+
+  ///////////version เก่าสุด
+  // const handleDoubleClick = async (an) => {
+  //   try {
+  //     const response = await axios.post(API_URL + '/test', { an: an });
+
+  //     // ถ้า API สำเร็จ ให้เปลี่ยนหน้าไปพร้อมส่งข้อมูลจาก API
+  //     navigate('/mainIPD', {
+  //       state: { patientData: response.data, success: true },
+  //     });
+  //   } catch (error) {
+  //     console.error('Error fetching patient data:', error);
+
+  //     // ถ้า API ล้มเหลว ก็ยังเปลี่ยนหน้าไป พร้อมส่งข้อมูลแสดง error
+  //     navigate('/mainIPD', {
+  //       state: { error: 'Failed to fetch patient data', success: false },
+  //     });
+  //   }
+  // };
+
+  // const handleDoubleClick = (an) => {
+  //   // เมื่อดับเบิ้ลคลิก จะเปลี่ยนหน้าไปที่ FrmProfile โดยส่ง an ไปด้วย
+  //   navigate('/mainIPD', {
+  //     state: { an: an },
+  //   });
+  // };
+
   return (
     <div className=" h-full flex w-screen">
       <div className="h-full w-1/4 border-2 border-gray-300 flex flex-col px-2">
@@ -141,7 +280,6 @@ export default function FrmDataTable() {
             <thead>
               <tr className="bg-custom-r1 sticky top-0">
                 <th className="text-left p-2">Admit Date</th>
-                {/* <th className="text-left p-2">Discharged Date</th> */}
                 <th className="p-2 text-center">HN</th>
                 <th className="p-2 text-center">AN</th>
                 <th className="p-2 text-center">ชื่อ - นามสกุล</th>
@@ -154,12 +292,15 @@ export default function FrmDataTable() {
                 <tr
                   key={index}
                   className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                  onClick={() => setSelectedWard(ward)}
+                  // เพิ่มการใช้งาน onDoubleClick เพื่อเรียก API และเปลี่ยน route
+                  onDoubleClick={() => {
+                    console.log('AN:', record.an); // แสดงค่า an ใน console เมื่อมีการดับเบิ้ลคลิก
+                    handleDoubleClick(record.an, record.hn); // ส่งค่า an ไปยังฟังก์ชัน handleDoubleClick
+                  }}
                 >
                   <td className="p-2">
                     {new Date(record.admitteddate).toLocaleDateString()}
                   </td>
-                  {/* <td className="p-2">{record.dischargeddate ? new Date(record.dischargeddate).toLocaleDateString() : 'N/A'}</td> */}
                   <td className="p-2 text-center">{record.hn}</td>
                   <td className="p-2 text-center">{record.an}</td>
                   <td className="p-2 text-center">{record.patientname}</td>

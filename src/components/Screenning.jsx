@@ -17,7 +17,7 @@ import icon7 from '../../img/homeIcon.png';
 import printer from '../../img/printer.png';
 import cancel from '../../img/cancel.png';
 import doc from '../../img/doc.png';
-
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../config';
 
 const data3 = {
@@ -66,6 +66,12 @@ export default function () {
     ],
   };
 
+  const [selectedButton, setSelectedButton] = useState(''); // เก็บปุ่มที่กดล่าสุด
+
+  const handleButtonClick = (buttonLabel) => {
+    setSelectedButton(buttonLabel);
+  };
+
   const [selectedRoom, setSelectedRoom] = useState('ห้องยา IPD[001]');
   const [wards, setWards] = useState([]); // สร้าง state สำหรับเก็บข้อมูล wards ที่ได้รับ
 
@@ -77,14 +83,29 @@ export default function () {
       });
       setWards(response.data); // เก็บข้อมูลที่ได้รับใน state
       console.log('ข้อมูลที่ได้รับจาก Backend:', response.data);
-      console.log(selectedRoom);
+      console.log('Room:', selectedRoom);
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
   };
 
+  const handleApiCall = async (endpoint, buttonLabel) => {
+    console.log(`🔄 Calling API: ${API_URL}/${endpoint}`);
+    console.log('📢 selectedButton เปลี่ยนค่า:', selectedButton);
+    try {
+      const response = await axios.post(`${API_URL}/${endpoint}`);
+      console.log('✅ API Response:', response.data);
+
+      setWards(response.data); // ✅ เปลี่ยนจาก setData เป็น setWards เพื่อให้ข้อมูลแสดงผล
+      setSelectedButton(buttonLabel);
+    } catch (error) {
+      console.error('❌ Error fetching API:', error);
+    }
+  };
+
   useEffect(() => {
-    sendRoomData();
+    // sendRoomData();
+    handleApiCall();
   }, [selectedRoom]);
 
   // ฟังก์ชันที่เรียกใช้เมื่อมีการเปลี่ยนแปลงค่าใน select
@@ -95,16 +116,55 @@ export default function () {
   const [selectedWard, setSelectedWard] = useState([]);
   const [patients, setPatients] = useState([]);
 
-  const handleWardClick = async (wardcode) => {
+  // const handleWardClick = async (wardcode) => {
+  //   try {
+  //     const response = await axios.post(API_URL + '/screentwo', {
+  //       wardcode,
+  //       selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วย
+  //     });
+  //     console.log('ข้อมูลที่ได้รับจากการกรอง:', response.data);
+  //     setPatients(response.data); // เก็บข้อมูลที่ได้รับใน state patients
+  //   } catch (error) {
+  //     console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+  //   }
+  // };
+
+  const handleWardClick = async (wardcode, button) => {
+    let endpoint = '/screentwo'; // ค่าเริ่มต้น
+    if (selectedButton === 'ยา Stat') {
+      endpoint = '/screenStat_2';
+    } else if (selectedButton === 'ยา Stat อัดแล้ว') {
+      endpoint = '/screenStat_Finish_2';
+    } else if (selectedButton === 'ยารอ screen และส่งจัดยา') {
+      endpoint = '/ward2';
+    } else if (selectedButton === 'ยารอ screen และส่งจัดยาแล้ว') {
+      endpoint = '/wardApiForScreenSendFinish';
+    }
+    // const handleWardClick = async (wardcode, button) => {
+    //   let endpoint = "/screentwo"; // ค่าเริ่มต้น
+    //   if (selectedButton === "ยา Stat") {
+    //     endpoint = "/screenStat_2";
+    //   } else if (selectedButton === "ยา Stat อัดแล้ว") {
+    //     endpoint = "/screenStat_Finish_2";
+    //   } else if (selectedButton === "ยารอ screen และส่งจัดยา") {
+    //     endpoint = "/ward2";
+    //   } else if (selectedButton === "ยารอ screen และส่งจัดยาแล้ว") {
+    //     endpoint = "/wardApiForScreenSendFinish";
+    //   }
+
     try {
-      const response = await axios.post(API_URL + '/screentwo', {
+      const response = await axios.post(API_URL + endpoint, {
         wardcode,
-        selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วย
+        selectroom: selectedRoom,
       });
-      console.log('ข้อมูลที่ได้รับจากการกรอง:', response.data);
-      setPatients(response.data); // เก็บข้อมูลที่ได้รับใน state patients
+
+      console.log(`🔄 เรียก API 2: ${API_URL + endpoint}`);
+      console.log('✅ ข้อมูลที่ได้รับจากการกรองรอบที่2:', response.data);
+      console.log('📢 selectedButton เปลี่ยนค่า:', selectedButton);
+
+      setPatients(response.data);
     } catch (error) {
-      console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+      console.error('❌ เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
     }
   };
 
@@ -123,6 +183,57 @@ export default function () {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleDoubleClick = async (an, hn) => {
+    try {
+      const fetchWithErrorHandling = (apiCall) => {
+        return apiCall.catch((error) => {
+          console.error('Error in API call:', error);
+          return null; // Return null or default value
+        });
+      };
+
+      const [
+        responseView,
+        response144,
+        responselabResult,
+        responsenoteDrp,
+        responsemedIPD,
+        responsedrugallergy,
+      ] = await Promise.all([
+        fetchWithErrorHandling(
+          axios.post(API_URL + '/Profile_private_hn', { hn })
+        ),
+        fetchWithErrorHandling(
+          axios.post(API_URL + '/Profile_private_an', { an })
+        ),
+        fetchWithErrorHandling(axios.post(API_URL + '/labResult', { hn })),
+        fetchWithErrorHandling(axios.post(API_URL + '/noteDrp', { hn })),
+        fetchWithErrorHandling(axios.post(API_URL + '/medIPD', { an })),
+        fetchWithErrorHandling(axios.post(API_URL + '/drugallergy', { hn })),
+      ]);
+
+      // console.log('AN sent to backend:', an);
+      // console.log('HN sent to backend:', hn);
+
+      // ส่งข้อมูลไปยังหน้า /mainIPD
+      navigate('/mainIPD', {
+        state: {
+          patientDataView: responseView?.data || {},
+          patientData144: response144?.data || {},
+          labResult: responselabResult?.data || [],
+          noteDrp: responsenoteDrp?.data || [],
+          medIPD: responsemedIPD?.data || [],
+          // drugAllergyData: responsedrugallergy?.data || [],
+          drugAllergyData: responsedrugallergy?.data || '',
+        },
+      });
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+    }
+  };
+
   const handleSelectPatient = (patient) => {
     setSelectedPatient(patient);
     console.log(patient);
@@ -134,46 +245,122 @@ export default function () {
           <div className="space-x-2 mt-1 ml-4 w-full flex">
             {' '}
             {/* ปุ่มด้านบน */}
-            <ButtonWithIcon icon={icon1} label="ยา Stat" bgColor="bg-white" />
+            <ButtonWithIcon
+              icon={icon1}
+              label="ยา Stat"
+              bgColor={
+                selectedButton === 'ยา Stat'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยา Stat');
+                handleApiCall('screenStat_1'); // ✅ เรียก API 1
+              }}
+            />
             <ButtonWithIcon
               icon={icon2}
               label="ยา Stat อัดแล้ว"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'ยา Stat อัดแล้ว'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยา Stat อัดแล้ว');
+                handleApiCall('screenStat_Finish_1'); // ✅ เรียก API 2
+              }}
             />
             <ButtonWithIcon
               icon={icon3}
               label="ยารอ screen และส่งจัดยา"
-              bgColor="bg-green-400"
+              bgColor={
+                selectedButton === 'ยารอ screen และส่งจัดยา'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยารอ screen และส่งจัดยา');
+                handleApiCall('screen'); // ✅ เรียก API 3
+              }}
             />
             <ButtonWithIcon
               icon={icon4}
               label="ยารอ screen และส่งจัดยาแล้ว"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'ยารอ screen และส่งจัดยาแล้ว'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยารอ screen และส่งจัดยาแล้ว');
+                handleApiCall('screenStat_Continue_Finish_1'); // ✅ เรียก API 4
+              }}
             />
             <ButtonWithIcon
               icon={icon8}
               label="ยารอส่ง Robot"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'ยารอส่ง Robot'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยารอส่ง Robot');
+                handleApiCall('ยังไม่มี'); // ✅ เรียก API 5 ยังไม่มี
+              }}
             />
             <ButtonWithIcon
               icon={icon5}
               label="ยารอ screen ทั้งหมด"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'ยารอ screen ทั้งหมด'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยารอ screen ทั้งหมด');
+                handleApiCall('screen_Wait_1'); // ✅ เรียก API 6
+              }}
             />
             <ButtonWithIcon
               icon={icon7}
               label="ยากลับบ้านรอ screen และส่งจัดยา"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'ยากลับบ้านรอ screen และส่งจัดยา'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยากลับบ้านรอ screen และส่งจัดยา');
+                handleApiCall('screen_TakeHome_1'); // ✅ เรียก API 7
+              }}
             />
             <ButtonWithIcon
               icon={icon7}
-              label="ยากลับบ้านรอ screen และส่งจัดยา"
-              bgColor="bg-white"
+              label="ยากลับบ้าน screen ส่งจัดยา"
+              bgColor={
+                selectedButton === 'ยากลับบ้าน screen ส่งจัดยา'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('ยากลับบ้าน screen ส่งจัดยา');
+                handleApiCall('screen_TakeHome_Finish_1'); // ✅ เรียก API 8
+              }}
             />
             <ButtonWithIcon
               icon={icon6}
               label="รายการยามีปัญหา"
-              bgColor="bg-white"
+              bgColor={
+                selectedButton === 'รายการยามีปัญหา'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white'
+              }
+              onClick={() => {
+                handleButtonClick('รายการยามีปัญหา');
+                handleApiCall('ว่าง');
+              }}
             />
           </div>
         </div>
@@ -242,7 +429,10 @@ export default function () {
                       <tr
                         key={index}
                         className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
-                        onClick={() => handleWardClick(ward.wardcode)} // ส่งค่า wardcode เมื่อคลิก
+                        // onClick={() => handleWardClick(ward.wardcode)} // ส่งค่า wardcode เมื่อคลิก
+                        onClick={() =>
+                          handleWardClick(ward.wardcode, selectedButton)
+                        }
                       >
                         <td className="border border-gray-300 p-2 text-xs text-center">
                           <input type="checkbox" />
@@ -336,7 +526,11 @@ export default function () {
                             className="hover:bg-blue-400 hover:text-white active:bg-blue-700 cursor-pointer"
                             onClick={() =>
                               setSelectedprescriptionno(ward.prescriptionno)
-                            } /// ส่งไป prescriptionno
+                            } // ส่งไป prescriptionno
+                            onDoubleClick={() => {
+                              console.log('AN:', ward.an); // แสดงค่า an ใน console เมื่อมีการดับเบิ้ลคลิก
+                              handleDoubleClick(ward.an, ward.hn); // ส่งค่า an และ hn ไปยังฟังก์ชัน handleDoubleClick
+                            }}
                           >
                             <td className="border border-gray-300 p-1 text-xs text-center">
                               <input type="checkbox" />
@@ -441,8 +635,38 @@ export default function () {
                           <td className="border border-gray-300 p-1 text-center">
                             <input type="checkbox" />
                           </td>
-                          <td className="border border-gray-300 p-1">
+                          {/* <td className="border border-gray-300 p-1">
                             {ward.takedate}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {new Date(ward.takedate).toLocaleDateString(
+                              'th-TH',
+                              {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                              }
+                            )}
+                          </td>
+                          <td className="border border-gray-300 p-1">
+                            {new Date(ward.takedate).toLocaleDateString(
+                              'th-TH',
+                              {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                              }
+                            )}
+                          </td> */}
+                          <td className="border border-gray-300 p-1">
+                            {new Date(ward.takedate).toLocaleDateString(
+                              'en-GB',
+                              {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                              }
+                            )}
                           </td>
                           <td className="border border-gray-300 p-1">
                             {ward.time}
@@ -492,14 +716,18 @@ export default function () {
   );
 }
 
-const ButtonWithIcon = ({ icon, label, bgColor }) => {
+const ButtonWithIcon = ({ icon, label, bgColor, onClick }) => {
   return (
-    <button className="bg-white  text-gray-700 border-2 p-1 rounded  hover:bg-gray-700 hover:text-white  active:bg-gray-300 text-sm flex flex-col justify-center items-center cursor-pointer wards-center w-32">
-      <img src={icon} alt={label} className="w-5 h-5 mr-2 " />
+    <button
+      className={`border-2 p-1 rounded text-sm flex flex-col justify-center items-center cursor-pointer w-32 ${bgColor}`}
+      onClick={onClick} // ต้องเพิ่ม onClick เพื่อให้ปุ่มทำงาน
+    >
+      <img src={icon} alt={label} className="w-5 h-5" />
       <span className="mt-2 text-[13px] text-center">{label}</span>
     </button>
   );
 };
+
 const ButtonCancel = ({ icon, label, label2 }) => {
   return (
     <button className="bg-red-100  border-red-500 text-gray-700 border-2 p-1 mr-1 rounded hover:bg-red-700 cursor-pointer hover:text-white active:bg-red-300 text-xs flex justify-center items-center wards-center w-32">

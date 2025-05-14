@@ -16,6 +16,9 @@ import successIcon from '../../img/success.png';
 import cancelIcon from '../../img/cancel.png';
 import { HomeIcon } from '@heroicons/react/16/solid';
 
+import axios from 'axios'; // ใช้ axios สำหรับเรียก API
+import { API_URL } from '../../config';
+
 Modal.setAppElement('#root');
 
 export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
@@ -58,6 +61,12 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
     { name: 'จักษุ', count: 27 },
     { name: 'ENT', count: 14 },
   ];
+  const handleKeyPress = (event) => {
+    if (event.key === 'F5') {
+      event.preventDefault(); // ป้องกันการรีเฟรชหน้า
+      createBill(); // เรียกฟังก์ชัน createBill
+    }
+  };
   const createBill = () => {
     setIsCreate(true);
   };
@@ -69,6 +78,57 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   const handleRadioAdmit = (event) => {
     setSelectedStatus(event.target.value);
   };
+
+  const [patientData, setPatientData] = useState(null); // ใช้สำหรับเก็บข้อมูลจาก backend
+
+  const [patientType, setPatientType] = useState('IPD'); // ค่าเริ่มต้น IPD
+  const [searchType, setSearchType] = useState('AN'); // ค่าเริ่มต้น AN
+  const [text, setText] = useState(''); // ค่าที่ใช้ค้นหา
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
+
+  const handleSearch = async () => {
+    if (!text.trim()) {
+      setError('กรุณากรอกค่าค้นหา');
+      return;
+    }
+
+    try {
+      setError('');
+
+      const requestData = {
+        patientType,
+        type: searchType,
+        text: text.trim(),
+      };
+
+      console.log('🚀 [Frontend] กำลังส่งค่าไปยัง Backend:', requestData);
+
+      const response = await axios.post(API_URL + '/btnsearch', requestData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      console.log('✅ [Frontend] ได้รับข้อมูลจาก API:', response.data);
+
+      if (response.data.results.length > 0) {
+        setData(response.data.results[0]);
+      } else {
+        setData(null);
+        setError('ไม่พบข้อมูล');
+      }
+    } catch (err) {
+      console.error('❌ [Frontend] API Error:', err);
+      setError('ไม่พบข้อมูล หรือเกิดข้อผิดพลาด');
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div className="h-full w-screen">
       <div className="้h-1/6">
@@ -199,33 +259,65 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
           </div>
           <div className="row-span-1     ">
             <div className="flex h-full w-full gap-1 justify-center items-center">
-              <select
+              {/* <select
                 name="room"
                 id="room"
                 className="border-2 h-6 w-16 border-gray-400"
               >
-                <option value="1">IPD</option>
-                <option value="1">OPD</option>
+                <option value="IPD">IPD</option>
+                <option value="OPD">OPD</option>
               </select>
               <select
                 name="room"
                 id="room"
                 className="border-2 h-6 w-32 border-gray-400"
               >
-                <option value="1">AN</option>
-                <option value="1">HN</option>
-                <option value="1">เลขที่ใบสั่งยา</option>
+                <option value="AN">AN</option>
+                <option value="HN">HN</option>
                 <option value="1">ชื่อ</option>
                 <option value="1">นามสกุล</option>
                 <option value="1">เลขที่ประชาชน</option>
               </select>
               <input
                 type="text"
-                name="name"
-                id="1"
-                className="border-2 h-6 w-42 border-gray-400"
+                value={AN}
+                onChange={(e) => setAn(e.target.value)}
+                placeholder="กรอก AN"
+              /> */}
+              <select
+                className="border-2 h-8 w-20 border-gray-400"
+                value={patientType}
+                onChange={(e) => setPatientType(e.target.value)}
+              >
+                <option value="IPD">IPD</option>
+                <option value="OPD">OPD</option>
+              </select>
+
+              {/* เลือกประเภทค้นหา */}
+              <select
+                className="border-2 h-8 w-32 border-gray-400"
+                value={searchType}
+                onChange={(e) => setSearchType(e.target.value)}
+              >
+                <option value="AN">AN</option>
+                <option value="HN">HN</option>
+                <option value="ชื่อ">ชื่อ</option>
+                <option value="นามสกุล">นามสกุล</option>
+                <option value="เลขบัตรประชาชน">เลขบัตรประชาชน</option>
+              </select>
+
+              {/* กรอกค่าค้นหา */}
+              <input
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="กรอกค่าค้นหา"
+                className="border-2 h-8 px-2 border-gray-400"
               />
-              <button className="w-24 h-7 text-white font-bold bg-gray-400 flex gap-2 justify-center items-center rounded-sm hover:bg-gray-600 active:bg-slate-500">
+              <button
+                className="w-24 h-7 text-white font-bold bg-gray-400 flex gap-2 justify-center items-center rounded-sm hover:bg-gray-600 active:bg-slate-500"
+                onClick={handleSearch} // ฟังก์ชันค้นหาถูกเรียกเมื่อกดปุ่ม
+              >
                 <img src={searchIcon} alt="ค้นหา" className="w-5 h-5" />
                 <span>ค้นหา</span>
               </button>
@@ -238,13 +330,15 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <div className="w-[23%] flex justify-end mr-2">HN:</div>
                   <input
                     type="text"
-                    className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                    className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.hn || ''} // แก้ให้หน่อยแสดงข้อมูลจากแบคเอน
                     readOnly
                   />
                   <div className="w-[12%] flex justify-center ">AN:</div>
                   <input
                     type="text"
-                    className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                    className="w-[30%] border border-collapse border-gray-700 cursor-default"
+                    value={data ? data.an : ''} // แก้ให้หน่อยแสดงข้อมูลจากแบคเอน
                     readOnly
                   />
                 </div>
@@ -255,6 +349,11 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    value={
+                      data
+                        ? `${data?.title} ${data?.name} ${data?.surname}`
+                        : ''
+                    }
                     readOnly
                   />
                 </div>
@@ -266,6 +365,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.ward_name || ''}
                     readOnly
                   />
                 </div>
@@ -288,6 +388,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.dr_name || ''}
                     readOnly
                   />
                 </div>
@@ -296,9 +397,9 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.birth || ''}
                     readOnly
                   />
-                  <div className="w-[42%]"></div>
                 </div>
                 <div className=" flex w-full">
                   <div className="w-[23%] flex justify-end mr-2">อายุ:</div>
@@ -325,6 +426,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.sex || ''}
                     readOnly
                   />
                   <div className="w-[42%] flex">
@@ -347,6 +449,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   <input
                     type="text"
                     className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                    value={data?.pttype_name || ''}
                     readOnly
                   />
                 </div>
@@ -368,7 +471,8 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   Admit Date:
                   <input
                     type="text"
-                    className="w-[60%]  border border-collapse border-gray-700 cursor-default"
+                    className="w-[60%] border border-collapse border-gray-700 cursor-default"
+                    value={patientData ? patientData.ward_name : ''}
                     readOnly
                   />
                 </div>
@@ -424,7 +528,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                   alt="Discharge"
                   className="w-6 h-6 mr-3"
                 />
-                ยืนยัน
+                ยืนยันเหก
               </div>
               <div className=" h-full w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-red-600 hover:text-white active:bg-red-800">
                 <img
@@ -505,13 +609,15 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                     <div className="w-[23%] flex justify-end mr-2">HN:</div>
                     <input
                       type="text"
-                      className="w-[35%]  border border-collapse border-gray-700 cursor-default"
+                      className="w-[35%] border border-collapse border-gray-700 cursor-default"
+                      value={patientData ? patientData.hn : ''}
                       readOnly
                     />
-                    <div className="w-[12%] flex justify-center ">AN:</div>
+                    <div className="w-[12%] flex justify-center">AN:</div>
                     <input
                       type="text"
-                      className="w-[30%]  border border-collapse border-gray-700 cursor-default"
+                      className="w-[30%] border border-collapse border-gray-700 cursor-default"
+                      value={patientData ? patientData.an : ''}
                       readOnly
                     />
                   </div>
@@ -609,13 +715,14 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
                       <div className="w-[15%] flex ml-2">cm.</div>
                     </div>
                   </div>
-                  <div className=" flex w-full">
+                  <div className="flex w-full">
                     <div className="w-[23%] flex justify-end mr-2">
                       สิทธิ์ผู้ป่วย:
                     </div>
                     <input
                       type="text"
                       className="w-[77%] border border-collapse border-gray-700 cursor-default"
+                      value={patientData ? patientData.pttype_name : ''}
                       readOnly
                     />
                   </div>
@@ -664,7 +771,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
           <div className="flex h-16  items-center justify-center">
             <button className=" h-12 w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-green-600 hover:text-white active:bg-green-800 mr-3">
               <img src={successIcon} alt="Discharge" className="w-6 h-6 mr-3" />
-              ยืนยัน
+              ยืนยันwert
             </button>
             <button className=" h-12 w-32 border border-collapse border-gray-600 bg-white p-1 cursor-pointer flex justify-center items-center hover:bg-red-600 hover:text-white active:bg-red-800">
               <img src={cancelIcon} alt="Discharge" className="w-6 h-6 mr-3" />

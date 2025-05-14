@@ -44,6 +44,7 @@ export default function FrmMainIpd() {
         <Routes>
           <Route path="/" element={<FrmDataTebleIPD />} />
           <Route path="/mainIPD" element={<FrmProfile />} />
+          <Route path="/popup" element={<PopUp />} />
           <Route path="/nurseStation/*" element={<FrmNurseStation />} />
           <Route path="/quickorder" element={<QuickOrder />} />
           <Route path="/DataDispenseDose/" element={<DataDispenseDose />} />
@@ -66,6 +67,7 @@ export default function FrmMainIpd() {
 }
 
 import FrmProfile from './Profile/FrmProfile';
+import PopUp from './Profile/PopUp';
 import FrmSubTreasury from './menucomponents/FrmSubTreasury';
 import QuickOrder from './menucomponents/IPDRoom/QuickOrder';
 import MadTranfer from './menucomponents/IPDRoom/MadTranfer/MadTranfer';
