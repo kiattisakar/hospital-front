@@ -1,15 +1,36 @@
 // DataTable.jsx ใหม่ทดสอบแสดงข้อมูลห้องยา iv ipd tpn
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const DataTable = ({ data = [] }) => {
-  // กำหนดค่าเริ่มต้นให้ data เป็น array ว่าง
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      setTableData(data); // อัปเดตข้อมูลใน state
+    const fetchStatus = async () => {
+      const updatedData = await Promise.all(
+        data.map(async (item) => {
+          const status = await checkDispenseStatus(item.meditemindex);
+          return { ...item, meditemindexStatus: status };
+        })
+      );
+      setTableData(updatedData);
+    };
+
+    if (data.length > 0) {
+      fetchStatus();
     }
   }, [data]);
+
+  const checkDispenseStatus = async (index) => {
+    try {
+      const res = await axios.post('http://localhost:3000/api/checkdispense', {
+        meditemindex: index,
+      });
+      return res.data.status;
+    } catch {
+      return 'ข้อผิดพลาด';
+    }
+  };
 
   const handleCheckboxChange = (e, item) => {
     const newStatus = e.target.checked ? 1 : 0;
@@ -214,7 +235,8 @@ const DataTable = ({ data = [] }) => {
                 <tr key={index} className="hover:bg-gray-100">
                   <td className="p-2 text-center border">{index + 1}</td>
                   <td className="p-2 text-center border">
-                    {item.meditemindex}
+                    {/* {item.meditemindex} */}
+                    {item.meditemindexStatus}
                   </td>
                   <td className="p-2 text-left border"></td>
                   <td className="p-2 text-center border">{item.groupdrug}</td>

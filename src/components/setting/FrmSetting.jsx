@@ -15,6 +15,8 @@ import MainDoseData from './manageDoseData/MainDoseData';
 import ManagePatientData from './ManagePatientData';
 import ManageWard from './ManageWard';
 
+import ManageMedicineBarcode from './ManageMedicineBarcode'; // เปลี่ยน path ให้ตรงกับไฟล์ของคุณ
+
 export default function FrmSetting() {
   const [selectedButton, setSelectedButton] = useState('manage-dose-data');
   const [namePage, setNamePage] = useState('จัดการข้อมูลยา');
@@ -120,6 +122,11 @@ export default function FrmSetting() {
             <Route path="manage-dose-data" element={<ManageDoseData />} />
             <Route path="manage-patient-data" element={<ManagePatientData />} />
             <Route path="manage-ward" element={<ManageWard />} />
+            <Route
+              path="medicine-barcode"
+              element={<ManageMedicineBarcode />}
+            />{' '}
+            {/* เพิ่มบรรทัดนี้ */}
           </Routes>
         </div>
       </div>

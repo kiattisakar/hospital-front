@@ -10,7 +10,7 @@ export default function LabResult() {
       <div className="w-full h-full overflow-auto">
         <table className="w-full bg-white rounded shadow">
           <thead>
-            <tr className="sticky top-0 bg-white w-full bg-white rounded shadow">
+            <tr className="sticky top-0 bg-white w-full rounded shadow">
               <th className="p-2 border border-gray-200 text-center">
                 date_result
               </th>
