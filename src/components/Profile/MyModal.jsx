@@ -1,7 +1,47 @@
 import { useState } from 'react';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+} from '@headlessui/react';
 
 const MyModal = ({ onClose }) => {
-  const [selected, setSelected] = useState(null); // ค่าเริ่มต้นคือยังไม่เลือกอะไรเลย
+  const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState(null);
+  const [showTMT, setShowTMT] = useState(false);
+
+  const data = [
+    {
+      id: '001',
+      name: 'Paracetamol',
+      price: 5.0,
+      tmtcode: 'TMT1234567',
+      demanic: 'N02BE0อหกดอ1',
+      tradename: 'Tylenoอหกดอหกดอl',
+      volume: '500 mg',
+      strength: 'Strong',
+    },
+    {
+      id: '002',
+      name: 'Ibuprofen',
+      price: 8.0,
+      tmtcode: 'TMT2345678',
+      demanic: 'M01AEหกดอหกดอ01',
+      tradename: 'Brufeอหกดอหกดอหn',
+      volume: '400 mg',
+      strength: 'Medium',
+    },
+  ];
+
+  const filteredData =
+    query === ''
+      ? []
+      : data.filter(
+          (item) =>
+            item.name.toLowerCase().includes(query.toLowerCase()) ||
+            item.id.includes(query)
+        );
 
   const handleToggle = (value) => {
     if (selected === value) {
@@ -139,24 +179,118 @@ const MyModal = ({ onClose }) => {
                     <div className="bg-red-300 flex flex-row items-center w-[40%]">
                       <input
                         type="checkbox"
-                        id="checkbox1"
-                        className="ml-3 w-4 h-4 text-blue-600 accent-blue-600"
+                        checked={showTMT}
+                        onChange={() => setShowTMT(!showTMT)}
                       />
                       <span className="p-1">เปิดการใช้งานคีย์ยานอก รพ. F3</span>
                     </div>
                   </div>
-                  <div className="bg-green-800 h-[33.341%] flex flex-row pl-3 items-center">
-                    <span className="ml-auto p-1">ขื่อยา :</span>
+                  <div className="bg-green-800 h-[33.341%] flex flex-row items-center">
+                    <span className="">ชื่อยา :</span>
+
+                    <Combobox value={selected} onChange={setSelected}>
+                      <div className="relative w-[500px]">
+                        <Combobox.Input
+                          className="w-full border p-2 rounded text-sm"
+                          onChange={(e) => setQuery(e.target.value)}
+                          displayValue={(item) => (item ? item.name : '')}
+                          placeholder="ค้นหายา..."
+                        />
+
+                        {query !== '' && filteredData.length > 0 && (
+                          <div className="absolute z-10 mt-1 w-full bg-white border rounded shadow-lg">
+                            <div className="max-h-[240px] overflow-y-auto">
+                              <table className="w-full text-sm table-fixed border-collapse">
+                                <thead className="bg-gray-100 sticky top-0">
+                                  <tr>
+                                    {showTMT ? (
+                                      <>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          TMT
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          Demanic
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          ชื่อการค้า
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          ปริมาณ
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          ความแรง
+                                        </th>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <th className="px-2 py-1 w-1/4 text-left">
+                                          รหัสยา
+                                        </th>
+                                        <th className="px-2 py-1 w-1/2 text-left">
+                                          ชื่อยา
+                                        </th>
+                                        <th className="px-2 py-1 w-1/4 text-left">
+                                          ราคา
+                                        </th>
+                                      </>
+                                    )}
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {filteredData.map((item) => (
+                                    <tr
+                                      key={item.id}
+                                      className="cursor-pointer hover:bg-blue-100"
+                                      onClick={() => {
+                                        setSelected(item);
+                                        setQuery('');
+                                      }}
+                                    >
+                                      {showTMT ? (
+                                        <>
+                                          <td className="px-2 py-1">
+                                            {item.tmtcode}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.demanic}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.tradename}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.volume}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.strength}
+                                          </td>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <td className="px-2 py-1">
+                                            {item.id}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.name}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.price}
+                                          </td>
+                                        </>
+                                      )}
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </Combobox>
 
                     <input
                       type="text"
-                      defaultValue=""
-                      className="border border-gray-400 rounded mr-2 px-2 py-1 w-[285px]"
-                    />
-                    <input
-                      type="text"
                       defaultValue="0"
-                      className="border text-center border-gray-400 rounded text-red-500 mr-8 px-2 py-1 w-[85px]"
+                      className="border text-center border-gray-400 rounded text-red-500 px-2 py-1 w-[50px]"
                     />
                   </div>
                 </div>
