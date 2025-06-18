@@ -11,7 +11,7 @@ const MyModal = ({ onClose }) => {
   const [selected, setSelected] = useState(null);
   const [showTMT, setShowTMT] = useState(false);
 
-  const data = [
+  const data1 = [
     {
       id: '001',
       name: 'Paracetamol',
@@ -22,17 +22,37 @@ const MyModal = ({ onClose }) => {
       volume: '500 mg',
       strength: 'Strong',
     },
+  ];
+  const data2 = [
     {
       id: '002',
       name: 'Ibuprofen',
       price: 8.0,
       tmtcode: 'TMT2345678',
-      demanic: 'M01AEหกดอหกดอ01',
-      tradename: 'Brufeอหกดอหกดอหn',
-      volume: '400 mg',
-      strength: 'Medium',
     },
   ];
+
+  // ดึงข้อมูลเมื่อค่า chkKeydrug หรือ searchText เปลี่ยน
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/dose/getDoseBySearch',
+          {
+            params: {
+              chkKeydrug,
+              txtorderitemname: searchText,
+            },
+          }
+        );
+        setDrugData(response.data); // สมมุติว่า API ส่ง array ของ object กลับมา
+      } catch (error) {
+        console.error('Error fetching drug data:', error);
+      }
+    };
+
+    fetchData();
+  }, [chkKeydrug, searchText]); // โหลดใหม่ทุกครั้งที่ checkbox หรือ text เปลี่ยน
 
   const filteredData =
     query === ''
