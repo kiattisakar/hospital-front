@@ -4,7 +4,7 @@ export default function ManageMedicineBarcode() {
   return (
     <div className="w-full h-full p-4 bg-white rounded shadow-md">
       <h1 className="text-2xl font-bold mb-4 text-blue-700">
-        จัดการบาร์โค๊ดยา
+        ข้อมูลกระบอกยา :
       </h1>
 
       {/* ส่วนค้นหาหรือกรอกข้อมูล */}

@@ -18,14 +18,11 @@ import ManageWard from './ManageWard';
 import ManageMedicineBarcode from './ManageMedicineBarcode'; // เปลี่ยน path ให้ตรงกับไฟล์ของคุณ
 
 export default function FrmSetting() {
-  const [selectedButton, setSelectedButton] = useState('manage-dose-data');
+  const [selectedButton, setSelectedButton] = useState('');
   const [namePage, setNamePage] = useState('จัดการข้อมูลยา');
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate(selectedButton);
-  }, [selectedButton, navigate]);
   return (
     <div className="w-full h-full space-y-1 px-2 py-3">
       <div className="h-[5%] w-[100%] border border-collapse border-gray-500 bg-white flex justify-start items-center px-3 space-x-3">
@@ -117,15 +114,16 @@ export default function FrmSetting() {
             }}
           />
         </div>
-        <div className="w-[90%] h-full bg-white border border-collapse border-gray-500 p-4">
+        <div className="w-full h-full bg-white border border-collapse border-gray-500">
           <Routes>
-            <Route path="manage-dose-data" element={<ManageDoseData />} />
+            <Route path="manage-dose-data/*" element={<ManageDoseData />} />
             <Route path="manage-patient-data" element={<ManagePatientData />} />
             <Route path="manage-ward" element={<ManageWard />} />
             <Route
               path="medicine-barcode"
               element={<ManageMedicineBarcode />}
-            />{' '}
+            />
+            <Route path="me" element={<MainDoseData />} />
             {/* เพิ่มบรรทัดนี้ */}
           </Routes>
         </div>
