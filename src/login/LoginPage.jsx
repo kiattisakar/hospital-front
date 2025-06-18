@@ -19,7 +19,7 @@ const LoginPage = () => {
       });
       setMessage('เข้าสู่ระบบสำเร็จ');
       localStorage.setItem('token', response.data.token);
-      navigate('/mainIPD'); // นำทางไปที่หน้า mainIPD หลังจากการล็อกอินสำเร็จ
+      navigate('/'); // นำทางไปที่หน้า mainIPD หลังจากการล็อกอินสำเร็จ
     } catch (err) {
       setMessage('รหัสผ่านหรือชื่อไม่ถูกต้อง');
       console.error(err);
