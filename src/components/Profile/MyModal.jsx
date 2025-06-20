@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import {
   Combobox,
   ComboboxInput,
@@ -10,57 +12,62 @@ const MyModal = ({ onClose }) => {
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(null);
   const [showTMT, setShowTMT] = useState(false);
+  const [data, setData] = useState([]); // ✅ ต้องมีบรรทัดนี้
+  // const data = [
+  //   {
+  //     orderitemcode: 'MRPNI3',
+  //     orderitemTHname: 'เมอโรพีเนม 1 กรัม',
+  //     orderitemENname: 'MEROPENEM 1 G :E2',
+  //   },
+  //   {
+  //     TPUCode: '1014140',
+  //     ActiveIngredient: 'meropenem',
+  //     Strength: '500 mg',
+  //     Dosageform: 'powder for solution for injection/infusion',
+  //     DispUnit: 'vial',
+  //     TradeName: 'MEROPENEM ALVOGEN',
+  //     Manufacturer: 'ACS DOBFAR, ITALY',
+  //   },
+  // ];
 
-  const data1 = [
-    {
-      id: '001',
-      name: 'Paracetamol',
-      price: 5.0,
-      tmtcode: 'TMT1234567',
-      demanic: 'N02BE0อหกดอ1',
-      tradename: 'Tylenoอหกดอหกดอl',
-      volume: '500 mg',
-      strength: 'Strong',
-    },
-  ];
-  const data2 = [
-    {
-      id: '002',
-      name: 'Ibuprofen',
-      price: 8.0,
-      tmtcode: 'TMT2345678',
-    },
-  ];
-
-  // ดึงข้อมูลเมื่อค่า chkKeydrug หรือ searchText เปลี่ยน
   useEffect(() => {
     const fetchData = async () => {
+      if (query.trim() === '') {
+        setData([]);
+        return;
+      }
+
+      const url = showTMT
+        ? 'http://localhost:3000/dose/getDoseBySearch?chkKeydrug=true&txtorderitemname=' +
+          query
+        : 'http://localhost:3000/dose/getDoseBySearch?txtorderitemname=' +
+          query;
+
       try {
-        const response = await axios.get(
-          'http://localhost:3000/dose/getDoseBySearch',
-          {
-            params: {
-              chkKeydrug,
-              txtorderitemname: searchText,
-            },
-          }
-        );
-        setDrugData(response.data); // สมมุติว่า API ส่ง array ของ object กลับมา
-      } catch (error) {
-        console.error('Error fetching drug data:', error);
+        const response = await axios.get(url);
+        setData(response.data || []);
+      } catch (err) {
+        console.error('API error:', err);
+        setData([]);
       }
     };
 
     fetchData();
-  }, [chkKeydrug, searchText]); // โหลดใหม่ทุกครั้งที่ checkbox หรือ text เปลี่ยน
+  }, [query, showTMT]);
+
+  const handleSelect = (item) => {
+    setSelected(item);
+    setQuery('');
+  };
 
   const filteredData =
     query === ''
       ? []
       : data.filter(
           (item) =>
-            item.name.toLowerCase().includes(query.toLowerCase()) ||
-            item.id.includes(query)
+            item.orderitemENname?.toLowerCase().includes(query.toLowerCase()) ||
+            item.TradeName?.toLowerCase().includes(query.toLowerCase()) ||
+            item.ActiveIngredient?.toLowerCase().includes(query.toLowerCase())
         );
 
   const handleToggle = (value) => {
@@ -213,7 +220,9 @@ const MyModal = ({ onClose }) => {
                         <Combobox.Input
                           className="w-full border p-2 rounded text-sm"
                           onChange={(e) => setQuery(e.target.value)}
-                          displayValue={(item) => (item ? item.name : '')}
+                          displayValue={(item) =>
+                            item ? item.orderitemENname : ''
+                          }
                           placeholder="ค้นหายา..."
                         />
 
@@ -235,10 +244,16 @@ const MyModal = ({ onClose }) => {
                                           ชื่อการค้า
                                         </th>
                                         <th className="px-2 py-1 w-1/6 text-left">
-                                          ปริมาณ
+                                          ความแรง
                                         </th>
                                         <th className="px-2 py-1 w-1/6 text-left">
-                                          ความแรง
+                                          ผู้ผลิต
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          DosesageForm
+                                        </th>
+                                        <th className="px-2 py-1 w-1/6 text-left">
+                                          DispUnit
                                         </th>
                                       </>
                                     ) : (
@@ -248,9 +263,6 @@ const MyModal = ({ onClose }) => {
                                         </th>
                                         <th className="px-2 py-1 w-1/2 text-left">
                                           ชื่อยา
-                                        </th>
-                                        <th className="px-2 py-1 w-1/4 text-left">
-                                          ราคา
                                         </th>
                                       </>
                                     )}
@@ -269,31 +281,34 @@ const MyModal = ({ onClose }) => {
                                       {showTMT ? (
                                         <>
                                           <td className="px-2 py-1">
-                                            {item.tmtcode}
+                                            {item.TPUCode}
                                           </td>
                                           <td className="px-2 py-1">
-                                            {item.demanic}
+                                            {item.ActiveIngredient}
                                           </td>
                                           <td className="px-2 py-1">
-                                            {item.tradename}
+                                            {item.TradeName}
                                           </td>
                                           <td className="px-2 py-1">
-                                            {item.volume}
+                                            {item.Strength}
                                           </td>
                                           <td className="px-2 py-1">
-                                            {item.strength}
+                                            {item.Manufacturer}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.Dosageform}
+                                          </td>
+                                          <td className="px-2 py-1">
+                                            {item.DispUnit}
                                           </td>
                                         </>
                                       ) : (
                                         <>
                                           <td className="px-2 py-1">
-                                            {item.id}
+                                            {item.orderitemcode}
                                           </td>
                                           <td className="px-2 py-1">
-                                            {item.name}
-                                          </td>
-                                          <td className="px-2 py-1">
-                                            {item.price}
+                                            {item.orderitemENname}
                                           </td>
                                         </>
                                       )}
