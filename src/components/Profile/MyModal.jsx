@@ -38,14 +38,22 @@ const MyModal = ({ onClose }) => {
       }
 
       const url = showTMT
-        ? 'http://localhost:3000/dose/getDoseBySearch?chkKeydrug=true&txtorderitemname=' +
-          query
-        : 'http://localhost:3000/dose/getDoseBySearch?txtorderitemname=' +
-          query;
+        ? `http://localhost:3000/dose/getDoseBySearch?chkKeydrug=true&txtorderitemname=${query}`
+        : `http://localhost:3000/dose/getDoseBySearch?txtorderitemname=${query}`;
 
       try {
         const response = await axios.get(url);
-        setData(response.data || []);
+        let result;
+
+        if (showTMT) {
+          // กรณี showTMT = true คาดว่า response.data เป็น object มี recordset
+          result = response.data.recordset || [];
+        } else {
+          // กรณี showTMT = false คาดว่า response.data เป็น array ตรง ๆ
+          result = Array.isArray(response.data) ? response.data : [];
+        }
+
+        setData(result);
       } catch (err) {
         console.error('API error:', err);
         setData([]);
@@ -61,13 +69,19 @@ const MyModal = ({ onClose }) => {
   };
 
   const filteredData =
-    query === ''
+    query === '' || !Array.isArray(data)
       ? []
       : data.filter(
           (item) =>
-            item.orderitemENname?.toLowerCase().includes(query.toLowerCase()) ||
-            item.TradeName?.toLowerCase().includes(query.toLowerCase()) ||
-            item.ActiveIngredient?.toLowerCase().includes(query.toLowerCase())
+            (item.orderitemENname || '')
+              .toLowerCase()
+              .includes(query.toLowerCase()) ||
+            (item.TradeName || '')
+              .toLowerCase()
+              .includes(query.toLowerCase()) ||
+            (item.ActiveIngredient || '')
+              .toLowerCase()
+              .includes(query.toLowerCase())
         );
 
   const handleToggle = (value) => {
@@ -221,7 +235,11 @@ const MyModal = ({ onClose }) => {
                           className="w-full border p-2 rounded text-sm"
                           onChange={(e) => setQuery(e.target.value)}
                           displayValue={(item) =>
-                            item ? item.orderitemENname : ''
+                            item
+                              ? showTMT
+                                ? item.TradeName
+                                : item.orderitemENname
+                              : ''
                           }
                           placeholder="ค้นหายา..."
                         />
