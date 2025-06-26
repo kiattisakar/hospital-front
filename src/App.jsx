@@ -60,7 +60,7 @@ function PrivateRoute({ element }) {
   if (isAuthenticated === null) {
     return <div>Loading...</div>; // คุณสามารถใส่ loading spinner ได้ที่นี่
   }
-
+ 
   return isAuthenticated ? element : <Navigate to="/login" replace />;
 }
 

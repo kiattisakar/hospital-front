@@ -25,7 +25,6 @@ export default function FrmMainIpd() {
       })
 
       .then((data) => {
-        console.log(data);
         setData(data);
       })
       .catch((error) => {

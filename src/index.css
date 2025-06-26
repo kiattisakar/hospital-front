@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "daisyui" {
+  themes: false;
+}
 textarea {
   resize: none;
 }
@@ -18,4 +21,10 @@ select:focus {
   outline: none;
   border-color: #d1d5db; /* gray-300 */
   box-shadow: none;
+}
+label.input-text {
+  border: 2px;
+  border-color: black;
+  width: 30px;
+  height: 10px;
 }

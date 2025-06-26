@@ -35,10 +35,10 @@ import { FaLessThan } from 'react-icons/fa6';
 
 export default function ManageDoseData() {
   return (
-    <div className="w-full h-full flex flex-col p-4">
+    <div className="w-full h-full flex flex-col p-2">
       <Routes>
         <Route path="" element={<ShowButton />} />
-        <Route path="MainDoseData" element={<MainDoseData />} />
+        <Route path="MainDoseData/*" element={<MainDoseData />} />
       </Routes>
     </div>
   );
