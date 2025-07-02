@@ -7,24 +7,31 @@ import { API_URL } from '../../config';
 import { useNavigate } from 'react-router-dom';
 // import { labResult } from '../../../back/services/medicationProfile/lab';
 
-export default function FrmDataTable() {
+export default function FrmDataTable({ ptstatus, orderdate }) {
   const [wards, setWards] = useState([]);
   const [selectedWard, setSelectedWard] = useState(null);
   const [patients, setPatients] = useState([]);
-  const [orderdate, setOrderdate] = useState('2024-05-30');
-  const [ptstatus, setPtstatus] = useState('');
+  // const [orderdate, setOrderdate] = useState('2024-05-30');
+  // const [ptstatus, setPtstatus] = useState('');
 
   // Fetch ward data on component mount
   useEffect(() => {
+    console.log('ส่งไป backend:', { ptstatus, orderdate }); // <-- เพิ่มบรรทัดนี้ดูค่า
+
     axios
-      .post(API_URL + '/first')
+      .post(API_URL + '/first', {
+        ptstatus: ptstatus,
+        orderdate: orderdate,
+      })
       .then((response) => {
+        console.log('Response จาก backend:', response.data);
         setWards(response.data);
       })
+
       .catch((error) => {
         console.error('There was an error fetching the ward data!', error);
       });
-  }, []);
+  }, [ptstatus, orderdate]); // เรียก API ใหม่เมื่อค่ามีการเปลี่ยน
 
   // Fetch patient data when selectedWard, orderdate, or ptstatus changes
   useEffect(() => {

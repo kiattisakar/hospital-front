@@ -25,3 +25,20 @@ export const getDoseById = async (drugId) => {
   });
   return response.data[0];
 };
+export const dtdosageunit = async (capacityId) => {
+  const response = await axios.get(URL + 'dose/getUnitByID', {
+    params: {
+      txtOrderUnit: capacityId,
+    },
+  });
+  return response.data[0];
+};
+
+export const dtorderunit = async (capacityId) => {
+  const response = await axios.get(URL + 'dose/getOrderUnitByID', {
+    params: {
+      txtOrderUnit: capacityId,
+    },
+  });
+  return response.data.recordsets[0];
+};

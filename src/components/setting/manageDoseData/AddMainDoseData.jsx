@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import noCam from '../../../../img/no-pictures-no-camera.svg';
-import { getDoseById } from '../../../service/DoseService';
+import {
+  getDoseById,
+  dtdosageunit,
+  dtorderunit,
+} from '../../../service/DoseService';
+import successImg from '../../../../img/success.png';
+import cancelImg from '../../../../img/cancel.png';
 export default function AddMainDoseData() {
   const [dataDose, setDataDose] = useState([]);
   const { orderitemcode } = useParams();
@@ -481,6 +487,721 @@ export default function AddMainDoseData() {
   );
 }
 const ShowDoseData = ({ data }) => {
-  console.log(data);
-  return <div className="w-full h-full bg-yellow-300 p-2">test</div>;
+  const [enName, setEnName] = useState('');
+  const [thName, setThName] = useState('');
+  const [formData, setFormData] = useState({
+    genericName: '',
+    brandName: '',
+    strength: '',
+    unit: '',
+    quantity: '',
+    quantityUnit: '',
+    orderName: '',
+    howToTake: '',
+    additionalInfo: '',
+    gfmisCode: '',
+    lotNumber: '',
+    pricePerUnit: '',
+    ipdPrice: '',
+    opdPrice: '',
+    dosage1: '',
+    dosage2: '',
+    frequency: '',
+    country: '',
+    category: '',
+    province: '',
+    ptcCategory: '',
+    medicationType: '',
+    usage: '',
+    eyeType: '',
+    hasSpecialStorage: false,
+    isLiquid: false,
+    requiresRefrigeration: false,
+    hasSpecialInstructions: false,
+  });
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (data?.orderitemENname) {
+      setEnName(data.orderitemENname);
+      setThName(data.orderitemTHname);
+    }
+    if (data) {
+      setFormData((prev) => ({
+        ...prev,
+        genericName: data.genericname,
+        strength: data.capacity,
+      }));
+    }
+    //---------------Unit Code หน่วย------------------
+
+    const fatchUnit2 = async () => {
+      try {
+        const rsUnit = await dtdosageunit(data.capacity_unit);
+        // ตรวจสอบว่ามีข้อมูลหรือไม่
+        if (rsUnit && rsUnit.length > 0 && rsUnit[0].DispensedUnitTH) {
+          setFormData((prev) => ({
+            ...prev,
+            unit: rsUnit[0].DispensedUnitTH,
+          }));
+        }
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการโหลดข้อมูลหน่วยยา:', error);
+      }
+    };
+    //---------------Unit Code หน่วยย่อย------------------
+    const fatchUnit1 = async () => {
+      try {
+        const rsUnit1 = await dtdosageunit(data.dosageunitcode);
+        // ตรวจสอบว่ามีข้อมูลหรือไม่
+        console.log(rsUnit1);
+        if (rsUnit1 && rsUnit1.length > 0 && rsUnit1[0].DispensedUnitTH) {
+          setFormData((prev) => ({
+            ...prev,
+            quantityUnit: rsUnit1[0].DispensedUnitTH,
+          }));
+        }
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการโหลดข้อมูลหน่วยยา:', error);
+      }
+    };
+    //------------------------หน่วยขาย-----------------
+    const fatchOrderUnit = async () => {
+      try {
+        const rsOrderUnit = await dtorderunit(data.orderunitcode);
+        // ตรวจสอบว่ามีข้อมูลหรือไม่
+        console.log(rsOrderUnit);
+        if (
+          rsOrderUnit &&
+          rsOrderUnit.length > 0 &&
+          rsOrderUnit[0].DispensedTotalUnitTH
+        ) {
+          setFormData((prev) => ({
+            ...prev,
+            orderName: rsOrderUnit[0].DispensedTotalUnitTH,
+          }));
+        }
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการโหลดข้อมูลหน่วยยา:', error);
+      }
+    };
+    if (data?.capacity_unit) {
+      fatchUnit2();
+    }
+    if (data?.dosageunitcode) {
+      fatchUnit1();
+    }
+    if (data?.orderunitcode) {
+      fatchOrderUnit();
+    }
+  }, [data]);
+  return (
+    <div className="w-full h-full p-2">
+      <div className="w-full h-[16%] flex">
+        <div className="h-full w-1/2 grid grid-rows-3 grid-cols-4 py-2">
+          <span className="row-start-1 row-span-1 col-start-1 col-span-1 text-[16px] flex items-center justify-end mr-2">
+            รหัสยา :
+          </span>
+          <input
+            type="text"
+            className="px-2 w-full h-[96%] row-span-1 row-start-1 col-span-3 col-start-2 border border-gray-600 focus:border-gray-400 bg-gray-300"
+            readOnly
+            value={data.orderitemcode}
+          />
+          <span className="row-start-2 row-span-1 col-start-1 col-span-1 text-[16px] flex items-center justify-end mr-2">
+            ชื่อยาบนฉลาก :
+          </span>
+          <input
+            type="text"
+            className="px-2 w-full h-[96%] row-span-1 row-start-2 col-span-3 col-start-2 border border-gray-600"
+            value={enName}
+            onChange={(e) => setEnName(e.target.value)}
+          />
+          <span className="row-start-3 row-span-1 col-start-1 col-span-1 text-[16px] flex items-center justify-end mr-2">
+            ชื่อยาภาษาไทย :
+          </span>
+          <input
+            type="text"
+            className="px-2 w-full h-[96%] row-span-1 row-start-3 col-span-3 col-start-2 border border-gray-600"
+            value={thName}
+            onChange={(e) => setThName(e.target.value)}
+          />
+        </div>
+        <div className="h-full w-1/2  py-2 grid grid-rows-6 grid-cols-12 gap-1">
+          <button className=" bg-yellow-300 text-yellow-900 w-full h-full row-span-3 row-start-1 col-span-2 col-start-1 ml-2 hover:bg-yellow-200">
+            Monograph
+          </button>
+          <button className=" bg-white border-4 border-green-300 text-green-900 w-full h-full row-span-3 row-start-4 col-span-2 col-start-1 ml-2 hover:bg-green-200 flex justify-center items-center">
+            <img src={successImg} alt="รูป" className="h-7 w-7 mr-1" />
+            บันทึก
+          </button>
+          <button className=" bg-white border-4 border-red-300 text-red-900 w-full h-full row-span-3 row-start-4 col-span-2 col-start-3 ml-2 hover:bg-red-200 flex justify-center items-center">
+            <img src={cancelImg} alt="รูป" className="h-7 w-7 mr-1" />
+            ยกเลิก
+          </button>
+        </div>
+      </div>
+      <div className="w-full h-[84%]">
+        <div className="tabs tabs-box w-full h-full">
+          <input
+            type="radio"
+            name="my_tabs_6"
+            className="tab"
+            defaultChecked
+            aria-label="General"
+          />
+          <div className="tab-content bg-base-100 border-base-300 pt-1">
+            {/*------------------------------------ganeral Tap-----------------------------------------------------------------*/}
+            <div className=" bg-gray-50 h-full overflow-auto">
+              <div className="w-full px-2 mx-auto bg-white rounded-lg shadow-lg py-2">
+                {/* Header Section */}
+                <div className="grid grid-cols-2 gap-6 mb-6">
+                  {/* Left Column */}
+                  <div className="space-y-4">
+                    {/* Generic Name Input */}
+                    <div className="flex items-center space-x-2">
+                      <label className="text-sm font-medium text-gray-700 w-24">
+                        Generic Name:
+                      </label>
+                      <input
+                        type="text"
+                        className="border border-gray-300 px-3 py-1 text-sm flex-1"
+                        value={formData.genericName}
+                      />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600"
+                      />
+                      <span className="text-sm text-gray-700">ค้นหา</span>
+                    </div>
+
+                    {/* Generic Name Table */}
+                    <div className="border border-gray-300 h-56 overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            <th className="border border-gray-300 px-2 py-1 text-left w-8"></th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              Generic Name
+                            </th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              ความแรง
+                            </th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              หน่วย
+                            </th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              คือ
+                            </th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              หน่วย
+                            </th>
+                            <th className="border border-gray-300 px-2 py-1 text-left">
+                              ลบ
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 px-2 py-1">
+                              <input type="checkbox" className="w-4 h-4" />
+                            </td>
+                            <td className="border border-gray-300 px-2 py-1">
+                              lamivudine
+                            </td>
+                            <td className="border border-gray-300 px-2 py-1"></td>
+                            <td className="border border-gray-300 px-2 py-1"></td>
+                            <td className="border border-gray-300 px-2 py-1"></td>
+                            <td className="border border-gray-300 px-2 py-1"></td>
+                            <td className="border border-gray-300 px-2 py-1">
+                              <button className="bg-red-500 text-white px-2 py-1 text-xs">
+                                X
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Form Fields */}
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          ปริมาณยาหน่วยย่อย/หน่วยขาย:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-32 text-sm"
+                          value={formData.strength}
+                        />
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-32 text-sm"
+                          value={formData.unit}
+                        />
+                        <span className="text-sm ml-4">หน่วย</span>
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          หน่วยย่อย:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-28 text-sm"
+                          value={formData.quantityUnit}
+                        />
+                        <label className="text-sm text-gray-700 ml-4">
+                          ลักษณะยา:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                          placeholder=""
+                        />
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          หน่วยขาย:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-28 text-sm"
+                          value={formData.orderName}
+                        />
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          สีตัวอักษร:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-48 text-sm"
+                        />
+                        <button className="bg-blue-500 text-white px-3 py-2 text-sm">
+                          📋
+                        </button>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-sm text-gray-700 w-32">
+                            รหัสมาตราฐาน (DID):
+                          </label>
+                          <input
+                            type="text"
+                            className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                          />
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                          <label className="text-sm text-gray-700 w-32">
+                            รหัสยา (GFMIS):
+                          </label>
+                          <input
+                            type="text"
+                            className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                          />
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                          <label className="text-sm text-gray-700 w-32">
+                            รหัสคลังยา:
+                          </label>
+                          <input
+                            type="text"
+                            className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                            placeholder=""
+                          />
+                        </div>
+                      </div>
+
+                      {/* Checkboxes */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="label">
+                            <input
+                              type="checkbox"
+                              className="checkbox checkbox-sm checked:bg-blue-600 checked:text-white"
+                            />
+                            <p className="text-gray-700 text-sm">
+                              ยาโรคเรื้อรัง/ใช้ติดต่อกันเป็นเวลานาน
+                            </p>
+                          </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <label className="label">
+                            <input
+                              type="checkbox"
+                              className="checkbox checkbox-sm checked:bg-blue-600 checked:text-white"
+                            />
+                            <p className="text-sm text-gray-700">ยาแซ่เย็น</p>
+                          </label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <label className="label">
+                            <input
+                              type="checkbox"
+                              className="checkbox checkbox-sm checked:bg-blue-600 checked:text-white"
+                            />
+                            <p className="text-sm text-gray-700">
+                              ยาที่ต้องกันแสง
+                            </p>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Dose Section */}
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          คำนวณ Dose:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-24 text-sm"
+                        />
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 w-24 text-sm"
+                        />
+                        <span className="text-sm">หน่วย</span>
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          รูปแบบการคำนวณ:
+                        </label>
+                        <select className="border border-gray-300 px-2 py-1 flex-1 text-sm">
+                          <option value=""></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-2">
+                    {/* Country Selection */}
+                    <div className="grid grid-cols-2 grid-rows-3">
+                      <label className="row-start-1 row-span-1 col-start-1 col-span-1 text-sm text-gray-700">
+                        ประเภทเวชภัณฑ์:
+                      </label>
+                      <select className="row-start-1 row-span-1 col-start-2 col-span-1 border border-gray-300 px-2 py-1 text-sm">
+                        <option>ยา</option>
+                      </select>
+
+                      <label className="row-start-2 row-span-1 col-start-1 col-span-1 text-sm text-gray-700">
+                        ประเภท:
+                      </label>
+                      <select className="row-start-2 row-span-1 col-start-2 col-span-1 border border-gray-300 px-2 py-1 text-sm">
+                        <option>ทั่วไป</option>
+                      </select>
+
+                      <label className=" row-start-3 row-span-1 col-start-1 col-span-1  text-sm text-gray-700">
+                        ประเภทยาตามระเบียบ PTC:
+                      </label>
+                      <select className="row-start-3 row-span-1 col-start-2 col-span-1 border border-gray-300 px-2 py-1 text-sm flex-1">
+                        <option value=""></option>
+                      </select>
+                    </div>
+
+                    {/* Medicine Categories */}
+
+                    <div className="space-y-2 ">
+                      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border px-2">
+                        <legend class="fieldset-legend">ประเภทรายการ</legend>
+
+                        <div className="space-y-1">
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="radio"
+                              id="ed"
+                              name="medicine_type"
+                              className="w-4 h-4"
+                            />
+                            <label
+                              htmlFor="ed"
+                              className="text-sm text-gray-700 cursor-pointer"
+                            >
+                              ED
+                            </label>
+
+                            <input
+                              type="checkbox"
+                              id="project"
+                              className="w-4 h-4 ml-4"
+                            />
+                            <label
+                              htmlFor="project"
+                              className="text-sm text-gray-700 cursor-pointer"
+                            >
+                              โครงการ
+                            </label>
+                          </div>
+
+                          <div className="flex items-center space-x-2">
+                            <input
+                              type="radio"
+                              id="ned"
+                              name="medicine_type"
+                              className="w-4 h-4"
+                            />
+                            <label
+                              htmlFor="ned"
+                              className="text-sm text-gray-700 cursor-pointer"
+                            >
+                              NED
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                      <div className="mt-4">
+                        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border px-2">
+                          <legend class="fieldset-legend">
+                            การคำนวณราคายา
+                          </legend>
+
+                          <div className="space-y-1">
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="calc1"
+                                name="price_calc"
+                                className="w-4 h-4"
+                                defaultChecked
+                              />
+                              <label
+                                htmlFor="calc1"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                ตามหน่วยย่อย
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="calc2"
+                                name="price_calc"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="calc2"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                หน่วยย่อยแล้วนำสมบันยางหน่วยย่อย
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="calc3"
+                                name="price_calc"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="calc3"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                เต็มหน่วยขาย
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="calc4"
+                                name="price_calc"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="calc4"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                ง่ายขาด
+                              </label>
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                id="lock"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="lock"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                ห้ามแก้ไขโดยใหม่ที่สั่งยา
+                              </label>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div className="space-y-2">
+                        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border px-2">
+                          <legend class="fieldset-legend">ประเภทรายการ</legend>
+
+                          <label className="text-sm text-gray-700 font-medium">
+                            ประเภทในโบกีล
+                          </label>
+                          <div className="space-y-1">
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_a"
+                                name="location_type"
+                                className="w-4 h-4"
+                                defaultChecked
+                              />
+                              <label
+                                htmlFor="loc_a"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี ก
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_b"
+                                name="location_type"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="loc_b"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี ข
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_c"
+                                name="location_type"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="loc_c"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี ค
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_d"
+                                name="location_type"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="loc_d"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี ง
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_e1"
+                                name="location_type"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="loc_e1"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี จ1
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="radio"
+                                id="loc_e2"
+                                name="location_type"
+                                className="w-4 h-4"
+                              />
+                              <label
+                                htmlFor="loc_e2"
+                                className="text-sm text-gray-700 cursor-pointer"
+                              >
+                                บัญชี จ2
+                              </label>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    {/* Location Categories */}
+
+                    {/* Price Fields */}
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          ราคาต้นทุน:
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          ราคาจำหน่าย(IPD):
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <label className="text-sm text-gray-700 w-32">
+                          ราคาจำหน่าย(OPD):
+                        </label>
+                        <input
+                          type="text"
+                          className="border border-gray-300 px-2 py-1 flex-1 text-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_6"
+            className="tab"
+            aria-label="Tab 2"
+          />
+          <div className="tab-content bg-base-100 border-base-300 p-6">
+            Tab content 2
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_6"
+            className="tab"
+            aria-label="Tab 3"
+          />
+          <div className="tab-content bg-base-100 border-base-300 p-6">
+            Tab content 3
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };

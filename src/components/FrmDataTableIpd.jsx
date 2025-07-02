@@ -22,26 +22,32 @@ import { API_URL } from '../../config';
 Modal.setAppElement('#root');
 
 export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
-  const [currentDate, setCurrentDate] = useState('');
+  const today = new Date();
+  const formattedToday = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`;
+  const [currentDate, setCurrentDate] = useState(formattedToday);
+
   const [modalCreate, setIsCreate] = useState(false);
   const [modalMoveDorm, setModalMoveDorm] = useState(false);
   const [modalGoHome, setModalGoHome] = useState(false);
+
+  const [selectedStatus, setSelectedStatus] = useState('all'); // ✅ เพิ่มตรงนี้
+
   useEffect(() => {
     const today = new Date();
-    const formattedDate = formatDateToDDMMYYYY(today); ///ใช่ตัวแปล formattedDate
+    const formattedDate = formatDateToISO(today); ///ใช่ตัวแปล formattedDate
     console.log(formattedDate);
     setCurrentDate(formattedDate);
   }, []);
 
-  const formatDateToDDMMYYYY = (date) => {
-    const day = ('0' + date.getDate()).slice(-2); // เติม 0 ด้านหน้า
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // เพิ่ม 1 ให้เดือนและเติม 0 ด้านหน้า
+  const formatDateToISO = (date) => {
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`; // yyyy-mm-dd
   };
   const handleDateChange = (e) => {
     const selectedDate = new Date(e.target.value);
-    const formattedDate = formatDateToDDMMYYYY(selectedDate);
+    const formattedDate = formatDateToISO(selectedDate);
     setCurrentDate(formattedDate);
   };
   const idH = 2;
@@ -73,7 +79,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
   const CloseModal = () => {
     setIsCreate(false);
   };
-  const [selectedStatus, setSelectedStatus] = useState('admit');
+  // const [selectedStatus, setSelectedStatus] = useState('admit');
 
   const handleRadioAdmit = (event) => {
     setSelectedStatus(event.target.value);
@@ -173,13 +179,14 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
             <img src={searchIcon} alt="ภาพ" className="w-4 h-4 mr-1" />
             ค้นหา
           </button>
+          {/* Date */}
           <input
             type="date"
             className="border border-gray-300 rounded p-1 w-1/4 mr-6"
             value={currentDate.split('/').reverse().join('-')}
             onChange={handleDateChange}
           />
-          <form className="flex space-x-4 mr-7 ">
+          <form className="flex space-x-4 mr-7">
             <div>
               <input
                 type="radio"
@@ -217,7 +224,7 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
         </div>
       </div>
       <div className="w-full h-5/6 ">
-        <FrmDataTable />
+        <FrmDataTable ptstatus={selectedStatus} orderdate={currentDate} />
       </div>
       <Modal
         isOpen={modalCreate}
