@@ -31,7 +31,24 @@ import createDose from '../../../img/createDose.png';
 import createDoseG from '../../../img/createdose2.png';
 
 import MainDoseData from './manageDoseData/MainDoseData';
+import MainUseDoseData from './HowUseMed/MainUseDoseData';
+import MainFrequensy from './Freqeuncy/MainFreqeuncy';
 import { FaLessThan } from 'react-icons/fa6';
+import MainTime from './Time/TimeDose';
+import MainDrugPrice from './PriceDrug/MainDrugPrice';
+import MainDrugInteraction from './DrugInteraction/MainDrugInteraction';
+import MainDoseUnit from './DoseUnit/MainDoseUnit';
+import MainOrderunit from './Orderunit/MainOrderunit';
+import MainPharmocology from './Pharmocology/MainPharmocology';
+import MainLinkHowUseDrug from './LinkUseDrug/MainLinkHowUseDrug';
+import MainLinkHowUse from './LinkHowUse/MainLinkHowUse';
+import MainLinkDontUse from './LinkDontUse/MainLinkDontUse';
+import MainAllergyGroup from './Drugallergygroup/MainAllergygroup';
+import MainTMT from './TMT/MainTMT';
+// import MainDrugInteraction from './DrugInteraction/MainDrugInteraction';
+import MainIndicationPTC from './IndicationPTC/MainIndicationPTC';
+import MainApprovetypePTC from './ApprovetypePTC/MainApprovetypePTC';
+import MainMapUnitdose from './MapUnitdose/MainMapUnitdose';
 
 export default function ManageDoseData() {
   return (
@@ -39,6 +56,22 @@ export default function ManageDoseData() {
       <Routes>
         <Route path="" element={<ShowButton />} />
         <Route path="MainDoseData/*" element={<MainDoseData />} />
+        <Route path="MainUseDoseData/*" element={<MainUseDoseData />} />
+        <Route path="MainFrequensy/*" element={<MainFrequensy />} />
+        <Route path="MainTime/*" element={<MainTime />} />
+        <Route path="MainDrugPrice/*" element={<MainDrugPrice />} />
+        <Route path="MainDrugInteraction/*" element={<MainDrugInteraction />} />
+        <Route path="MainDoseUnit/*" element={<MainDoseUnit />} />
+        <Route path="MainOrderunit/*" element={<MainOrderunit />} />
+        <Route path="MainPharmocology/*" element={<MainPharmocology />} />
+        <Route path="MainLinkHowUseDrug/*" element={<MainLinkHowUseDrug />} />
+        <Route path="MainLinkHowUse/*" element={<MainLinkHowUse />} />
+        <Route path="MainLinkDontUse/*" element={<MainLinkDontUse />} />
+        <Route path="MainAllergyGroup/*" element={<MainAllergyGroup />} />
+        <Route path="MainTMT/*" element={<MainTMT />} />
+        <Route path="MainIndicationPTC/*" element={<MainIndicationPTC />} />
+        <Route path="MainApprovetypePTC/*" element={<MainApprovetypePTC />} />
+        <Route path="MainMapUnitdose/*" element={<MainMapUnitdose />} />
       </Routes>
     </div>
   );
@@ -72,74 +105,98 @@ const ShowButton = () => {
         <ButtonWithMenu
           icon={bandageIcon}
           label={`วิธีใช้ยา`}
-          modal={() => {}}
+          modal={() => navigate('MainUseDoseData')}
         />
         <ButtonWithMenu
           icon={frequencyIcon}
           label={`ความถี่`}
-          modal={() => {}}
+          modal={() => navigate('MainFrequensy')}
         />
-        <ButtonWithMenu icon={timeIcon} label={`เวลา`} modal={() => {}} />
-        <ButtonWithMenu icon={cashIcon} label={`ราคายา`} modal={() => {}} />
+        <ButtonWithMenu
+          icon={timeIcon}
+          label={`เวลา`}
+          modal={() => navigate('MainTime')}
+        />
+        <ButtonWithMenu
+          icon={cashIcon}
+          label={`ราคายา`}
+          modal={() => navigate('MainDrugPrice')}
+        />
         <ButtonWithMenu
           icon={interactionIcon}
           label={`Drug Interaction`}
-          modal={() => {}}
+          modal={() => navigate('MainDrugInteraction')}
         />
-        <ButtonWithMenu icon={drugIcon} label={`หน่อยย่อย`} modal={() => {}} />
+        <ButtonWithMenu
+          icon={drugIcon}
+          label={`หน่อยย่อย`}
+          modal={() => navigate('MainDoseUnit')}
+        />
         <ButtonWithMenu
           icon={IPDRoomIcon}
           label={`หน่วยขาย`}
-          modal={() => {}}
+          modal={() => navigate('MainOrderunit')}
         />
         <ButtonWithMenu
           icon={medicineIcon}
           label={`Pharmacology`}
-          modal={() => {}}
+          modal={() => navigate('MainPharmocology')}
         />
         <ButtonWithMenu
           icon={dosebindIcon}
           label={`ผูกวิธีใช้กับยา`}
-          modal={() => {}}
+          modal={() => navigate('MainLinkHowUseDrug')}
         />
         <ButtonWithMenu
           icon={medicineBindIcon}
           label={`ผูกวิธีใช้`}
-          modal={() => {}}
+          modal={() => navigate('MainLinkHowUse')}
         />
         <ButtonWithMenu
           icon={rightdoseIcon}
           label={`ผูกยากับสิทธิ์ห้ามใช้`}
-          modal={() => {}}
+          modal={() => navigate('MainLinkDontUse')}
         />
-        <ButtonWithMenu icon={ArdIcon} label={`กลุ่มแพ้ยา`} modal={() => {}} />
-        <ButtonWithMenu icon={TMTIcon} label={`TMT`} modal={() => {}} />
-        <ButtonWithMenu icon={noteIcon} label={`ระเบียบ`} modal={() => {}} />
+        <ButtonWithMenu
+          icon={ArdIcon}
+          label={`กลุ่มแพ้ยา`}
+          modal={() => navigate('MainAllergyGroup')}
+        />
+        <ButtonWithMenu
+          icon={TMTIcon}
+          label={`TMT`}
+          modal={() => navigate('MainTMT')}
+        />
+        <ButtonWithMenu
+          icon={noteIcon}
+          label={`ระเบียบ`}
+          modal={() => navigate('Main')}
+        />
         <ButtonWithMenu
           icon={noteIcon1}
           label={`Indication PTC`}
-          modal={() => {}}
+          modal={() => navigate('MainIndicationPTC')}
         />
 
         <ButtonWithMenu
           icon={noteIcon2}
           label={`ประเภทตามระเบียบ PTC`}
-          modal={() => {}}
+          modal={() => navigate('MainApprovetypePTC')}
         />
         <ButtonWithMenu
           icon={IVRoomIcon2}
           label={`Map รหัสยาโปรแกรมUnitdose`}
-          modal={() => {}}
+          modal={() => navigate('MainMapUnitdose')}
         />
         <ButtonWithMenu
           icon={locationIcon}
           label={`Location`}
-          modal={() => {}}
+          modal={() => navigate('ttt1')}
         />
         <ButtonWithMenu
           icon={drugIcon2}
           label={`Drug Protocal`}
-          modal={() => {}}
+          modal={() => navigate('ttt1')}
         />
       </div>
       <div className="w-full h-[5%] border-b-2 border-collapse border-gray-300 flex items-center px-3 text-lg">

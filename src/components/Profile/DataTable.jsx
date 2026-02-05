@@ -1,6 +1,7 @@
 // DataTable.jsx ใหม่ทดสอบแสดงข้อมูลห้องยา iv ipd tpn
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_SCREEN } from '../../../config';
 
 const DataTable = ({ data = [] }) => {
   const [tableData, setTableData] = useState([]);
@@ -23,7 +24,7 @@ const DataTable = ({ data = [] }) => {
 
   const checkDispenseStatus = async (index) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/checkdispense', {
+      const res = await axios.post(API_SCREEN + '/checkdispense', {
         meditemindex: index,
       });
       return res.data.status;

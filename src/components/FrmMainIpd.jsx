@@ -35,7 +35,7 @@ export default function FrmMainIpd() {
       });
   }, []);
   return (
-    <div className=" font-sans flex flex-col h-screen w-screen text-[14px] ">
+    <div className=" font-sans flex flex-col h-screen w-screen text-[12px] ">
       <header className="h-[5%]">
         <IpdHeader />
       </header>

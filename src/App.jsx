@@ -25,7 +25,7 @@ function PrivateRoute({ element }) {
           return;
         }
 
-        const response = await axios.get(API_URL + '/auth', {
+        const response = await axios.get(API_URL + '/api/auth', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,7 +60,7 @@ function PrivateRoute({ element }) {
   if (isAuthenticated === null) {
     return <div>Loading...</div>; // คุณสามารถใส่ loading spinner ได้ที่นี่
   }
- 
+
   return isAuthenticated ? element : <Navigate to="/login" replace />;
 }
 

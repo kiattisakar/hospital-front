@@ -1,5 +1,6 @@
+//Doseservice.jsx
 import axios from 'axios';
-import { URL } from '../../config';
+import { API_URL } from '../../config';
 
 export const getSearchDoseManager = async (
   search,
@@ -7,7 +8,7 @@ export const getSearchDoseManager = async (
   rdOpen,
   rdClose
 ) => {
-  const response = await axios.get(URL + 'dose/getSearchDoseManager', {
+  const response = await axios.get(API_URL + '/dose/getSearchDoseManager', {
     params: {
       txtSearch: search || '',
       showDataFunc: condition,
@@ -18,7 +19,7 @@ export const getSearchDoseManager = async (
   return response.data;
 };
 export const getDoseById = async (drugId) => {
-  const response = await axios.get(URL + 'dose/getDrugById', {
+  const response = await axios.get(API_URL + '/dose/getDrugById', {
     params: {
       drugId: drugId,
     },
@@ -26,7 +27,7 @@ export const getDoseById = async (drugId) => {
   return response.data[0];
 };
 export const dtdosageunit = async (capacityId) => {
-  const response = await axios.get(URL + 'dose/getUnitByID', {
+  const response = await axios.get(API_URL + '/dose/getUnitByID', {
     params: {
       txtOrderUnit: capacityId,
     },
@@ -35,7 +36,7 @@ export const dtdosageunit = async (capacityId) => {
 };
 
 export const dtorderunit = async (capacityId) => {
-  const response = await axios.get(URL + 'dose/getOrderUnitByID', {
+  const response = await axios.get(API_URL + '/dose/getOrderUnitByID', {
     params: {
       txtOrderUnit: capacityId,
     },

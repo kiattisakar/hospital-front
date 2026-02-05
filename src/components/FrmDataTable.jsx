@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { API_URL } from '../../config';
+import { API_SCREEN } from '../../config';
 
 import { useNavigate } from 'react-router-dom';
 // import { labResult } from '../../../back/services/medicationProfile/lab';
@@ -19,7 +19,7 @@ export default function FrmDataTable({ ptstatus, orderdate }) {
     console.log('ส่งไป backend:', { ptstatus, orderdate }); // <-- เพิ่มบรรทัดนี้ดูค่า
 
     axios
-      .post(API_URL + '/first', {
+      .post(API_SCREEN + '/first', {
         ptstatus: ptstatus,
         orderdate: orderdate,
       })
@@ -37,7 +37,7 @@ export default function FrmDataTable({ ptstatus, orderdate }) {
   useEffect(() => {
     if (selectedWard) {
       axios
-        .post(API_URL + '/second', {
+        .post(API_SCREEN + '/second', {
           orderdate: orderdate,
           ptstatus: ptstatus,
           wardcode: selectedWard.wardcode,
@@ -72,17 +72,17 @@ export default function FrmDataTable({ ptstatus, orderdate }) {
         responsedrugallergy,
       ] = await Promise.all([
         fetchWithErrorHandling(
-          axios.post(API_URL + '/Profile_private_hn', { hn })
+          axios.post(API_SCREEN + '/Profile_private_hn', { hn })
         ),
         fetchWithErrorHandling(
-          axios.post(API_URL + '/Profile_private_an', { an })
+          axios.post(API_SCREEN + '/Profile_private_an', { an })
         ),
-        fetchWithErrorHandling(axios.post(API_URL + '/labResult', { hn })),
-        fetchWithErrorHandling(axios.post(API_URL + '/noteDrp', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/labResult', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/noteDrp', { hn })),
         fetchWithErrorHandling(
-          axios.post(API_URL + '/medIPD', { an, roomType: 'IPD' })
+          axios.post(API_SCREEN + '/medIPD', { an, roomType: 'IPD' })
         ), // ✅ เพิ่ม roomType: 'IPD'
-        fetchWithErrorHandling(axios.post(API_URL + '/drugallergy', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/drugallergy', { hn })),
       ]);
       console.log('ส่งค่ายาจาก medIPD:', responsemedIPD?.data);
 
@@ -119,12 +119,12 @@ export default function FrmDataTable({ ptstatus, orderdate }) {
   //       responsemedIPD,
   //       responsedrugallergy,
   //     ] = await Promise.all([
-  //       axios.post(API_URL + '/Profile_private_hn', { hn: hn }),
-  //       axios.post(API_URL + '/Profile_private_an', { an: an }),
-  //       axios.post(API_URL + '/labResult', { hn: hn }),
-  //       axios.post(API_URL + '/noteDrp', { hn: hn }),
-  //       axios.post(API_URL + '/medIPD', { an: an }),
-  //       axios.post(API_URL + '/drugallergy', { hn: hn }),
+  //       axios.post(API_SCREEN+ '/Profile_private_hn', { hn: hn }),
+  //       axios.post(API_SCREEN+ '/Profile_private_an', { an: an }),
+  //       axios.post(API_SCREEN+ '/labResult', { hn: hn }),
+  //       axios.post(API_SCREEN+ '/noteDrp', { hn: hn }),
+  //       axios.post(API_SCREEN+ '/medIPD', { an: an }),
+  //       axios.post(API_SCREEN+ '/drugallergy', { hn: hn }),
   //     ]);
 
   //     console.log('AN sent to backend:', an);
@@ -165,7 +165,7 @@ export default function FrmDataTable({ ptstatus, orderdate }) {
   ///////////version เก่าสุด
   // const handleDoubleClick = async (an) => {
   //   try {
-  //     const response = await axios.post(API_URL + '/test', { an: an });
+  //     const response = await axios.post(API_SCREEN+ '/test', { an: an });
 
   //     // ถ้า API สำเร็จ ให้เปลี่ยนหน้าไปพร้อมส่งข้อมูลจาก API
   //     navigate('/mainIPD', {

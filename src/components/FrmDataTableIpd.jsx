@@ -17,7 +17,7 @@ import cancelIcon from '../../img/cancel.png';
 import { HomeIcon } from '@heroicons/react/16/solid';
 
 import axios from 'axios'; // ใช้ axios สำหรับเรียก API
-import { API_URL } from '../../config';
+import { API_SCREEN } from '../../config';
 
 Modal.setAppElement('#root');
 
@@ -110,9 +110,13 @@ export default function FrmDataTebleIPD(isOpen, onClose, onConfirm) {
 
       console.log('🚀 [Frontend] กำลังส่งค่าไปยัง Backend:', requestData);
 
-      const response = await axios.post(API_URL + '/btnsearch', requestData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await axios.post(
+        API_SCREEN + '/btnsearch',
+        requestData,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
 
       console.log('✅ [Frontend] ได้รับข้อมูลจาก API:', response.data);
 

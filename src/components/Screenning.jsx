@@ -18,7 +18,7 @@ import printer from '../../img/printer.png';
 import cancel from '../../img/cancel.png';
 import doc from '../../img/doc.png';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../../config';
+import { API_SCREEN } from '../../config';
 
 const data3 = {
   prescrip: [
@@ -78,7 +78,7 @@ export default function () {
   // ฟังก์ชันที่ใช้สำหรับการส่งข้อมูลไปยัง Backend
   const sendRoomData = async () => {
     try {
-      const response = await axios.post(API_URL + '/screen', {
+      const response = await axios.post(API_SCREEN + '/screen', {
         selectroom: selectedRoom,
       });
       setWards(response.data); // เก็บข้อมูลที่ได้รับใน state
@@ -90,10 +90,10 @@ export default function () {
   };
 
   const handleApiCall = async (endpoint, buttonLabel) => {
-    console.log(`🔄 Calling API: ${API_URL}/${endpoint}`);
+    console.log(`🔄 Calling API: ${API_SCREEN}/${endpoint}`);
     console.log('📢 selectedButton เปลี่ยนค่า:', selectedButton);
     try {
-      const response = await axios.post(`${API_URL}/${endpoint}`);
+      const response = await axios.post(`${API_SCREEN}/${endpoint}`);
       console.log('✅ API Response:', response.data);
 
       setWards(response.data); // ✅ เปลี่ยนจาก setData เป็น setWards เพื่อให้ข้อมูลแสดงผล
@@ -118,7 +118,7 @@ export default function () {
 
   // const handleWardClick = async (wardcode) => {
   //   try {
-  //     const response = await axios.post(API_URL + '/screentwo', {
+  //     const response = await axios.post(API_SCREEN + '/screentwo', {
   //       wardcode,
   //       selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วย
   //     });
@@ -153,12 +153,12 @@ export default function () {
     //   }
 
     try {
-      const response = await axios.post(API_URL + endpoint, {
+      const response = await axios.post(API_SCREEN + endpoint, {
         wardcode,
         selectroom: selectedRoom,
       });
 
-      console.log(`🔄 เรียก API 2: ${API_URL + endpoint}`);
+      console.log(`🔄 เรียก API 2: ${API_SCREEN + endpoint}`);
       console.log('✅ ข้อมูลที่ได้รับจากการกรองรอบที่2:', response.data);
       console.log('📢 selectedButton เปลี่ยนค่า:', selectedButton);
 
@@ -172,7 +172,7 @@ export default function () {
 
   const setSelectedprescriptionno = async (prescriptionno) => {
     try {
-      const response = await axios.post(API_URL + '/screenthree', {
+      const response = await axios.post(API_SCREEN + '/screenthree', {
         prescriptionno,
         selectroom: selectedRoom, // ส่งค่า selectedRoom ไปด้วยถ้าจำเป็น
       });
@@ -203,15 +203,15 @@ export default function () {
         responsedrugallergy,
       ] = await Promise.all([
         fetchWithErrorHandling(
-          axios.post(API_URL + '/Profile_private_hn', { hn })
+          axios.post(API_SCREEN + '/Profile_private_hn', { hn })
         ),
         fetchWithErrorHandling(
-          axios.post(API_URL + '/Profile_private_an', { an })
+          axios.post(API_SCREEN + '/Profile_private_an', { an })
         ),
-        fetchWithErrorHandling(axios.post(API_URL + '/labResult', { hn })),
-        fetchWithErrorHandling(axios.post(API_URL + '/noteDrp', { hn })),
-        fetchWithErrorHandling(axios.post(API_URL + '/medIPD', { an })),
-        fetchWithErrorHandling(axios.post(API_URL + '/drugallergy', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/labResult', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/noteDrp', { hn })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/medIPD', { an })),
+        fetchWithErrorHandling(axios.post(API_SCREEN + '/drugallergy', { hn })),
       ]);
 
       // console.log('AN sent to backend:', an);

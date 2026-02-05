@@ -26,7 +26,7 @@ import DataTable from './DataTable';
 import axios from 'axios';
 
 import { useLocation } from 'react-router-dom';
-import { API_URL } from '../../../config';
+import { API_SCREEN } from '../../../config';
 
 import MyModal from './MyModal';
 
@@ -83,7 +83,10 @@ export default function FrmProfile() {
       }
 
       console.log('✅ ส่งข้อมูล:', { an, roomType });
-      const response = await axios.post(API_URL + '/medIPD', { an, roomType });
+      const response = await axios.post(API_SCREEN + '/medIPD', {
+        an,
+        roomType,
+      });
 
       console.log('ข้อมูลยา:', response.data);
       setTableData(response.data);
